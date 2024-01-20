@@ -1,0 +1,14 @@
+{
+    "Version": "1.2",
+    "Data": {
+        "Source": "c:\\users\\danz3\\downloads\\scp3008\\scp3008\\source\\scp3008\\scp3008.cpp",
+        "ProvidedModule": "",
+        "PCH": "c:\\users\\danz3\\downloads\\scp3008\\scp3008\\intermediate\\build\\win64\\x64\\scp3008editor\\development\\engine\\sharedpch.engine.cpp20.h.pch",
+        "Includes": [
+            "c:\\users\\danz3\\downloads\\scp3008\\scp3008\\intermediate\\build\\win64\\x64\\unrealeditor\\development\\scp3008\\definitions.scp3008.h",
+            "c:\\users\\danz3\\downloads\\scp3008\\scp3008\\source\\scp3008\\scp3008.h"
+        ],
+        "ImportedModules": [],
+        "ImportedHeaderUnits": []
+    }
+}
