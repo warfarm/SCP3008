@@ -1,4 +1,4 @@
-"C:\Users\danz3\Downloads\SCP3008\SCP3008\Intermediate\Build\Win64\x64\SCP3008Editor\Development\UnrealEd\SharedPCH.UnrealEd.RTTI.Cpp20.cpp"
+"E:\Projects\UnrealProjects\SCP3008\SCP3008\Intermediate\Build\Win64\x64\SCP3008Editor\Development\UnrealEd\SharedPCH.UnrealEd.RTTI.Cpp20.cpp"
 /I "."
 /I "..\Intermediate\Build\Win64\UnrealEditor\Inc\UnrealEd\UHT"
 /I "Programs\UnrealLightmass\Public"
@@ -266,10 +266,10 @@
 /external:I "C:\Program Files (x86)\Windows Kits\10\include\10.0.22621.0\shared"
 /external:I "C:\Program Files (x86)\Windows Kits\10\include\10.0.22621.0\um"
 /external:I "C:\Program Files (x86)\Windows Kits\10\include\10.0.22621.0\winrt"
-/Yc"C:\Users\danz3\Downloads\SCP3008\SCP3008\Intermediate\Build\Win64\x64\SCP3008Editor\Development\UnrealEd\SharedPCH.UnrealEd.RTTI.Cpp20.h"
-/Fp"C:\Users\danz3\Downloads\SCP3008\SCP3008\Intermediate\Build\Win64\x64\SCP3008Editor\Development\UnrealEd\SharedPCH.UnrealEd.RTTI.Cpp20.h.pch"
-/Fo"C:\Users\danz3\Downloads\SCP3008\SCP3008\Intermediate\Build\Win64\x64\SCP3008Editor\Development\UnrealEd\SharedPCH.UnrealEd.RTTI.Cpp20.h.obj"
-/sourceDependencies "C:\Users\danz3\Downloads\SCP3008\SCP3008\Intermediate\Build\Win64\x64\SCP3008Editor\Development\UnrealEd\SharedPCH.UnrealEd.RTTI.Cpp20.h.dep.json"
+/Yc"E:\Projects\UnrealProjects\SCP3008\SCP3008\Intermediate\Build\Win64\x64\SCP3008Editor\Development\UnrealEd\SharedPCH.UnrealEd.RTTI.Cpp20.h"
+/Fp"E:\Projects\UnrealProjects\SCP3008\SCP3008\Intermediate\Build\Win64\x64\SCP3008Editor\Development\UnrealEd\SharedPCH.UnrealEd.RTTI.Cpp20.h.pch"
+/Fo"E:\Projects\UnrealProjects\SCP3008\SCP3008\Intermediate\Build\Win64\x64\SCP3008Editor\Development\UnrealEd\SharedPCH.UnrealEd.RTTI.Cpp20.h.obj"
+/sourceDependencies "E:\Projects\UnrealProjects\SCP3008\SCP3008\Intermediate\Build\Win64\x64\SCP3008Editor\Development\UnrealEd\SharedPCH.UnrealEd.RTTI.Cpp20.h.dep.json"
 /Zc:inline
 /nologo
 /Oi

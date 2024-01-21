@@ -1,5 +1,5 @@
 /I "."
-/I "C:\Users\danz3\Downloads\SCP3008\SCP3008\Source"
+/I "E:\Projects\UnrealProjects\SCP3008\SCP3008\Source"
 /I "Runtime\Core\Public"
 /I "Runtime\Core\Internal"
 /I "Runtime\TraceLog\Public"

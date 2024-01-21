@@ -74,5 +74,5 @@
 /DBUILD_ICON_FILE_NAME="\"..\\Build\\Windows\\Resources\\Default.ico\""
 /DPROJECT_COPYRIGHT_STRING="Fill out your copyright notice in the Description page of Project Settings."
 /DPROJECT_PRODUCT_IDENTIFIER=SCP3008
-/fo "C:\Users\danz3\Downloads\SCP3008\SCP3008\Intermediate\Build\Win64\x64\UnrealEditor\Development\SCP3008\Default.rc2.res"
+/fo "E:\Projects\UnrealProjects\SCP3008\SCP3008\Intermediate\Build\Win64\x64\UnrealEditor\Development\SCP3008\Default.rc2.res"
 "..\Build\Windows\Resources\Default.rc2"

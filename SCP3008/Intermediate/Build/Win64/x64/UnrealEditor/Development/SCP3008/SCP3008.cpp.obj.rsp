@@ -1,11 +1,11 @@
-"C:\Users\danz3\Downloads\SCP3008\SCP3008\Source\SCP3008\SCP3008.cpp"
-/FI"C:\Users\danz3\Downloads\SCP3008\SCP3008\Intermediate\Build\Win64\x64\SCP3008Editor\Development\Engine\SharedPCH.Engine.Cpp20.h"
-/FI"C:\Users\danz3\Downloads\SCP3008\SCP3008\Intermediate\Build\Win64\x64\UnrealEditor\Development\SCP3008\Definitions.SCP3008.h"
-/Yu"C:\Users\danz3\Downloads\SCP3008\SCP3008\Intermediate\Build\Win64\x64\SCP3008Editor\Development\Engine\SharedPCH.Engine.Cpp20.h"
-/Fp"C:\Users\danz3\Downloads\SCP3008\SCP3008\Intermediate\Build\Win64\x64\SCP3008Editor\Development\Engine\SharedPCH.Engine.Cpp20.h.pch"
-/Fo"C:\Users\danz3\Downloads\SCP3008\SCP3008\Intermediate\Build\Win64\x64\UnrealEditor\Development\SCP3008\SCP3008.cpp.obj"
-/sourceDependencies "C:\Users\danz3\Downloads\SCP3008\SCP3008\Intermediate\Build\Win64\x64\UnrealEditor\Development\SCP3008\SCP3008.cpp.dep.json"
-@"C:\Users\danz3\Downloads\SCP3008\SCP3008\Intermediate\Build\Win64\x64\UnrealEditor\Development\SCP3008\SCP3008.Shared.rsp"
+"E:\Projects\UnrealProjects\SCP3008\SCP3008\Source\SCP3008\SCP3008.cpp"
+/FI"E:\Projects\UnrealProjects\SCP3008\SCP3008\Intermediate\Build\Win64\x64\SCP3008Editor\Development\Engine\SharedPCH.Engine.Cpp20.h"
+/FI"E:\Projects\UnrealProjects\SCP3008\SCP3008\Intermediate\Build\Win64\x64\UnrealEditor\Development\SCP3008\Definitions.SCP3008.h"
+/Yu"E:\Projects\UnrealProjects\SCP3008\SCP3008\Intermediate\Build\Win64\x64\SCP3008Editor\Development\Engine\SharedPCH.Engine.Cpp20.h"
+/Fp"E:\Projects\UnrealProjects\SCP3008\SCP3008\Intermediate\Build\Win64\x64\SCP3008Editor\Development\Engine\SharedPCH.Engine.Cpp20.h.pch"
+/Fo"E:\Projects\UnrealProjects\SCP3008\SCP3008\Intermediate\Build\Win64\x64\UnrealEditor\Development\SCP3008\SCP3008.cpp.obj"
+/sourceDependencies "E:\Projects\UnrealProjects\SCP3008\SCP3008\Intermediate\Build\Win64\x64\UnrealEditor\Development\SCP3008\SCP3008.cpp.dep.json"
+@"E:\Projects\UnrealProjects\SCP3008\SCP3008\Intermediate\Build\Win64\x64\UnrealEditor\Development\SCP3008\SCP3008.Shared.rsp"
 /Zc:inline
 /nologo
 /Oi

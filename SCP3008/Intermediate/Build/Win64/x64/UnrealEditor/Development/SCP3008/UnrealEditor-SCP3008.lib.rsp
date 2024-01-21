@@ -6,7 +6,7 @@
 /NAME:"UnrealEditor-SCP3008.dll"
 /IGNORE:4221
 /NODEFAULTLIB
-"C:\Users\danz3\Downloads\SCP3008\SCP3008\Intermediate\Build\Win64\x64\SCP3008Editor\Development\Engine\SharedPCH.Engine.Cpp20.h.obj"
-"C:\Users\danz3\Downloads\SCP3008\SCP3008\Intermediate\Build\Win64\x64\UnrealEditor\Development\SCP3008\SCP3008.cpp.obj"
-"C:\Users\danz3\Downloads\SCP3008\SCP3008\Intermediate\Build\Win64\x64\UnrealEditor\Development\SCP3008\Default.rc2.res"
-/OUT:"C:\Users\danz3\Downloads\SCP3008\SCP3008\Intermediate\Build\Win64\x64\UnrealEditor\Development\SCP3008\UnrealEditor-SCP3008.lib"
+"E:\Projects\UnrealProjects\SCP3008\SCP3008\Intermediate\Build\Win64\x64\SCP3008Editor\Development\Engine\SharedPCH.Engine.Cpp20.h.obj"
+"E:\Projects\UnrealProjects\SCP3008\SCP3008\Intermediate\Build\Win64\x64\UnrealEditor\Development\SCP3008\SCP3008.cpp.obj"
+"E:\Projects\UnrealProjects\SCP3008\SCP3008\Intermediate\Build\Win64\x64\UnrealEditor\Development\SCP3008\Default.rc2.res"
+/OUT:"E:\Projects\UnrealProjects\SCP3008\SCP3008\Intermediate\Build\Win64\x64\UnrealEditor\Development\SCP3008\UnrealEditor-SCP3008.lib"
