@@ -165,9 +165,7 @@ void AMainPlayer::PerformInteractionCheck()
 				{
 					return;
 				}
-
-				
-				
+				FoundInteractable(HitResult.GetActor());
 			}
 		}
 	}
@@ -175,24 +173,90 @@ void AMainPlayer::PerformInteractionCheck()
 	NoInteractableFound();
 }
 
-void AMainPlayer::FoundInteractable(AActor* Interactable)
+void AMainPlayer::FoundInteractable(AActor* NewInteractable)
 {
+	if (IsInteracting())
+	{
+		EndInteract();
+	}
+
+	if (InteractionData.CurrentInteractable)
+	{
+		TargetInteractable = InteractionData.CurrentInteractable;
+		TargetInteractable->EndFocus();
+	}
+
+	InteractionData.CurrentInteractable = NewInteractable;
+	TargetInteractable = NewInteractable;
+
+	TargetInteractable->BeginFocus();
 }
 
 void AMainPlayer::NoInteractableFound()
 {
+	if (IsInteracting())
+	{
+		GetWorldTimerManager().ClearTimer(TimerHandle_Interaction);
+	}
+
+	if (InteractionData.CurrentInteractable)
+	{
+		if (IsValid(TargetInteractable.GetObject()))
+		{
+			TargetInteractable->EndFocus();
+		}
+
+		// hide interaction widget on the HUD
+		
+		InteractionData.CurrentInteractable = nullptr;
+		TargetInteractable = nullptr;
+	}
 }
 
 void AMainPlayer::BeginInteract()
 {
+	// verify nothing has changed with the interactable state since beginning interaction
+	PerformInteractionCheck();
+
+	if (InteractionData.CurrentInteractable)
+	{
+		if (IsValid(TargetInteractable.GetObject()))
+		{
+			TargetInteractable->BeginInteract();
+
+			if (FMath::IsNearlyZero(TargetInteractable->InteractableData.InteractionDuration, 0.1f))
+			{
+				Interact();
+			}
+			else
+			{
+				GetWorldTimerManager().SetTimer(TimerHandle_Interaction,
+					this,
+					&AMainPlayer::Interact,
+					false);	
+			}
+		}
+	}
 }
 
 void AMainPlayer::EndInteract()
 {
+	GetWorldTimerManager().ClearTimer(TimerHandle_Interaction);
+	
+	if (IsValid(TargetInteractable.GetObject()))
+	{
+		TargetInteractable->EndInteract();
+	}
 }
 
 void AMainPlayer::Interact()
 {
+	GetWorldTimerManager().ClearTimer(TimerHandle_Interaction);
+	
+	if (IsValid(TargetInteractable.GetObject()))
+	{
+		TargetInteractable->Interact();
+	}
 }
 
 
