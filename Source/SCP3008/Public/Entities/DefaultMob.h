@@ -4,6 +4,7 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/Actor.h"
+#include "Runtime/AIModule/Classes/AIController.h"
 #include "DefaultMob.generated.h"
 
 UENUM()
@@ -14,7 +15,7 @@ enum EnemyState { PATROL UMETA(DisplayName = "Patrol"),
 
 
 UCLASS()
-class SCP3008_API ADefaultMob : public AActor
+class SCP3008_API ADefaultMob : public AAIController
 {
 	GENERATED_BODY()
 	
@@ -33,7 +34,11 @@ protected:
 	virtual void Idle();
 	// Exits state via SwitchState function safely
 	virtual void ExitSafe();
-
+	
+	// 	Makes the actor move to a random location, then idle for a set duration
+	UFUNCTION(BlueprintCallable, Category = "AI")
+	bool Patrol();
+	// 
 	
 
 	
@@ -47,9 +52,12 @@ protected:
 	// controls switching between randomized states (patrol, idle)
 	// 0 = patrol, 1 = idle ie. [0][1] = chamce of going from patrol to idle
 	static  TArray<TArray<float>> markovMatrix;
+	// Override this function to set the markov matrix
+	virtual void setMarkovChain();
+private:
 	// Switches state using the markov matrix. If bOverride is true, the state will be forced to change even if it isn't in a randomized state
 	// using a reference in current implementation, but could be changed to a return value 
 	void SwitchState(bool bOverride = false);
-	virtual void setMarkovChain(TArray<TArray<float>>);
+	
 
 };

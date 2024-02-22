@@ -14,12 +14,13 @@ ADefaultMob::ADefaultMob()
 
 	ActorState = PATROL;
 
+	setMarkovChain();
 	
 	
 }
-void ADefaultMob::setMarkovChain(TArray<TArray<float>> newChain )
+void ADefaultMob::setMarkovChain( )
 {
-	markovMatrix = newChain;
+	markovMatrix = { {0.9f, 0.1f}, {0.1f, 0.9f} };
 	
 }
 
@@ -59,17 +60,25 @@ void ADefaultMob::Stun(float duration)
 }
 
 
-
+// calls switchstate with override
 void ADefaultMob::ExitAlways()
 {
 	UE_LOG(LogTemp, Warning, TEXT("FunctionCalled"));
 	SwitchState(true);
 }
+// calls switchstate with no override
 void ADefaultMob::ExitSafe()
 {
 	
 	SwitchState();
 }
+bool ADefaultMob::Patrol()
+{
+	
+	return true;
+
+}
+
 
 // bOvveride default value set in header file
 void ADefaultMob::SwitchState(bool bOverride)
