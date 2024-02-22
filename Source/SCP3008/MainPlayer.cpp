@@ -28,8 +28,15 @@ void AMainPlayer::BeginPlay()
 {
 	Super::BeginPlay();
 
-	GetCharacterMovement()->AirControl = 0.7;
+	GetCharacterMovement()->AirControl = 0.7f;
+	GetCharacterMovement()->GravityScale = 1.2f;
 }
+
+void AMainPlayer::Landed(const FHitResult& Hit)
+{
+	bIsJumping = false;
+}
+
 
 // Called every frame
 void AMainPlayer::Tick(float DeltaTime)
@@ -70,9 +77,9 @@ void AMainPlayer::Move(const FInputActionValue& InputValue)
 		const FVector Forward = GetActorForwardVector();
 		const FVector Right = GetActorRightVector();
 
-		AddMovementInput(Forward, InputVector.Y);
-		AddMovementInput(Right, InputVector.X);
-	}
+		AddMovementInput(Forward, InputVector.Y * MoveSpeed);
+		AddMovementInput(Right, InputVector.X * MoveSpeed);
+	}	
 }
 
 void AMainPlayer::Look(const FInputActionValue& InputValue)
@@ -81,13 +88,23 @@ void AMainPlayer::Look(const FInputActionValue& InputValue)
 
 	if(IsValid(Controller))
 	{
-		AddControllerYawInput(InputVector.X);
-		AddControllerPitchInput(InputVector.Y);
+		AddControllerYawInput(InputVector.X * CameraSensitivity);
+		AddControllerPitchInput(InputVector.Y * CameraSensitivity);
 	}
 }
 
 void AMainPlayer::Jump()
 {
-	ACharacter::Jump();
+	if (!bIsJumping && Stamina >= JumpStaminaCost)
+	{
+		Stamina -= JumpStaminaCost;
+
+		// for some reason jump power scales insanely low
+		GetCharacterMovement()->JumpZVelocity = JumpPower * 500;
+		ACharacter::Jump();
+
+		// this is set to false in the Landed(...) override
+		bIsJumping = true;
+	}
 }
 
