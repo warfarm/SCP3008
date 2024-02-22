@@ -16,6 +16,9 @@ class SCP3008_API UItemBase : public UObject
 	
 public:
 
+	/*UPROPERTY()
+	UInventoryComponent* OwnedInventory;*/
+
 	UPROPERTY(EditAnywhere, Category = "Item Data")
 	FName ID{};
 
@@ -37,7 +40,7 @@ public:
 	UItemBase() = default;
 
 	UFUNCTION(Category = "Item")
-	UItemBase* CreateItemCopy();
+	UItemBase* CreateItemCopy() const;
 
 	UFUNCTION(Category = "Item")
 	FORCEINLINE float GetItemWeight() const { return NumericData.Weight; };

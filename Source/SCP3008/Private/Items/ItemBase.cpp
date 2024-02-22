@@ -3,11 +3,20 @@
 
 #include "Items/ItemBase.h"
 
-UItemBase* UItemBase::CreateItemCopy()
+UItemBase* UItemBase::CreateItemCopy() const
 {
-    return nullptr;
+    UItemBase* ItemCopy{ NewObject<UItemBase>(StaticClass()) };
+
+    ItemCopy->ID = this->ID;
+    ItemCopy->ItemQuality = this->ItemQuality;
+    ItemCopy->ItemType = this->ItemType;
+    ItemCopy->TextData = this->TextData;
+    ItemCopy->NumericData = this->NumericData;
+    ItemCopy->AssetData = this->AssetData;
+
+    return ItemCopy;
 }
 
-void UItemBase::Use(AMainPlayer* Player)
-{
-}
+//void UItemBase::Use(AMainPlayer* Player)
+//{
+//}
