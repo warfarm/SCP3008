@@ -66,6 +66,9 @@ void AMainPlayer::SetupPlayerInputComponent(UInputComponent* PlayerInputComponen
 		Input->BindAction(MoveAction, ETriggerEvent::Triggered, this, &AMainPlayer::Move);
 		Input->BindAction(LookAction, ETriggerEvent::Triggered, this, &AMainPlayer::Look);
 		Input->BindAction(JumpAction, ETriggerEvent::Triggered, this, &AMainPlayer::Jump);
+		
+		Input->BindAction(SprintAction, ETriggerEvent::Started, this, &AMainPlayer::SprintStart);
+		Input->BindAction(SprintAction, ETriggerEvent::Completed, this, &AMainPlayer::SprintEnd);
 	}
 }
 
@@ -78,8 +81,16 @@ void AMainPlayer::Move(const FInputActionValue& InputValue)
 		const FVector Forward = GetActorForwardVector();
 		const FVector Right = GetActorRightVector();
 
-		AddMovementInput(Forward, InputVector.Y * MoveSpeed);
-		AddMovementInput(Right, InputVector.X * MoveSpeed);
+		float TrueSpeed = MoveSpeed;
+		if (bIsSprinting)
+		{
+			TrueSpeed *= SprintSpeedMultiplier;	
+		}
+
+		UE_LOG(LogTemp, Warning, TEXT("TRUESPEED IS %f"), TrueSpeed);
+
+		AddMovementInput(Forward, InputVector.Y * TrueSpeed);
+		AddMovementInput(Right, InputVector.X * TrueSpeed);
 	}	
 }
 
@@ -108,4 +119,19 @@ void AMainPlayer::Jump()
 		bIsJumping = true;
 	}
 }
+
+void AMainPlayer::SprintStart()
+{
+	bIsSprinting = true;
+	MoveSpeed *= 1.3f;
+	GetCharacterMovement()->MaxWalkSpeed *= 1.3;
+}
+
+void AMainPlayer::SprintEnd()
+{
+	bIsSprinting = false;
+	MoveSpeed /= 1.3f;
+	GetCharacterMovement()->MaxWalkSpeed /= 1.3;
+}
+
 

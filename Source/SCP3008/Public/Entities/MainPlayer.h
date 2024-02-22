@@ -28,6 +28,9 @@ protected:
 	
 	UPROPERTY(EditAnywhere, Category="EnhancedInput")
 	UInputAction* JumpAction;
+	
+	UPROPERTY(EditAnywhere, Category="EnhancedInput")
+	UInputAction* SprintAction;
 
 	// Camera
 	UPROPERTY(EditAnywhere, Category = "Camera")
@@ -59,7 +62,10 @@ protected:
 
 	// Movement Related
 	UPROPERTY(EditAnywhere, Category="PlayerMovement")
-	float MoveSpeed{ 1.f };
+	float MoveSpeed{ 1.f };	
+
+	UPROPERTY(EditAnywhere, Category="PlayerMovement")
+	float SprintSpeedMultiplier{ 1.33f };
 	
 	UPROPERTY(EditAnywhere, Category="PlayerMovement")
 	float JumpPower{ 1.f };
@@ -69,7 +75,8 @@ protected:
 
 protected:
 	/* ----- STATE ----- */
-	bool bIsJumping{false};
+	bool bIsJumping{ false };
+	bool bIsSprinting{ false };
 	
 public:
 	// Sets default values for this character's properties
@@ -101,7 +108,11 @@ public:
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
 
 protected:
+	/* ----- INPUT RELATED ----- */
 	void Move(const FInputActionValue& InputValue);
 	void Look(const FInputActionValue& InputValue);
 	void Jump();
+	void SprintStart();
+	void SprintEnd();
+	
 };
