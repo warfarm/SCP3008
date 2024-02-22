@@ -6,8 +6,29 @@
 #include "InputActionValue.h"
 #include "Camera/CameraComponent.h"
 #include "GameFramework/Character.h"
+#include "Interfaces/InteractionInterface.h"
 #include "Logging/LogMacros.h"
 #include "MainPlayer.generated.h"
+
+USTRUCT()
+struct FInteractionData
+{
+	GENERATED_USTRUCT_BODY()
+
+	FInteractionData() :
+	CurrentInteractable(nullptr),
+	LastInteractionCheckTime(0.f)
+	{
+		
+	}
+
+	UPROPERTY()
+	AActor* CurrentInteractable;
+
+	UPROPERTY()
+	float LastInteractionCheckTime;
+	
+};
 
 UCLASS()
 class SCP3008_API AMainPlayer : public ACharacter
@@ -17,66 +38,77 @@ class SCP3008_API AMainPlayer : public ACharacter
 protected:
 	/* ----- COMPONENTS ----- */
 	// Input stuff
-	UPROPERTY(EditAnywhere, Category="EnhancedInput")
+	UPROPERTY(EditAnywhere, Category="Player | EnhancedInput")
 	class UInputMappingContext* InputMapping;
 	
-	UPROPERTY(EditAnywhere, Category="EnhancedInput")
+	UPROPERTY(EditAnywhere, Category="Player | EnhancedInput")
 	class UInputAction* MoveAction;
 	
-	UPROPERTY(EditAnywhere, Category="EnhancedInput")
+	UPROPERTY(EditAnywhere, Category="Player | EnhancedInput")
 	UInputAction* LookAction;
 	
-	UPROPERTY(EditAnywhere, Category="EnhancedInput")
+	UPROPERTY(EditAnywhere, Category="Player | EnhancedInput")
 	UInputAction* JumpAction;
 	
-	UPROPERTY(EditAnywhere, Category="EnhancedInput")
+	UPROPERTY(EditAnywhere, Category="Player | EnhancedInput")
 	UInputAction* SprintAction;
 
 	// Camera
-	UPROPERTY(EditAnywhere, Category = "Camera")
+	UPROPERTY(EditAnywhere, Category="Player | Camera")
 	UCameraComponent* Camera;
-
+	
 	// Gameplay
+	UPROPERTY(VisibleAnywhere, Category="Player | Interaction")
+	TScriptInterface<IInteractionInterface> TargetInteractable;
+	
 	// TODO! insert health component here
 
-protected:
 	/* ----- PROPERTIES ----- */
 	
 	// Hunger, Thirst, Stamina
-	UPROPERTY(EditAnywhere, Category="PlayerCore")
+	UPROPERTY(EditAnywhere, Category="Player | Core")
 	float MaxHunger{ 100.f };
-	UPROPERTY(EditAnywhere, Category="PlayerCore")
+	UPROPERTY(EditAnywhere, Category="Player | Core")
 	float MaxThirst{ 100.f };
-	UPROPERTY(EditAnywhere, Category="PlayerCore")
+	UPROPERTY(EditAnywhere, Category="Player | Core")
 	float MaxStamina{ 125.f };
 
-	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category="PlayerCore")
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category="Player | Core")
 	float Hunger{ MaxHunger };
-	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category="PlayerCore")
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category="Player | Core")
 	float Thirst{ MaxThirst };
-	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category="PlayerCore")
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category="Player | Core")
 	float Stamina{ MaxStamina };
 
-	UPROPERTY(EditAnywhere, Category="PlayerCore")
+	UPROPERTY(EditAnywhere, Category="Player | Core")
 	float JumpStaminaCost{ 5.f };
 
 	// Movement Related
-	UPROPERTY(EditAnywhere, Category="PlayerMovement")
+	UPROPERTY(EditAnywhere, Category="Player | Movement")
 	float MoveSpeed{ 1.f };	
 
-	UPROPERTY(EditAnywhere, Category="PlayerMovement")
+	UPROPERTY(EditAnywhere, Category="Player | Movement")
 	float SprintSpeedMultiplier{ 1.33f };
 	
-	UPROPERTY(EditAnywhere, Category="PlayerMovement")
+	UPROPERTY(EditAnywhere, Category="Player | Movement")
 	float JumpPower{ 1.f };
 
 	// Camera
 	float CameraSensitivity{ 0.8f };
 
-protected:
+	// Interactions
+	float InteractionCheckFrequency{ 0.1f };
+	float InteractionCheckDistance{ 300.f };
+
+	FTimerHandle TimerHandle_Interaction;
+
+	FInteractionData InteractionData;
+	
 	/* ----- STATE ----- */
+	
 	bool bIsJumping{ false };
 	bool bIsSprinting{ false };
+	float PreviousTrueSpeed{ MoveSpeed };
 	
 public:
 	// Sets default values for this character's properties
@@ -98,21 +130,21 @@ protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
 	virtual void Landed(const FHitResult& Hit) override;
-	
-public:
-	
-	// Called every frame
 	virtual void Tick(float DeltaTime) override;
-
-	// Called to bind functionality to input
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
 
-protected:
 	/* ----- INPUT RELATED ----- */
 	void Move(const FInputActionValue& InputValue);
 	void Look(const FInputActionValue& InputValue);
 	void Jump();
 	void SprintStart();
 	void SprintEnd();
-	
+
+	/* ----- INTERACTIONS ----- */
+	void PerformInteractionCheck();
+	void FoundInteractable(AActor* Interactable);
+	void NoInteractableFound();
+	void BeginInteract();
+	void EndInteract();
+	void Interact();
 };

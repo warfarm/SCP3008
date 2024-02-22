@@ -43,7 +43,11 @@ void AMainPlayer::Landed(const FHitResult& Hit)
 void AMainPlayer::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
-	
+
+	if (GetWorld()->TimeSince(InteractionData.LastInteractionCheckTime) > InteractionCheckFrequency)
+	{
+		PerformInteractionCheck();
+	}
 }
 
 // Called to bind functionality to input
@@ -87,6 +91,13 @@ void AMainPlayer::Move(const FInputActionValue& InputValue)
 			TrueSpeed *= SprintSpeedMultiplier;	
 		}
 
+		// update max movepseed or soemthing
+		if (PreviousTrueSpeed != TrueSpeed)
+		{
+			PreviousTrueSpeed = TrueSpeed;
+			GetCharacterMovement()->MaxWalkSpeed = TrueSpeed * 600.f;
+		}
+
 		UE_LOG(LogTemp, Warning, TEXT("TRUESPEED IS %f"), TrueSpeed);
 
 		AddMovementInput(Forward, InputVector.Y * TrueSpeed);
@@ -123,15 +134,65 @@ void AMainPlayer::Jump()
 void AMainPlayer::SprintStart()
 {
 	bIsSprinting = true;
-	MoveSpeed *= 1.3f;
-	GetCharacterMovement()->MaxWalkSpeed *= 1.3;
 }
 
 void AMainPlayer::SprintEnd()
 {
 	bIsSprinting = false;
-	MoveSpeed /= 1.3f;
-	GetCharacterMovement()->MaxWalkSpeed /= 1.3;
+}
+
+void AMainPlayer::PerformInteractionCheck()
+{
+	InteractionData.LastInteractionCheckTime = GetWorld()->GetTimeSeconds();
+	if (USceneComponent* CameraComponent = CastChecked<USceneComponent>(Camera))
+	{
+		FVector TraceStart{CameraComponent->GetComponentLocation()};
+		FVector TraceEnd{TraceStart + GetViewRotation().Vector() * InteractionCheckDistance};
+
+		// TODO! remove later
+		DrawDebugLine(GetWorld(), TraceStart, TraceEnd, FColor::Red, false, 1.f, 0.f, 2.f);
+
+		FCollisionQueryParams QueryParams;
+		QueryParams.AddIgnoredActor(this);
+		FHitResult HitResult{};
+
+		if (GetWorld()->LineTraceSingleByChannel(HitResult, TraceStart, TraceEnd, ECC_Visibility, QueryParams))
+		{
+			if (HitResult.GetActor()->GetClass()->ImplementsInterface(UInteractionInterface::StaticClass()))
+			{
+				// If we are looking atthe same interactable for some reason
+				if (HitResult.GetActor() == InteractionData.CurrentInteractable)
+				{
+					return;
+				}
+
+				
+				
+			}
+		}
+	}
+
+	NoInteractableFound();
+}
+
+void AMainPlayer::FoundInteractable(AActor* Interactable)
+{
+}
+
+void AMainPlayer::NoInteractableFound()
+{
+}
+
+void AMainPlayer::BeginInteract()
+{
+}
+
+void AMainPlayer::EndInteract()
+{
+}
+
+void AMainPlayer::Interact()
+{
 }
 
 
