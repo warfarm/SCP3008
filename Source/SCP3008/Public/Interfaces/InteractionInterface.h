@@ -14,7 +14,7 @@ enum class EInteractableType : uint8
 	Device UMETA(DisplayName = "Device"),
 	Toggle UMETA(DisplayName = "Toggle"),
 	Container UMETA(DisplayName = "Container"),
-}
+};
 
 USTRUCT()
 struct FInteractableData
@@ -25,7 +25,7 @@ struct FInteractableData
 		InteractableType(EInteractableType::Pickup),
 		Name(FText::GetEmpty()),
 		Action(FText::GetEmpty()),
-		InteractionDuration(0.0f),
+		InteractionDuration(0.0f)
 	{
 	};
 
