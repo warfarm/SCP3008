@@ -1,7 +1,8 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
 
-#include "MainPlayer.h"
+#include "Entities/MainPlayer.h"
+
 #include "Components/CapsuleComponent.h"
 #include "InputMappingContext.h"
 #include "EnhancedInputSubsystems.h"
