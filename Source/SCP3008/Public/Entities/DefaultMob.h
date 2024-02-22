@@ -27,10 +27,12 @@ public:
 protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
-	// Exits stun state via SwitchState fucntion
-	virtual void Unstun();
+	// Exits state via SwitchState fucntion
+	virtual void ExitAlways();
 	// Idles the actor for a set duration
 	virtual void Idle();
+	// Exits state via SwitchState function safely
+	virtual void ExitSafe();
 
 	
 

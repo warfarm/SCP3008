@@ -29,12 +29,13 @@ void ADefaultMob::setMarkovChain(TArray<TArray<float>> newChain )
 void ADefaultMob::BeginPlay()
 {
 	Super::BeginPlay();
+	SwitchState();
 	
 }
 
 
 
-// Called every frame
+// Called every frame 
 void ADefaultMob::Tick(float DeltaTime)
 {
 	// testing code below
@@ -48,18 +49,26 @@ void ADefaultMob::Idle()
 	
 	ActorState = IDLE;
 	FTimerHandle handle;
-	GetWorldTimerManager().SetTimer(handle, this, &ADefaultMob::SwitchState, 5.0f, false);
+	GetWorldTimerManager().SetTimer(handle, this, &ADefaultMob::ExitSafe, 5.0f, false);
 }
 void ADefaultMob::Stun(float duration)
 {
 	ActorState = STUNNED;
 	FTimerHandle handle;
-	GetWorldTimerManager().SetTimer(handle, this, &ADefaultMob::Unstun, duration, false);
+	GetWorldTimerManager().SetTimer(handle, this, &ADefaultMob::ExitAlways, duration, false);
 }
 
-void ADefaultMob::Unstun()
+
+
+void ADefaultMob::ExitAlways()
 {
+	UE_LOG(LogTemp, Warning, TEXT("FunctionCalled"));
 	SwitchState(true);
+}
+void ADefaultMob::ExitSafe()
+{
+	
+	SwitchState();
 }
 
 // bOvveride default value set in header file
@@ -72,6 +81,7 @@ void ADefaultMob::SwitchState(bool bOverride)
 		if (random < markovMatrix[0][1])
 		{
 			ActorState = IDLE;
+			Idle();
 		}
 	}
 	else if (ActorState == IDLE)
