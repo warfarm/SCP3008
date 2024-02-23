@@ -3,6 +3,7 @@
 #pragma once
 
 #include "CoreMinimal.h"
+#include "EntitiesInterface.h"
 #include "GameFramework/Actor.h"
 #include "Runtime/AIModule/Classes/AIController.h"
 #include "DefaultMob.generated.h"
@@ -15,7 +16,7 @@ enum EnemyState { PATROL UMETA(DisplayName = "Patrol"),
 
 
 UCLASS()
-class SCP3008_API ADefaultMob : public AAIController
+class SCP3008_API ADefaultMob : public AAIController, public IEntitiesInterface
 {
 	GENERATED_BODY()
 	
@@ -54,10 +55,12 @@ protected:
 	static  TArray<TArray<float>> markovMatrix;
 	// Override this function to set the markov matrix
 	virtual void setMarkovChain();
+	void HandleState();
 private:
 	// Switches state using the markov matrix. If bOverride is true, the state will be forced to change even if it isn't in a randomized state
 	// using a reference in current implementation, but could be changed to a return value 
 	void SwitchState(bool bOverride = false);
+	
 	
 
 };

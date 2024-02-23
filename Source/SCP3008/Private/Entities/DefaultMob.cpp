@@ -119,3 +119,15 @@ void ADefaultMob::SwitchState(bool bOverride)
 }
 
 
+void ADefaultMob::HandleState()
+{
+	if (ActorState == PATROL)
+	{
+		Patrol();
+	}
+	else if (ActorState == IDLE)
+	{
+		Idle();
+	}
+	
+}
