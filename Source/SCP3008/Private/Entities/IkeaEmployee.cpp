@@ -20,3 +20,8 @@ void AIkeaEmployee::Tick(float DeltaTime)
 	Super::Tick(DeltaTime);
 	
 }
+void AIkeaEmployee::BeginPlay()
+{
+	Super::BeginPlay();
+	
+}
