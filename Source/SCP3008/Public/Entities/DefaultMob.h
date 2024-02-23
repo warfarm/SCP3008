@@ -23,7 +23,8 @@ class SCP3008_API ADefaultMob : public AAIController, public IEntitiesInterface
 public:	
 	// Sets default values for this actor's properties
 	ADefaultMob();
-	EnemyState ActorState;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "AI")
+	TEnumAsByte<EnemyState> ActorState;
 	float IdleTime{5.0f};
 	// virtual void Stun(float duration);	
 protected:
