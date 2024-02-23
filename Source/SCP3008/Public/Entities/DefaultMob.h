@@ -25,16 +25,18 @@ public:
 	ADefaultMob();
 	EnemyState ActorState;
 	float IdleTime{5.0f};
-	virtual void Stun(float duration);	
+	// virtual void Stun(float duration);	
 protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
 	// Exits state via SwitchState fucntion
-	virtual void ExitAlways();
+	UFUNCTION(BlueprintCallable, Category = "AI")
+	bool ExitAlways();
 	// Idles the actor for a set duration
-	virtual void Idle();
+	// virtual void Idle();
 	// Exits state via SwitchState function safely
-	virtual void ExitSafe();
+	UFUNCTION(BlueprintCallable, Category = "AI")
+	bool ExitSafe();
 	
 	// 	Makes the actor move to a random location, then idle for a set duration
 	UFUNCTION(BlueprintCallable, Category = "AI")

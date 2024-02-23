@@ -45,32 +45,35 @@ void ADefaultMob::Tick(float DeltaTime)
 	Super::Tick(DeltaTime);
 	
 }
-void ADefaultMob::Idle()
-{
-	
-	ActorState = IDLE;
-	FTimerHandle handle;
-	GetWorldTimerManager().SetTimer(handle, this, &ADefaultMob::ExitSafe, 5.0f, false);
-}
-void ADefaultMob::Stun(float duration)
-{
-	ActorState = STUNNED;
-	FTimerHandle handle;
-	GetWorldTimerManager().SetTimer(handle, this, &ADefaultMob::ExitAlways, duration, false);
-}
+// void ADefaultMob::Idle()
+// {
+// 	
+// 	ActorState = IDLE;
+// 	FTimerHandle handle;
+// 	GetWorldTimerManager().SetTimer(handle, this, &ADefaultMob::ExitSafe, 5.0f, false);
+// }
+// void ADefaultMob::Stun(float duration)
+// {
+// 	ActorState = STUNNED;
+// 	FTimerHandle handle;
+// 	GetWorldTimerManager().SetTimer(handle, this, &ADefaultMob::ExitSafe, duration, false);
+// }
 
 
 // calls switchstate with override
-void ADefaultMob::ExitAlways()
+bool ADefaultMob::ExitAlways()
 {
-	UE_LOG(LogTemp, Warning, TEXT("FunctionCalled"));
+	
 	SwitchState(true);
+
+	return true;
 }
 // calls switchstate with no override
-void ADefaultMob::ExitSafe()
+bool ADefaultMob::ExitSafe()
 {
 	
 	SwitchState();
+	return true;
 }
 bool ADefaultMob::Patrol()
 {
@@ -90,7 +93,7 @@ void ADefaultMob::SwitchState(bool bOverride)
 		if (random < markovMatrix[0][1])
 		{
 			ActorState = IDLE;
-			Idle();
+			// Idle();
 		}
 	}
 	else if (ActorState == IDLE)
@@ -127,7 +130,7 @@ void ADefaultMob::HandleState()
 	}
 	else if (ActorState == IDLE)
 	{
-		Idle();
+		// Idle();
 	}
 	
 }
