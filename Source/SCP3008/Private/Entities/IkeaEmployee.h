@@ -15,5 +15,7 @@ class AIkeaEmployee : public ADefaultMob
 	GENERATED_BODY()
 public:
 	AIkeaEmployee();
-	
+protected:
+	virtual void Tick(float DeltaSeconds) override;
+	virtual void BeginPlay() override;
 };

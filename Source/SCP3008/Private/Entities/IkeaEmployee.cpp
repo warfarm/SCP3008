@@ -12,7 +12,7 @@ AIkeaEmployee::AIkeaEmployee()
 	// setMarkovChain();
 }
 
-void ADefaultMob::Tick(float DeltaTime)
+void AIkeaEmployee::Tick(float DeltaTime)
 {
 	// testing code below
 	// SwitchState(ActorState, false);
