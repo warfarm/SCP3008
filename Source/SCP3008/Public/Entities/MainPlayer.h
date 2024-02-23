@@ -142,9 +142,10 @@ protected:
 
 	/* ----- INTERACTIONS ----- */
 	void PerformInteractionCheck();
-	void FoundInteractable(AActor* Interactable);
+	void FoundInteractable(AActor* NewInteractable);
 	void NoInteractableFound();
 	void BeginInteract();
 	void EndInteract();
 	void Interact();
+	FORCEINLINE bool IsInteracting() const { return GetWorldTimerManager().IsTimerActive(TimerHandle_Interaction); }
 };
