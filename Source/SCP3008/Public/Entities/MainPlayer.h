@@ -37,6 +37,7 @@ class SCP3008_API AMainPlayer : public ACharacter
 
 protected:
 	/* ----- COMPONENTS ----- */
+	
 	// Input stuff
 	UPROPERTY(EditAnywhere, Category="Player | EnhancedInput")
 	class UInputMappingContext* InputMapping;
@@ -52,6 +53,9 @@ protected:
 	
 	UPROPERTY(EditAnywhere, Category="Player | EnhancedInput")
 	UInputAction* SprintAction;
+	
+	UPROPERTY(EditAnywhere, Category="Player | EnhancedInput")
+	UInputAction* InteractAction;
 
 	// Camera
 	UPROPERTY(EditAnywhere, Category="Player | Camera")
