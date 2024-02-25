@@ -1,9 +1,9 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
 
-#include "Entities/IkeaEmployee.h"
+#include "Entities/IkeaEmployeeController.h"
 
-AIkeaEmployee::AIkeaEmployee()
+AIkeaEmployeeController::AIkeaEmployeeController()
 {
 	// PrimaryActorTick.bCanEverTick = true;
 	//
@@ -12,7 +12,7 @@ AIkeaEmployee::AIkeaEmployee()
 	// setMarkovChain();
 }
 
-void AIkeaEmployee::Tick(float DeltaTime)
+void AIkeaEmployeeController::Tick(float DeltaTime)
 {
 	// testing code below
 	// SwitchState(ActorState, false);
@@ -20,7 +20,7 @@ void AIkeaEmployee::Tick(float DeltaTime)
 	Super::Tick(DeltaTime);
 	
 }
-void AIkeaEmployee::BeginPlay()
+void AIkeaEmployeeController::BeginPlay()
 {
 	Super::BeginPlay();
 	

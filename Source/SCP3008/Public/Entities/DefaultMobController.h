@@ -6,7 +6,7 @@
 #include "EntitiesInterface.h"
 #include "GameFramework/Actor.h"
 #include "Runtime/AIModule/Classes/AIController.h"
-#include "DefaultMob.generated.h"
+#include "DefaultMobController.generated.h"
 
 UENUM()
 enum EnemyState { PATROL UMETA(DisplayName = "Patrol"),
@@ -16,13 +16,13 @@ enum EnemyState { PATROL UMETA(DisplayName = "Patrol"),
 
 
 UCLASS()
-class SCP3008_API ADefaultMob : public AAIController, public IEntitiesInterface
+class SCP3008_API ADefaultMobController : public AAIController
 {
 	GENERATED_BODY()
 	
 public:	
 	// Sets default values for this actor's properties
-	ADefaultMob();
+	ADefaultMobController();
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "AI")
 	TEnumAsByte<EnemyState> ActorState;
 	float IdleTime{5.0f};
@@ -39,13 +39,6 @@ protected:
 	UFUNCTION(BlueprintCallable, Category = "AI")
 	bool ExitSafe();
 	
-	// 	Makes the actor move to a random location, then idle for a set duration
-	UFUNCTION(BlueprintCallable, Category = "AI")
-	bool Patrol();
-	// 
-	
-
-	
 	
 	
 
@@ -58,7 +51,6 @@ protected:
 	static  TArray<TArray<float>> markovMatrix;
 	// Override this function to set the markov matrix
 	virtual void setMarkovChain();
-	void HandleState();
 private:
 	// Switches state using the markov matrix. If bOverride is true, the state will be forced to change even if it isn't in a randomized state
 	// using a reference in current implementation, but could be changed to a return value 

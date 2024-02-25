@@ -1,13 +1,13 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
 
-#include "..\Public\Entities\DefaultMob.h"
+#include "..\Public\Entities\DefaultMobController.h"
 
 // define the static variables
- TArray<TArray<float>> ADefaultMob::markovMatrix { {0.9f, 0.1f}, {0.1f, 0.9f} };
+ TArray<TArray<float>> ADefaultMobController::markovMatrix { {0.9f, 0.1f}, {0.1f, 0.9f} };
 
 // Sets default values
-ADefaultMob::ADefaultMob()
+ADefaultMobController::ADefaultMobController()
 {
  	// Set this actor to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
@@ -18,7 +18,7 @@ ADefaultMob::ADefaultMob()
 	
 	
 }
-void ADefaultMob::setMarkovChain( )
+void ADefaultMobController::setMarkovChain( )
 {
 	markovMatrix = { {0.9f, 0.1f}, {0.1f, 0.9f} };
 	
@@ -27,7 +27,7 @@ void ADefaultMob::setMarkovChain( )
 
 
 // Called when the game starts or when spawned
-void ADefaultMob::BeginPlay()
+void ADefaultMobController::BeginPlay()
 {
 	Super::BeginPlay();
 	SwitchState();
@@ -37,7 +37,7 @@ void ADefaultMob::BeginPlay()
 
 
 // Called every frame 
-void ADefaultMob::Tick(float DeltaTime)
+void ADefaultMobController::Tick(float DeltaTime)
 {
 	// testing code below
 	// SwitchState(ActorState, false);
@@ -61,7 +61,7 @@ void ADefaultMob::Tick(float DeltaTime)
 
 
 // calls switchstate with override
-bool ADefaultMob::ExitAlways()
+bool ADefaultMobController::ExitAlways()
 {
 	
 	SwitchState(true);
@@ -69,22 +69,17 @@ bool ADefaultMob::ExitAlways()
 	return true;
 }
 // calls switchstate with no override
-bool ADefaultMob::ExitSafe()
+bool ADefaultMobController::ExitSafe()
 {
 	
 	SwitchState();
 	return true;
 }
-bool ADefaultMob::Patrol()
-{
-	
-	return true;
 
-}
 
 
 // bOvveride default value set in header file
-void ADefaultMob::SwitchState(bool bOverride)
+void ADefaultMobController::SwitchState(bool bOverride)
 {
 	float random = FMath::FRand();
 	if (ActorState == PATROL)
@@ -122,15 +117,3 @@ void ADefaultMob::SwitchState(bool bOverride)
 }
 
 
-void ADefaultMob::HandleState()
-{
-	if (ActorState == PATROL)
-	{
-		Patrol();
-	}
-	else if (ActorState == IDLE)
-	{
-		// Idle();
-	}
-	
-}

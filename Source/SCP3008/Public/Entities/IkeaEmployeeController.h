@@ -3,18 +3,18 @@
 #pragma once
 
 #include "CoreMinimal.h"
-#include "../../Public/Entities/DefaultMob.h"
-#include "IkeaEmployee.generated.h"
+#include "../../Public/Entities/DefaultMobController.h"
+#include "IkeaEmployeeController.generated.h"
 
 /**
  * 
  */
 UCLASS()
-class AIkeaEmployee : public ADefaultMob
+class AIkeaEmployeeController : public ADefaultMobController
 {
 	GENERATED_BODY()
 public:
-	AIkeaEmployee();
+	AIkeaEmployeeController();
 protected:
 	virtual void Tick(float DeltaSeconds) override;
 	virtual void BeginPlay() override;
