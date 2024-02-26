@@ -2,6 +2,7 @@
 
 
 #include "Entities/MainPlayer.h"
+#include "UserInterface/Main/BaseHUD.h"
 
 #include "Components/CapsuleComponent.h"
 #include "InputMappingContext.h"
@@ -31,6 +32,8 @@ void AMainPlayer::BeginPlay()
 
 	GetCharacterMovement()->AirControl = 0.7f;
 	GetCharacterMovement()->GravityScale = 1.2f;
+
+	HUD = Cast<ABaseHUD>(GetWorld()->GetFirstPlayerController()->GetHUD());
 }
 
 void AMainPlayer::Landed(const FHitResult& Hit)
@@ -163,7 +166,7 @@ void AMainPlayer::PerformInteractionCheck()
 		{
 			if (HitResult.GetActor()->GetClass()->ImplementsInterface(UInteractionInterface::StaticClass()))
 			{
-				// If we are looking atthe same interactable for some reason
+				// If we are looking at the same interactable for some reason
 				if (HitResult.GetActor() == InteractionData.CurrentInteractable)
 				{
 					return;
@@ -192,6 +195,9 @@ void AMainPlayer::FoundInteractable(AActor* NewInteractable)
 	InteractionData.CurrentInteractable = NewInteractable;
 	TargetInteractable = NewInteractable;
 
+	//Update Interaction Widget
+	HUD->UpdateInteractionWidget(&TargetInteractable->InteractableData);
+	
 	TargetInteractable->BeginFocus();
 }
 
@@ -210,6 +216,7 @@ void AMainPlayer::NoInteractableFound()
 		}
 
 		// hide interaction widget on the HUD
+		HUD->HideInteractionWidget();
 		
 		InteractionData.CurrentInteractable = nullptr;
 		TargetInteractable = nullptr;
@@ -258,7 +265,7 @@ void AMainPlayer::Interact()
 	
 	if (IsValid(TargetInteractable.GetObject()))
 	{
-		TargetInteractable->Interact();
+		TargetInteractable->Interact(this);
 	}
 }
 

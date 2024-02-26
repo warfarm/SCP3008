@@ -19,22 +19,22 @@ public:
 	/*UPROPERTY()
 	UInventoryComponent* OwnedInventory;*/
 
-	UPROPERTY(EditAnywhere, Category = "Item Data")
+	UPROPERTY(VisibleAnywhere, Category = "Item")
 	FName ID{};
 
-	UPROPERTY(EditAnywhere, Category = "Item Data")
+	UPROPERTY(VisibleAnywhere, Category = "Item")
 	EItemType ItemType{};
 
-	UPROPERTY(EditAnywhere, Category = "Item Data")
+	UPROPERTY(VisibleAnywhere, Category = "Item")
 	EItemQuality ItemQuality{};
 
-	UPROPERTY(EditAnywhere, Category = "Item Data")
+	UPROPERTY(VisibleAnywhere, Category = "Item")
 	FItemTextData TextData{};
 
-	UPROPERTY(EditAnywhere, Category = "Item Data")
+	UPROPERTY(VisibleAnywhere, Category = "Item")
 	FItemNumericData NumericData{};
 
-	UPROPERTY(EditAnywhere, Category = "Item Data")
+	UPROPERTY(VisibleAnywhere, Category = "Item")
 	FItemAssetData AssetData{};
 
 	UItemBase() = default;
@@ -44,7 +44,7 @@ public:
 
 	UFUNCTION(Category = "Item")
 	FORCEINLINE float GetItemWeight() const { return NumericData.Weight; };
-
+	
 	//UFUNCTION(Category = "Item")
 	//virtual void Use(AMainPlayer* Player);
 
@@ -52,7 +52,7 @@ protected:
 
 	bool operator == (const FName& OtherID) const
 	{
-		return ID == OtherID;
+		return this->ID == OtherID;
 	}
 
 };
