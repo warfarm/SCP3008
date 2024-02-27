@@ -6,6 +6,8 @@
 #include "UObject/Interface.h"
 #include "InteractionInterface.generated.h"
 
+class AMainPlayer;
+
 UENUM()
 enum class EInteractableType : uint8
 {
@@ -60,13 +62,13 @@ class SCP3008_API IInteractionInterface
 	// Add interface functions to this class. This is the class that will be inherited to implement this interface.
 public:
 
-	virtual void BeginFocus() = 0;
-	virtual void EndFocus() = 0;
+	virtual void BeginFocus();
+	virtual void EndFocus();
 
-	virtual void BeginInteract() = 0;
-	virtual void EndInteract() = 0;
+	virtual void BeginInteract();
+	virtual void EndInteract();
 
-	virtual void Interact() = 0;
+	virtual void Interact(AMainPlayer* Player);
 
 	FInteractableData InteractableData;
 };

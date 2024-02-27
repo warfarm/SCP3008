@@ -10,6 +10,8 @@
 #include "Logging/LogMacros.h"
 #include "MainPlayer.generated.h"
 
+class ABaseHUD;
+
 USTRUCT()
 struct FInteractionData
 {
@@ -37,6 +39,9 @@ class SCP3008_API AMainPlayer : public ACharacter
 
 protected:
 	/* ----- COMPONENTS ----- */
+
+	UPROPERTY()
+	ABaseHUD* HUD;
 	
 	// Input stuff
 	UPROPERTY(EditAnywhere, Category="Player | EnhancedInput")
@@ -113,23 +118,7 @@ protected:
 	bool bIsJumping{ false };
 	bool bIsSprinting{ false };
 	float PreviousTrueSpeed{ MoveSpeed };
-	
-public:
-	// Sets default values for this character's properties
-	AMainPlayer();
 
-	/* ----- ACCESSORS ----- */
-	// Max values
-	inline float GetMaxHunger() const { return MaxHunger; }
-	inline float GetMaxThirst() const { return MaxThirst; }
-	inline float GetMaxStamina() const { return MaxStamina; }
-
-	// Current values
-	inline float GetHunger() const { return Hunger; }
-	inline float GetThirst() const { return Thirst; }
-	inline float GetStamina() const { return Stamina; }
-	
-protected:
 	/* ----- OVERRIDES ----- */
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
@@ -152,4 +141,20 @@ protected:
 	void EndInteract();
 	void Interact();
 	FORCEINLINE bool IsInteracting() const { return GetWorldTimerManager().IsTimerActive(TimerHandle_Interaction); }
+	
+public:
+	// Sets default values for this character's properties
+	AMainPlayer();
+
+	/* ----- ACCESSORS ----- */
+	// Max values
+	inline float GetMaxHunger() const { return MaxHunger; }
+	inline float GetMaxThirst() const { return MaxThirst; }
+	inline float GetMaxStamina() const { return MaxStamina; }
+
+	// Current values
+	inline float GetHunger() const { return Hunger; }
+	inline float GetThirst() const { return Thirst; }
+	inline float GetStamina() const { return Stamina; }
+
 };
