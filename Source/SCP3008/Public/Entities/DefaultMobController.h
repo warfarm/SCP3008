@@ -9,7 +9,7 @@
 #include "DefaultMobController.generated.h"
 
 UENUM()
-enum EnemyState { PATROL UMETA(DisplayName = "Patrol"),
+enum EEnemyState { PATROL UMETA(DisplayName = "Patrol"),
 	CHASE UMETA(DisplayName = "Chase"),
 	IDLE UMETA(DisplayName = "Idle"),
 	STUNNED UMETA(DisplayName = "STUNNED")};
@@ -24,9 +24,12 @@ public:
 	// Sets default values for this actor's properties
 	ADefaultMobController();
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "AI")
-	TEnumAsByte<EnemyState> ActorState;
+	TEnumAsByte<EEnemyState> ActorState;
 	float IdleTime{5.0f};
-	// virtual void Stun(float duration);	
+	// Notifies the actor that it is stunned for a set duration
+	virtual void Stun(float duration);
+	UFUNCTION(BlueprintImplementableEvent, meta = (DisplayName = "On Stun"))
+	void OnStun(float duration);
 protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;

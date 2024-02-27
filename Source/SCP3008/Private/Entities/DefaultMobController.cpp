@@ -45,19 +45,6 @@ void ADefaultMobController::Tick(float DeltaTime)
 	Super::Tick(DeltaTime);
 	
 }
-// void ADefaultMob::Idle()
-// {
-// 	
-// 	ActorState = IDLE;
-// 	FTimerHandle handle;
-// 	GetWorldTimerManager().SetTimer(handle, this, &ADefaultMob::ExitSafe, 5.0f, false);
-// }
-// void ADefaultMob::Stun(float duration)
-// {
-// 	ActorState = STUNNED;
-// 	FTimerHandle handle;
-// 	GetWorldTimerManager().SetTimer(handle, this, &ADefaultMob::ExitSafe, duration, false);
-// }
 
 
 // calls switchstate with override
@@ -74,6 +61,11 @@ bool ADefaultMobController::ExitSafe()
 	
 	SwitchState();
 	return true;
+}
+void ADefaultMobController::Stun(float duration)
+{
+	OnStun(duration);
+	ActorState = STUNNED;
 }
 
 
