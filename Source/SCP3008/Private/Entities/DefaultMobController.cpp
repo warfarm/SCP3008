@@ -1,7 +1,8 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
 
-#include "..\Public\Entities\DefaultMobController.h"
+// #include "DefaultMobController.h"
+#include "Entities/DefaultMobController.h"
 
 // define the static variables
  TArray<TArray<float>> ADefaultMobController::markovMatrix { {0.9f, 0.1f}, {0.1f, 0.9f} };

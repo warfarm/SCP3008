@@ -3,7 +3,6 @@
 #pragma once
 
 #include "CoreMinimal.h"
-#include "EntitiesInterface.h"
 #include "GameFramework/Actor.h"
 #include "Runtime/AIModule/Classes/AIController.h"
 #include "DefaultMobController.generated.h"

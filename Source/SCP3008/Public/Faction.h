@@ -18,14 +18,17 @@ public:
 	std::string name;
 	
 	
+	
 
 
 
 	// Sets default values for this component's properties
 	UFaction();
+	
 	// Initialize the faction with an id, color, and name
 	void Initailize(int32, FColor, std::string);
-	
+
+
 	// create an instance of the default faction associated with that id
 	// 0 = Independent, 1 = SCP Foundation, 2 = Chaos Insurgency, 3 = Serpent's Hand
 	static UFaction* createDefaultFaction(AActor*,int32);	

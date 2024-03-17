@@ -14,13 +14,12 @@ UFaction::UFaction()
 	// ...
 }
 
-void UFaction::Initailize(int32 id, FColor color, std::string name)
+void UFaction::Initailize(int32 tid, FColor tcolor, std::string tname)
 {
-	this->id = id;
-	this->color = color;
-	this->name = name;
+	this->id = tid;
+	this->color = tcolor;
+	this->name = tname;
 }
-
 
 // Called when the game starts
 void UFaction::BeginPlay()
