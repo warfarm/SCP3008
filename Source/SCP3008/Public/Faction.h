@@ -16,6 +16,7 @@ public:
 	int id;
 	FColor color;
 	std::string name;
+	UTexture2D* icon;
 	
 	
 	
@@ -24,13 +25,18 @@ public:
 
 	// Sets default values for this component's properties
 	UFaction();
+
+	// Setters
 	
 	// Initialize the faction with an id, color, and name
 	void Initailize(int32, FColor, std::string);
+	// set the icon for the faction
+	void setIcon(UTexture2D*);
+	
 
 
 	// create an instance of the default faction associated with that id
-	// 0 = Independent, 1 = SCP Foundation, 2 = Chaos Insurgency, 3 = Serpent's Hand
+	// 0 = Independent, 1 = SCP Foundation, 2 = Chaos Insurgency, 3 = Serpent's Hand, 4 = UNGOC
 	static UFaction* createDefaultFaction(AActor*,int32);	
 	// Generate unique id for custom factions
 	static int32 generateId();
@@ -39,10 +45,13 @@ public:
 	int32 getId() const;
 	FColor getColor() const;
 	std::string_view getName() const;
+	UTexture2D* getIcon() const;
 
 protected:
 	// Called when the game starts
 	virtual void BeginPlay() override;
+	// Load the icon for a static faction
+	static UTexture2D* loadIcon(int id);
 
 	
 
