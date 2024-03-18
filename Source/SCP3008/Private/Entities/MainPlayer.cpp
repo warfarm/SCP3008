@@ -3,6 +3,7 @@
 
 #include "Entities/MainPlayer.h"
 #include "UserInterface/Main/BaseHUD.h"
+#include "Components/InventoryComponent.h"
 
 #include "Components/CapsuleComponent.h"
 #include "InputMappingContext.h"
@@ -23,6 +24,18 @@ AMainPlayer::AMainPlayer()
 	Camera = CreateDefaultSubobject<UCameraComponent>("Camera");
 	Camera->SetupAttachment(RootComponent);
 	Camera->bUsePawnControlRotation = true;
+	
+	PlayerInventory = CreateDefaultSubobject<UInventoryComponent>(TEXT("PlayerInventory"));
+	PlayerInventory->SetSlotsCapacity(DefaultSlotCapacity);
+	PlayerInventory->SetWeightCapacity(DefaultWeightCapacity);
+}
+
+void AMainPlayer::UpdateInteractionWidget() const
+{
+	if(IsValid(TargetInteractable.GetObject()))
+	{
+		HUD->UpdateInteractionWidget(&TargetInteractable->InteractableData);
+	}
 }
 
 // Called when the game starts or when spawned

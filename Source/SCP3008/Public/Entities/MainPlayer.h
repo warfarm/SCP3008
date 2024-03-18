@@ -10,6 +10,7 @@
 #include "Logging/LogMacros.h"
 #include "MainPlayer.generated.h"
 
+class UInventoryComponent;
 class ABaseHUD;
 
 USTRUCT()
@@ -40,6 +41,9 @@ class SCP3008_API AMainPlayer : public ACharacter
 protected:
 	/* ----- COMPONENTS ----- */
 
+	UPROPERTY(VisibleAnywhere, Category="Character | Inventory")
+	UInventoryComponent* PlayerInventory;
+	
 	UPROPERTY()
 	ABaseHUD* HUD;
 	
@@ -101,17 +105,21 @@ protected:
 	
 	UPROPERTY(EditAnywhere, Category="Player | Movement")
 	float JumpPower{ 1.f };
-
+	
 	// Camera
 	float CameraSensitivity{ 0.8f };
 
 	// Interactions
 	float InteractionCheckFrequency{ 0.1f };
 	float InteractionCheckDistance{ 300.f };
-
+	
 	FTimerHandle TimerHandle_Interaction;
 
 	FInteractionData InteractionData;
+
+	// Default Inventory Statistics
+	int32 DefaultSlotCapacity{ 20 };
+	float DefaultWeightCapacity{ 50 };
 	
 	/* ----- STATE ----- */
 	
@@ -148,13 +156,17 @@ public:
 
 	/* ----- ACCESSORS ----- */
 	// Max values
-	inline float GetMaxHunger() const { return MaxHunger; }
-	inline float GetMaxThirst() const { return MaxThirst; }
-	inline float GetMaxStamina() const { return MaxStamina; }
+	FORCEINLINE float GetMaxHunger() const { return MaxHunger; }
+	FORCEINLINE float GetMaxThirst() const { return MaxThirst; }
+	FORCEINLINE float GetMaxStamina() const { return MaxStamina; }
 
 	// Current values
-	inline float GetHunger() const { return Hunger; }
-	inline float GetThirst() const { return Thirst; }
-	inline float GetStamina() const { return Stamina; }
+	FORCEINLINE float GetHunger() const { return Hunger; }
+	FORCEINLINE float GetThirst() const { return Thirst; }
+	FORCEINLINE float GetStamina() const { return Stamina; }
 
+	FORCEINLINE UInventoryComponent* GetInventory() const {return PlayerInventory;}
+
+	/* ----- FUNCTIONS ----- */
+	void UpdateInteractionWidget() const;
 };

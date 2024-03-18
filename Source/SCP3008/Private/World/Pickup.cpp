@@ -3,6 +3,7 @@
 
 #include "World/Pickup.h"
 
+#include "Components/InventoryComponent.h"
 #include "Items/ItemBase.h"
 
 // Called when the game starts or when spawned
@@ -85,7 +86,29 @@ void APickup::TakePickup(const AMainPlayer* Taker)
 	{
 		if(ItemReference)
 		{
-			
+			if (UInventoryComponent* PlayerInventory = Taker->GetInventory())
+			{
+				const FItemAddResult AddResult = PlayerInventory->HandleAddItem(ItemReference);
+
+				switch(AddResult.OperationResult)
+				{
+					case EItemAddResult::IAR_NoItemAdded:
+						break;
+					case EItemAddResult::IAR_ItemAdded:
+						Destroy();
+						break;
+				}
+
+				UE_LOG(LogTemp, Warning, TEXT(%s), *AddResult.ResultMessage.ToString());
+			}
+			else
+			{
+				UE_LOG(LogTemp, Warning, TEXT("Player Inventory Component Null!"));
+			}
+		}
+		else
+		{
+			UE_LOG(LogTemp, Warning, TEXT("PickUp Internal Item Refrence Null!"));
 		}
 	}
 }

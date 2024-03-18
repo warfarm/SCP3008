@@ -6,9 +6,8 @@
 #include "Data/ItemDataStructs.h"
 #include "ItemBase.generated.h"
 
-/**
- * 
- */
+class UInventoryComponent;
+
 UCLASS()
 class SCP3008_API UItemBase : public UObject
 {
@@ -16,8 +15,8 @@ class SCP3008_API UItemBase : public UObject
 	
 public:
 
-	/*UPROPERTY()
-	UInventoryComponent* OwnedInventory;*/
+	UPROPERTY()
+	UInventoryComponent* OwnedInventory;
 
 	UPROPERTY(VisibleAnywhere, Category = "Item")
 	FName ID{};
@@ -37,8 +36,13 @@ public:
 	UPROPERTY(VisibleAnywhere, Category = "Item")
 	FItemAssetData AssetData{};
 
-	UItemBase() = default;
+	bool bIsCopy{};
+	bool bIsPickUp{};
+	
+	UItemBase();
 
+	void ResetItemFlags();
+	
 	UFUNCTION(Category = "Item")
 	UItemBase* CreateItemCopy() const;
 
