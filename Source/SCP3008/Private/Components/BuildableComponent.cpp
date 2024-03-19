@@ -14,6 +14,20 @@ UBuildableComponent::UBuildableComponent()
 }
 
 
+void UBuildableComponent::BeginInteract()
+{
+	IInteractionInterface::BeginInteract();
+
+	if (bIsHeld)
+	{
+		bIsHeld = false;
+	}
+	else
+	{
+		bIsHeld = true;	
+	}
+}
+
 // Called when the game starts
 void UBuildableComponent::BeginPlay()
 {

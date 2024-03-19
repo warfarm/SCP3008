@@ -169,4 +169,6 @@ public:
 
 	/* ----- FUNCTIONS ----- */
 	void UpdateInteractionWidget() const;
+
+	static AMainPlayer* GetPlayer();
 };
