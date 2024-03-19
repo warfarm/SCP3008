@@ -33,7 +33,7 @@ struct FItemAddResult
 	int32 AmountAdded;
 	//Item Operation state Enum
 	UPROPERTY(BlueprintReadOnly, Category = "Item Add Result")
-	EitemAddResult OperationResult;
+	EItemAddResult OperationResult;
 	//Operation Result Status Message
 	UPROPERTY(BlueprintReadOnly, Category = "Item Add Result")
 	FText ResultMessage;
@@ -42,7 +42,7 @@ struct FItemAddResult
 	{
 		FItemAddResult AddedNoneResult{};
 		AddedNoneResult.AmountAdded = 0;
-		AddedNoneResult.OperationResult = EitemAddResult::IAR_NoItemAdded;
+		AddedNoneResult.OperationResult = EItemAddResult::IAR_NoItemAdded;
 		AddedNoneResult.ResultMessage = ErrorText;
 		return AddedNoneResult;
 	};
@@ -50,7 +50,7 @@ struct FItemAddResult
 	{
 		FItemAddResult AddedAllResult{};
 		AddedAllResult.AmountAdded = 1;
-		AddedAllResult.OperationResult = EitemAddResult::IAR_ItemAdded;
+		AddedAllResult.OperationResult = EItemAddResult::IAR_ItemAdded;
 		AddedAllResult.ResultMessage = Message;
 		return AddedAllResult;
 	};
