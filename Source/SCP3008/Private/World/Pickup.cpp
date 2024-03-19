@@ -99,7 +99,7 @@ void APickup::TakePickup(const AMainPlayer* Taker)
 						break;
 				}
 
-				UE_LOG(LogTemp, Warning, TEXT(%s), *AddResult.ResultMessage.ToString());
+				UE_LOG(LogTemp, Warning, TEXT("%s"), *AddResult.ResultMessage.ToString());
 			}
 			else
 			{

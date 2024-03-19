@@ -80,6 +80,9 @@ FItemAddResult UInventoryComponent::HandleAddItem(UItemBase* InputItem)
 				FText::FromString("Successfully added {0} to Inventory."),
 				InputItem->TextData.Name));
 	}
+	return FItemAddResult::AddedNone(FText::Format(
+				FText::FromString("Added nothing, owner not found."),
+				InputItem->TextData.Name));
 }
 
 void UInventoryComponent::RemoveSingleInstance(UItemBase* ItemToRemove)
