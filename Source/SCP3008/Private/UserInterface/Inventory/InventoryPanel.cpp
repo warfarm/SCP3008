@@ -45,7 +45,7 @@ void UInventoryPanel::NativeOnInitialized()
 		if (InventoryReference)
 		{
 			InventoryReference->OnInventoryUpdate.AddUObject(this, &UInventoryPanel::RefreshInventory);
-			SetInfoText();
+			//SetInfoText();
 		}
 	}
 }
