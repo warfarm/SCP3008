@@ -71,6 +71,9 @@ protected:
 	
 	UPROPERTY(EditAnywhere, Category="Player | EnhancedInput")
 	UInputAction* InteractAction;
+	
+	UPROPERTY(EditAnywhere, Category="Player | EnhancedInput")
+	UInputAction* BuildAction;
 
 	// Camera
 	UPROPERTY(EditAnywhere, Category="Player | Camera")

@@ -119,6 +119,8 @@ void AMainPlayer::SetupPlayerInputComponent(UInputComponent* PlayerInputComponen
 		
 		Input->BindAction(InteractAction, ETriggerEvent::Started, this, &AMainPlayer::BeginInteract);
 		Input->BindAction(InteractAction, ETriggerEvent::Completed, this, &AMainPlayer::EndInteract);
+
+		Input->BindAction(BuildAction, ETriggerEvent::Started, this, &AMainPlayer::Build);
 	}
 }
 
@@ -190,18 +192,24 @@ void AMainPlayer::SprintEnd()
 // TODO!
 void AMainPlayer::Build()
 {
+	UE_LOG(LogTemp, Warning, TEXT("BUILD TRIGGERED"));
+	
 	bool bIsHolding = CurrentHeldBuildable != nullptr;
-
+	
 	if (bIsHolding)
 	{
 		// logic for placing down stuff
 		CurrentHeldBuildable->PlaceDown();
+
+		CurrentHeldBuildable = nullptr;
 	}
 	else
 	{
 		// logic for picking stuff 
-		UBuildableComponent* TargetBuildable{};
-		TargetBuildable->PickUp(this);
+		// UBuildableComponent* TargetBuildable{};
+		// TargetBuildable->PickUp(this);
+
+		
 	}
 }
 
