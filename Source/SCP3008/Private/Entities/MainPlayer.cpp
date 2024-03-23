@@ -198,7 +198,7 @@ void AMainPlayer::Build()
 	else
 	{
 		// logic for picking stuff 
-		UBuildableComponent* TargetBuildable;
+		UBuildableComponent* TargetBuildable{};
 		TargetBuildable->PickUp(this);
 	}
 }
