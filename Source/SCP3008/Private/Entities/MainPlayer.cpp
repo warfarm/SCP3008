@@ -114,6 +114,8 @@ void AMainPlayer::SetupPlayerInputComponent(UInputComponent* PlayerInputComponen
 		
 		Input->BindAction(SprintAction, ETriggerEvent::Started, this, &AMainPlayer::SprintStart);
 		Input->BindAction(SprintAction, ETriggerEvent::Completed, this, &AMainPlayer::SprintEnd);
+
+		Input->BindAction(ToggleAction, ETriggerEvent::Triggered, this, &AMainPlayer::ToggleMenu);
 		
 		Input->BindAction(InteractAction, ETriggerEvent::Started, this, &AMainPlayer::BeginInteract);
 		Input->BindAction(InteractAction, ETriggerEvent::Completed, this, &AMainPlayer::EndInteract);
@@ -201,6 +203,11 @@ void AMainPlayer::Build()
 		UBuildableComponent* TargetBuildable{};
 		TargetBuildable->PickUp(this);
 	}
+}
+
+void AMainPlayer::ToggleMenu()
+{
+	HUD->ToggleMenu();
 }
 
 void AMainPlayer::PerformInteractionCheck()

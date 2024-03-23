@@ -65,6 +65,9 @@ protected:
 	
 	UPROPERTY(EditAnywhere, Category="Player | EnhancedInput")
 	UInputAction* SprintAction;
+
+	UPROPERTY(EditAnywhere, Category="Player | EnhancedInput")
+	UInputAction* ToggleAction;
 	
 	UPROPERTY(EditAnywhere, Category="Player | EnhancedInput")
 	UInputAction* InteractAction;
@@ -148,6 +151,8 @@ protected:
 	void Build();
 
 	/* ----- INTERACTIONS ----- */
+	void ToggleMenu();
+	
 	void PerformInteractionCheck();
 	void FoundInteractable(AActor* NewInteractable);
 	void NoInteractableFound();
