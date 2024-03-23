@@ -2,9 +2,12 @@
 
 #pragma once
 
+#include <optional>
+
 #include "CoreMinimal.h"
 #include "InputActionValue.h"
 #include "Camera/CameraComponent.h"
+#include "Components/BuildableComponent.h"
 #include "GameFramework/Character.h"
 #include "Interfaces/InteractionInterface.h"
 #include "Logging/LogMacros.h"
@@ -117,6 +120,8 @@ protected:
 
 	FInteractionData InteractionData;
 
+	UBuildableComponent* CurrentHeldBuildable;
+
 	// Default Inventory Statistics
 	int32 DefaultSlotCapacity{ 20 };
 	float DefaultWeightCapacity{ 50 };
@@ -140,6 +145,7 @@ protected:
 	void Jump();
 	void SprintStart();
 	void SprintEnd();
+	void Build();
 
 	/* ----- INTERACTIONS ----- */
 	void PerformInteractionCheck();
@@ -170,5 +176,8 @@ public:
 	/* ----- FUNCTIONS ----- */
 	void UpdateInteractionWidget() const;
 
-	static AMainPlayer* GetPlayer();
+	/* ----- JUST nice stuff to have tbh ----- */
+	FORCEINLINE FVector GetCameraLocation();
+	FORCEINLINE FVector GetLookVector();
+	FORCEINLINE std::optional<FHitResult> BlockingLookDirRaycast(FCollisionQueryParams& QueryParams, float Distance);
 };

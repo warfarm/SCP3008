@@ -14,19 +14,34 @@ UBuildableComponent::UBuildableComponent()
 }
 
 
-void UBuildableComponent::BeginInteract()
+void UBuildableComponent::PickUp(AMainPlayer* TargetPlayer)
 {
-	IInteractionInterface::BeginInteract();
-
 	if (bIsHeld)
 	{
-		bIsHeld = false;
+		// handle invalid state
+		return;
 	}
-	else
-	{
-		bIsHeld = true;	
-	}
+
+	HoldingPlayer = TargetPlayer;
+
+	bIsHeld = true;
+	
 }
+
+void UBuildableComponent::PlaceDown()
+{
+	if (!bIsHeld)
+	{
+		// handle invalid state
+		return;
+	}
+
+	
+	
+	bIsHeld = false;
+	
+}
+
 
 // Called when the game starts
 void UBuildableComponent::BeginPlay()
@@ -43,6 +58,9 @@ void UBuildableComponent::TickComponent(float DeltaTime, ELevelTick TickType, FA
 {
 	Super::TickComponent(DeltaTime, TickType, ThisTickFunction);
 
-	// ...
+	if (bIsHeld)
+	{
+		
+	}
 }
 

@@ -9,6 +9,7 @@
 #include "InputMappingContext.h"
 #include "EnhancedInputSubsystems.h"
 #include "EnhancedInputComponent.h"
+#include "Components/BuildableComponent.h"
 #include "GameFramework/CharacterMovementComponent.h"
 
 // Sets default values
@@ -36,6 +37,30 @@ void AMainPlayer::UpdateInteractionWidget() const
 	{
 		HUD->UpdateInteractionWidget(&TargetInteractable->InteractableData);
 	}
+}
+
+FVector AMainPlayer::GetCameraLocation()
+{
+	return Camera->GetComponentLocation();
+}
+
+FVector AMainPlayer::GetLookVector()
+{
+	return GetViewRotation().Vector();
+}
+
+std::optional<FHitResult> AMainPlayer::BlockingLookDirRaycast(FCollisionQueryParams& QueryParams, float Distance)
+{
+	FVector TraceStart{GetCameraLocation()};
+	FVector TraceEnd{TraceStart +  GetLookVector() * Distance};
+
+	FHitResult HitResult{};
+
+	if (GetWorld()->LineTraceSingleByChannel(HitResult, TraceStart, TraceEnd, ECC_Visibility, QueryParams))
+	{
+		return {HitResult};
+	}
+	return {};
 }
 
 // Called when the game starts or when spawned
@@ -160,31 +185,53 @@ void AMainPlayer::SprintEnd()
 	bIsSprinting = false;
 }
 
+// TODO!
+void AMainPlayer::Build()
+{
+	bool bIsHolding = CurrentHeldBuildable != nullptr;
+
+	if (bIsHolding)
+	{
+		// logic for placing down stuff
+		CurrentHeldBuildable->PlaceDown();
+	}
+	else
+	{
+		// logic for picking stuff 
+		UBuildableComponent* TargetBuildable;
+		TargetBuildable->PickUp(this);
+	}
+}
+
 void AMainPlayer::PerformInteractionCheck()
 {
 	InteractionData.LastInteractionCheckTime = GetWorld()->GetTimeSeconds();
 	if (USceneComponent* CameraComponent = CastChecked<USceneComponent>(Camera))
 	{
-		FVector TraceStart{CameraComponent->GetComponentLocation()};
-		FVector TraceEnd{TraceStart + GetViewRotation().Vector() * InteractionCheckDistance};
+		FVector TraceStart{GetCameraLocation()};
+		FVector TraceEnd{TraceStart +  GetLookVector() * InteractionCheckDistance};
 
 		// TODO! remove later
 		DrawDebugLine(GetWorld(), TraceStart, TraceEnd, FColor::Red, false, 1.f, 0.f, 2.f);
-
+	
 		FCollisionQueryParams QueryParams;
 		QueryParams.AddIgnoredActor(this);
-		FHitResult HitResult{};
+		std::optional<FHitResult> HitResultOption{BlockingLookDirRaycast(QueryParams, InteractionCheckDistance)};
 
-		if (GetWorld()->LineTraceSingleByChannel(HitResult, TraceStart, TraceEnd, ECC_Visibility, QueryParams))
+		if (HitResultOption.has_value())
 		{
-			if (HitResult.GetActor()->GetClass()->ImplementsInterface(UInteractionInterface::StaticClass()))
+			FHitResult const& HitResult = HitResultOption.value();
+			AActor* HitActor = HitResult.GetActor();
+
+			// Checks to see if the actor class itself implements UInteractionIterface
+			if (HitActor->GetClass()->ImplementsInterface(UInteractionInterface::StaticClass()))
 			{
 				// If we are looking at the same interactable for some reason
-				if (HitResult.GetActor() == InteractionData.CurrentInteractable)
+				if (HitActor == InteractionData.CurrentInteractable)
 				{
 					return;
 				}
-				FoundInteractable(HitResult.GetActor());
+				FoundInteractable(HitActor);
 			}
 		}
 	}

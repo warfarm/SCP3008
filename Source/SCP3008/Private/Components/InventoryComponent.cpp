@@ -29,7 +29,9 @@ UItemBase* UInventoryComponent::FindMatchingItem(UItemBase* ItemIn) const
 	if(ItemIn)
 	{
 		if(InventoryContents.Contains(ItemIn))
-		{return ItemIn;}
+		{
+			return ItemIn;
+		}
 	}
 	return nullptr;
 }

@@ -2,10 +2,14 @@
 
 #pragma once
 
+#include <map>
+
 #include "CoreMinimal.h"
 #include "Components/ActorComponent.h"
 #include "HealthComponent.generated.h"
 
+// USTRUCT()
+// struct 
 
 UCLASS( ClassGroup=(Custom), meta=(BlueprintSpawnableComponent) )
 class SCP3008_API UHealthComponent : public UActorComponent
@@ -21,6 +25,8 @@ protected:
 	/* ----- STATE ----- */
 	UPROPERTY(EditAnywhere, Category="Health")
 	bool bCanTakeDamage{ true };
+	std::map<std::string, FTimerHandle> TickDamageSources;
+	std::map<std::string, float> DamageMultiplierSources;
 	
 public:	
 	// Sets default values for this component's properties
@@ -39,5 +45,7 @@ public:
 	virtual void TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction) override;
 	// Returns true if damage was taken, otherwise returns false
 	bool TakeDamage(float DamageAmount);
-		
+
+	// will add later if needed 
+	// void TakeTickDamage();
 };
