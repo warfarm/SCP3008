@@ -3,7 +3,7 @@
 
 ### UnrealEngine ###
 # Visual Studio 2015 user specific files
-.vs/
+.vs
 
 # Compiled Object files
 *.slo
@@ -18,7 +18,7 @@
 # Compiled Dynamic libraries
 *.so
 *.dylib
-*.dll
+
 
 # Fortran module files
 *.mod
