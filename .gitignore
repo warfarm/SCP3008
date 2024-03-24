@@ -51,7 +51,7 @@ SourceArt/**/*.tga
 
 # Binary Files
 Binaries/*
-Plugins/*/Binaries/*
+#Plugins/*/Binaries/*
 
 # Builds
 Build/*
@@ -72,7 +72,7 @@ Saved/*
 
 # Compiled source files for the engine to use
 Intermediate/*
-Plugins/*/Intermediate/*
+#Plugins/*/Intermediate/*
 
 # Cache files for the editor to use
 DerivedDataCache/*
@@ -90,8 +90,8 @@ Build/Android/res/*
 Build/Android/res/*/*
 !Build/Android/res/*/*.png
 # Ignore plugins binaries on deep subfolders
-Plugins/**/Binaries/*
-Plugins/**/Intermediate/*
+#Plugins/**/Binaries/*
+#Plugins/**/Intermediate/*
 
 ### VisualStudio ###
 ## Ignore Visual Studio temporary files, build results, and
