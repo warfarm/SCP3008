@@ -353,19 +353,19 @@ void EmptyLinkFunctionForGeneratedCodeILoginSession() {}
 		}
 		return Z_Registration_Info_UEnum_ParticipantSpeakingUpdateRate.InnerSingleton;
 	}
-	struct Z_CompiledInDeferFile_FID_unrealprojects_SCP3008_Plugins_VivoxCore_Source_VivoxCore_Public_ILoginSession_h_Statics
+	struct Z_CompiledInDeferFile_FID_Users_kai_j_OneDrive_Documents_GitHub_SCP3008_Plugins_VivoxCore_Source_VivoxCore_Public_ILoginSession_h_Statics
 	{
 		static const FEnumRegisterCompiledInInfo EnumInfo[];
 	};
-	const FEnumRegisterCompiledInInfo Z_CompiledInDeferFile_FID_unrealprojects_SCP3008_Plugins_VivoxCore_Source_VivoxCore_Public_ILoginSession_h_Statics::EnumInfo[] = {
+	const FEnumRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Users_kai_j_OneDrive_Documents_GitHub_SCP3008_Plugins_VivoxCore_Source_VivoxCore_Public_ILoginSession_h_Statics::EnumInfo[] = {
 		{ LoginState_StaticEnum, TEXT("LoginState"), &Z_Registration_Info_UEnum_LoginState, CONSTRUCT_RELOAD_VERSION_INFO(FEnumReloadVersionInfo, 780192043U) },
 		{ SubscriptionMode_StaticEnum, TEXT("SubscriptionMode"), &Z_Registration_Info_UEnum_SubscriptionMode, CONSTRUCT_RELOAD_VERSION_INFO(FEnumReloadVersionInfo, 824457172U) },
 		{ SubscriptionReply_StaticEnum, TEXT("SubscriptionReply"), &Z_Registration_Info_UEnum_SubscriptionReply, CONSTRUCT_RELOAD_VERSION_INFO(FEnumReloadVersionInfo, 3852786640U) },
 		{ TransmissionMode_StaticEnum, TEXT("TransmissionMode"), &Z_Registration_Info_UEnum_TransmissionMode, CONSTRUCT_RELOAD_VERSION_INFO(FEnumReloadVersionInfo, 1045563251U) },
 		{ ParticipantSpeakingUpdateRate_StaticEnum, TEXT("ParticipantSpeakingUpdateRate"), &Z_Registration_Info_UEnum_ParticipantSpeakingUpdateRate, CONSTRUCT_RELOAD_VERSION_INFO(FEnumReloadVersionInfo, 2046933256U) },
 	};
-	static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_unrealprojects_SCP3008_Plugins_VivoxCore_Source_VivoxCore_Public_ILoginSession_h_3267339712(TEXT("/Script/VivoxCore"),
+	static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Users_kai_j_OneDrive_Documents_GitHub_SCP3008_Plugins_VivoxCore_Source_VivoxCore_Public_ILoginSession_h_3267339712(TEXT("/Script/VivoxCore"),
 		nullptr, 0,
 		nullptr, 0,
-		Z_CompiledInDeferFile_FID_unrealprojects_SCP3008_Plugins_VivoxCore_Source_VivoxCore_Public_ILoginSession_h_Statics::EnumInfo, UE_ARRAY_COUNT(Z_CompiledInDeferFile_FID_unrealprojects_SCP3008_Plugins_VivoxCore_Source_VivoxCore_Public_ILoginSession_h_Statics::EnumInfo));
+		Z_CompiledInDeferFile_FID_Users_kai_j_OneDrive_Documents_GitHub_SCP3008_Plugins_VivoxCore_Source_VivoxCore_Public_ILoginSession_h_Statics::EnumInfo, UE_ARRAY_COUNT(Z_CompiledInDeferFile_FID_Users_kai_j_OneDrive_Documents_GitHub_SCP3008_Plugins_VivoxCore_Source_VivoxCore_Public_ILoginSession_h_Statics::EnumInfo));
 PRAGMA_ENABLE_DEPRECATION_WARNINGS
