@@ -39,7 +39,7 @@ void UFaction::TickComponent(float DeltaTime, ELevelTick TickType, FActorCompone
 	// ...
 }
 
-UFaction* UFaction::createDefaultFaction(AActor* Owner, int32 id)
+UFaction* UFaction::CreateDefaultFaction(AActor* Owner, int32 id)
 {
 	if (!Owner)
 	{

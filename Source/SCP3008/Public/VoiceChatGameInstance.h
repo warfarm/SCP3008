@@ -21,6 +21,7 @@ class SCP3008_API UVoiceChatGameInstance : public UGameInstance
 
 	void InitVivox();
 	void Login();
+	UFUNCTION(BlueprintCallable, Category="Voice")
 	void JoinChannel();
 
 	IClient* VivoxVoiceClient;

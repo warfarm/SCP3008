@@ -37,7 +37,8 @@ public:
 
 	// create an instance of the default faction associated with that id
 	// 0 = Independent, 1 = SCP Foundation, 2 = Chaos Insurgency, 3 = Serpent's Hand, 4 = UNGOC
-	static UFaction* createDefaultFaction(AActor*,int32);	
+	UFUNCTION(BlueprintCallable, Category = "Factions", meta = (DnvisplayName = "Create Default Faction"))
+	static UFaction* CreateDefaultFaction(AActor* Owner, int32 id);	
 	// Generate unique id for custom factions
 	static int32 generateId();
 

@@ -480,6 +480,9 @@ FodyWeavers.xsd
 *.msix
 *.msm
 *.msp
+# Plugin Intermediates
+Plugin/*/Intermediate/Build*
+
 
 # JetBrains Rider
 *.sln.iml
