@@ -29,6 +29,14 @@
 		{
 			"Name": "Water",
 			"Enabled": true
+		},
+		{
+			"Name": "Iris",
+			"Enabled": true
+		},
+		{
+			"Name": "VivoxCore",
+			"Enabled": true
 		}
 	]
 }

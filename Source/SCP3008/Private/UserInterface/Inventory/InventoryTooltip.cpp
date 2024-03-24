@@ -3,7 +3,7 @@
 
 #include "UserInterface/Inventory/InventoryTooltip.h"
 
-#include "IDetailTreeNode.h"
+// #include "IDetailTreeNode.h"
 #include "Components/TextBlock.h"
 #include "Items/ItemBase.h"
 #include "UserInterface/Inventory/InventoryItemSlot.h"
