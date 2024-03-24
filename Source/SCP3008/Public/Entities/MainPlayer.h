@@ -137,6 +137,7 @@ protected:
 	bool bIsJumping{ false };
 	bool bIsSprinting{ false };
 	float PreviousTrueSpeed{ MoveSpeed };
+	float BuildOffset{};
 
 	/* ----- OVERRIDES ----- */
 	// Called when the game starts or when spawned
@@ -185,7 +186,7 @@ public:
 	void UpdateInteractionWidget() const;
 
 	/* ----- JUST nice stuff to have tbh ----- */
-	FORCEINLINE FVector GetCameraLocation();
+	FORCEINLINE FVector GetCameraPosition();
 	FORCEINLINE FVector GetLookVector();
 	FORCEINLINE std::optional<FHitResult> BlockingLookDirRaycast(FCollisionQueryParams& QueryParams, float Distance);
 };

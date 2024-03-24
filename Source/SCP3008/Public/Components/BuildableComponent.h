@@ -16,10 +16,10 @@ protected:
 	/* ----- ATTRIBUTES ----- */
 	FRotator3d SavedRotation{};
 	bool bIsHeld{false};
+	float OffsetFromPlayer{};
+	
 	AMainPlayer* HoldingPlayer;
-
-	// this will be set dynamically
-	float PlayerOffset{};
+	UStaticMeshComponent* StaticMesh;
 	
 	/* ----- ENGINE OVERRIDES ----- */
 	// Called when the game starts
@@ -34,7 +34,10 @@ public:
 
 	// erm akshaully you could just implememnt the UII interface and override the virtual methods 
 	// TODO! make this shit return a Result<T, E> type
-	virtual void PickUp(AMainPlayer* TargetPlayer);
-	virtual void PlaceDown();
+	void PickUp(AMainPlayer* TargetPlayer);
+	void PlaceDown();
+
+	// Capped at 100 and 400. subject to change later perahsp?
+	void ShiftOffset(float Distance);
 
 };

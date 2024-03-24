@@ -39,7 +39,7 @@ void AMainPlayer::UpdateInteractionWidget() const
 	}
 }
 
-FVector AMainPlayer::GetCameraLocation()
+FVector AMainPlayer::GetCameraPosition()
 {
 	return Camera->GetComponentLocation();
 }
@@ -51,7 +51,7 @@ FVector AMainPlayer::GetLookVector()
 
 std::optional<FHitResult> AMainPlayer::BlockingLookDirRaycast(FCollisionQueryParams& QueryParams, float Distance)
 {
-	FVector TraceStart{GetCameraLocation()};
+	FVector TraceStart{GetCameraPosition()};
 	FVector TraceEnd{TraceStart +  GetLookVector() * Distance};
 
 	FHitResult HitResult{};
@@ -146,7 +146,7 @@ void AMainPlayer::Move(const FInputActionValue& InputValue)
 			GetCharacterMovement()->MaxWalkSpeed = TrueSpeed * 600.f;
 		}
 
-		UE_LOG(LogTemp, Warning, TEXT("TRUESPEED IS %f"), TrueSpeed);
+		// UE_LOG(LogTemp, Warning, TEXT("TRUESPEED IS %f"), TrueSpeed);
 
 		AddMovementInput(Forward, InputVector.Y * TrueSpeed);
 		AddMovementInput(Right, InputVector.X * TrueSpeed);
@@ -202,14 +202,35 @@ void AMainPlayer::Build()
 		CurrentHeldBuildable->PlaceDown();
 
 		CurrentHeldBuildable = nullptr;
+		UE_LOG(LogTemp, Warning, TEXT("PLACED"));
 	}
 	else
 	{
-		// logic for picking stuff 
-		// UBuildableComponent* TargetBuildable{};
-		// TargetBuildable->PickUp(this);
+		// logic for picking stuff
 
-		
+		// perform raycast
+		FCollisionQueryParams QueryParams;
+		QueryParams.AddIgnoredActor(this);
+	
+		std::optional<FHitResult> HitResultOption = BlockingLookDirRaycast(QueryParams, InteractionCheckDistance);
+
+		if (!HitResultOption.has_value())
+		{
+			return;
+		}
+
+		AActor* HitActor = HitResultOption.value().GetActor();
+
+		if (UBuildableComponent* TargetedBuildable = CastChecked<UBuildableComponent>(HitActor->GetComponentByClass(UBuildableComponent::StaticClass())))
+		{
+			// player has tried to interact w a buildable
+			BuildOffset = static_cast<float>(FVector3d::Distance(HitActor->GetActorLocation(), GetCameraPosition()));
+			
+			TargetedBuildable->PickUp(this);
+			CurrentHeldBuildable = TargetedBuildable;
+			UE_LOG(LogTemp, Warning, TEXT("PICKED UP"));
+		}
+		// if not we dont need to do anything
 	}
 }
 
@@ -223,7 +244,7 @@ void AMainPlayer::PerformInteractionCheck()
 	InteractionData.LastInteractionCheckTime = GetWorld()->GetTimeSeconds();
 	if (USceneComponent* CameraComponent = CastChecked<USceneComponent>(Camera))
 	{
-		FVector TraceStart{GetCameraLocation()};
+		FVector TraceStart{GetCameraPosition()};
 		FVector TraceEnd{TraceStart +  GetLookVector() * InteractionCheckDistance};
 
 		// TODO! remove later

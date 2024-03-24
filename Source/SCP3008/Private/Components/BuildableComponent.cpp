@@ -3,6 +3,8 @@
 
 #include "Components/BuildableComponent.h"
 
+#include "Entities/MainPlayer.h"
+
 // Sets default values for this component's properties
 UBuildableComponent::UBuildableComponent()
 {
@@ -13,7 +15,7 @@ UBuildableComponent::UBuildableComponent()
 	// ...
 }
 
-
+// TODO! 
 void UBuildableComponent::PickUp(AMainPlayer* TargetPlayer)
 {
 	if (bIsHeld)
@@ -25,7 +27,9 @@ void UBuildableComponent::PickUp(AMainPlayer* TargetPlayer)
 	HoldingPlayer = TargetPlayer;
 
 	bIsHeld = true;
-	
+
+	StaticMesh->SetSimulatePhysics(false);
+	GetOwner()->SetActorEnableCollision(false);
 }
 
 void UBuildableComponent::PlaceDown()
@@ -36,9 +40,17 @@ void UBuildableComponent::PlaceDown()
 		return;
 	}
 
-	
-	
 	bIsHeld = false;
+
+	// TODO! do more checks if in wall etc etc
+	StaticMesh->SetSimulatePhysics(true);
+	GetOwner()->SetActorEnableCollision(true);
+}
+
+// TODO! trigger w scrolling while in build mode
+void UBuildableComponent::ShiftOffset(float Distance)
+{
+	OffsetFromPlayer = FMath::Clamp(OffsetFromPlayer + Distance, 100, 400);
 	
 }
 
@@ -48,8 +60,8 @@ void UBuildableComponent::BeginPlay()
 {
 	Super::BeginPlay();
 
-	// ...
-	
+	StaticMesh = CastChecked<UStaticMeshComponent>(GetOwner()->GetComponentByClass(UStaticMeshComponent::StaticClass()));
+
 }
 
 
@@ -60,7 +72,10 @@ void UBuildableComponent::TickComponent(float DeltaTime, ELevelTick TickType, FA
 
 	if (bIsHeld)
 	{
-		
+		AActor* Owner = GetOwner();
+
+		// TODO! 
+		Owner->SetActorLocation(HoldingPlayer->GetCameraPosition() + HoldingPlayer->GetLookVector() * OffsetFromPlayer);
 	}
 }
 
