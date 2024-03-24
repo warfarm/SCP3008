@@ -481,7 +481,7 @@ FodyWeavers.xsd
 *.msm
 *.msp
 # Plugin Intermediates
-Plugin/*/Intermediate/Build*
+Plugin/*/Intermediate/Build/*
 
 
 # JetBrains Rider
