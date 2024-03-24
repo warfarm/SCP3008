@@ -224,7 +224,6 @@ void AMainPlayer::Build()
 		if (UBuildableComponent* TargetedBuildable = CastChecked<UBuildableComponent>(HitActor->GetComponentByClass(UBuildableComponent::StaticClass())))
 		{
 			// player has tried to interact w a buildable
-			BuildOffset = static_cast<float>(FVector3d::Distance(HitActor->GetActorLocation(), GetCameraPosition()));
 			
 			TargetedBuildable->PickUp(this);
 			CurrentHeldBuildable = TargetedBuildable;

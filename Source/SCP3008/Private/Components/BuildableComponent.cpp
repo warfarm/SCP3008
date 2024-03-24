@@ -24,6 +24,8 @@ void UBuildableComponent::PickUp(AMainPlayer* TargetPlayer)
 		return;
 	}
 
+	OffsetFromPlayer = static_cast<float>(FVector3d::Distance(GetOwner()->GetActorLocation(), TargetPlayer->GetCameraPosition()));
+
 	HoldingPlayer = TargetPlayer;
 
 	bIsHeld = true;
@@ -51,7 +53,6 @@ void UBuildableComponent::PlaceDown()
 void UBuildableComponent::ShiftOffset(float Distance)
 {
 	OffsetFromPlayer = FMath::Clamp(OffsetFromPlayer + Distance, 100, 400);
-	
 }
 
 
