@@ -1,0 +1,14 @@
+{
+    "Version": "1.2",
+    "Data": {
+        "Source": "c:\\users\\kai_j\\onedrive\\documents\\github\\scp3008\\plugins\\vivoxcore\\intermediate\\build\\win64\\unrealeditor\\inc\\vivoxcore\\uht\\channel3dproperties.gen.cpp",
+        "ProvidedModule": "",
+        "PCH": "c:\\users\\kai_j\\onedrive\\documents\\github\\scp3008\\intermediate\\build\\win64\\x64\\scp3008editor\\development\\engine\\sharedpch.engine.cpp20.h.pch",
+        "Includes": [
+            "c:\\users\\kai_j\\onedrive\\documents\\github\\scp3008\\plugins\\vivoxcore\\intermediate\\build\\win64\\x64\\unrealeditor\\development\\vivoxcore\\definitions.vivoxcore.h",
+            "c:\\users\\kai_j\\onedrive\\documents\\github\\scp3008\\plugins\\vivoxcore\\source\\vivoxcore\\public\\channel3dproperties.h"
+        ],
+        "ImportedModules": [],
+        "ImportedHeaderUnits": []
+    }
+}
