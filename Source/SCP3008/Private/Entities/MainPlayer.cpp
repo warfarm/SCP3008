@@ -97,17 +97,16 @@ void AMainPlayer::SetupPlayerInputComponent(UInputComponent* PlayerInputComponen
 	Super::SetupPlayerInputComponent(PlayerInputComponent);
 
 	// Setup enhanced input
-	if (APlayerController* PlayerController = Cast<APlayerController>(Controller))
+	auto InputSystem = GetInputSystem();
+	if (InputSystem.has_value())
 	{
-		if (UEnhancedInputLocalPlayerSubsystem* Subsystem = ULocalPlayer::GetSubsystem<UEnhancedInputLocalPlayerSubsystem>(PlayerController->GetLocalPlayer()))
-		{
-			Subsystem->AddMappingContext(InputMapping, 0);
-		}
+		InputSystem.value()->AddMappingContext(MainInputMapping, 0);
 	}
 
 	// If PlayerInputComponent is an instance of EnhancedInputComponent
 	if (UEnhancedInputComponent* Input = CastChecked<UEnhancedInputComponent>(PlayerInputComponent))
 	{
+		// Main action bindings
 		Input->BindAction(MoveAction, ETriggerEvent::Triggered, this, &AMainPlayer::Move);
 		Input->BindAction(LookAction, ETriggerEvent::Triggered, this, &AMainPlayer::Look);
 		Input->BindAction(JumpAction, ETriggerEvent::Triggered, this, &AMainPlayer::Jump);
@@ -121,6 +120,9 @@ void AMainPlayer::SetupPlayerInputComponent(UInputComponent* PlayerInputComponen
 		Input->BindAction(InteractAction, ETriggerEvent::Completed, this, &AMainPlayer::EndInteract);
 
 		Input->BindAction(BuildAction, ETriggerEvent::Started, this, &AMainPlayer::Build);
+
+		// Build action bindings
+		Input->BindAction(BuildShiftOffsetAction, ETriggerEvent::Triggered, this, &AMainPlayer::BuildShiftOffset);
 	}
 }
 
@@ -195,6 +197,13 @@ void AMainPlayer::Build()
 	UE_LOG(LogTemp, Warning, TEXT("BUILD TRIGGERED"));
 	
 	bool bIsHolding = CurrentHeldBuildable != nullptr;
+
+	auto InputSystem = GetInputSystem();
+	if (!InputSystem.has_value())
+	{
+		// something went wrong
+		return;
+	}
 	
 	if (bIsHolding)
 	{
@@ -202,6 +211,7 @@ void AMainPlayer::Build()
 		CurrentHeldBuildable->PlaceDown();
 
 		CurrentHeldBuildable = nullptr;
+		InputSystem.value()->RemoveMappingContext(BuildInputMapping);
 		UE_LOG(LogTemp, Warning, TEXT("PLACED"));
 	}
 	else
@@ -227,10 +237,36 @@ void AMainPlayer::Build()
 			
 			TargetedBuildable->PickUp(this);
 			CurrentHeldBuildable = TargetedBuildable;
+			InputSystem.value()->AddMappingContext(BuildInputMapping, 1);
 			UE_LOG(LogTemp, Warning, TEXT("PICKED UP"));
 		}
 		// if not we dont need to do anything
 	}
+}
+
+void AMainPlayer::BuildShiftOffset(const FInputActionValue& InputValue)
+{
+	float Input = InputValue.Get<float>();
+
+	bool bIsHolding = CurrentHeldBuildable != nullptr;
+
+	if (bIsHolding)
+	{
+		CurrentHeldBuildable->ShiftOffsetPercent(1.f + Input/7.f);
+	}
+}
+
+std::optional<UEnhancedInputLocalPlayerSubsystem*> AMainPlayer::GetInputSystem()
+{
+	// Setup enhanced input
+	if (APlayerController* PlayerController = Cast<APlayerController>(Controller))
+	{
+		if (UEnhancedInputLocalPlayerSubsystem* Subsystem = ULocalPlayer::GetSubsystem<UEnhancedInputLocalPlayerSubsystem>(PlayerController->GetLocalPlayer()))
+		{
+			return {Subsystem};
+		}
+	}
+	return {};
 }
 
 void AMainPlayer::ToggleMenu()
@@ -243,11 +279,11 @@ void AMainPlayer::PerformInteractionCheck()
 	InteractionData.LastInteractionCheckTime = GetWorld()->GetTimeSeconds();
 	if (USceneComponent* CameraComponent = CastChecked<USceneComponent>(Camera))
 	{
-		FVector TraceStart{GetCameraPosition()};
-		FVector TraceEnd{TraceStart +  GetLookVector() * InteractionCheckDistance};
-
-		// TODO! remove later
-		DrawDebugLine(GetWorld(), TraceStart, TraceEnd, FColor::Red, false, 1.f, 0.f, 2.f);
+	// 	FVector TraceStart{GetCameraPosition()};
+	// 	FVector TraceEnd{TraceStart +  GetLookVector() * InteractionCheckDistance};
+	//
+	// 	// TODO! remove later
+	// 	DrawDebugLine(GetWorld(), TraceStart, TraceEnd, FColor::Red, false, 1.f, 0.f, 2.f);
 	
 		FCollisionQueryParams QueryParams;
 		QueryParams.AddIgnoredActor(this);

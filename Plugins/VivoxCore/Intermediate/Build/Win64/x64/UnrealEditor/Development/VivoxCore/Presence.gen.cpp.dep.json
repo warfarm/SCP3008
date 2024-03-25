@@ -1,0 +1,23 @@
+{
+    "Version": "1.2",
+    "Data": {
+        "Source": "e:\\projects\\unrealprojects\\scp3008\\plugins\\vivoxcore\\intermediate\\build\\win64\\unrealeditor\\inc\\vivoxcore\\uht\\presence.gen.cpp",
+        "ProvidedModule": "",
+        "PCH": "e:\\projects\\unrealprojects\\scp3008\\intermediate\\build\\win64\\x64\\scp3008editor\\development\\engine\\sharedpch.engine.cpp20.h.pch",
+        "Includes": [
+            "e:\\projects\\unrealprojects\\scp3008\\plugins\\vivoxcore\\intermediate\\build\\win64\\x64\\unrealeditor\\development\\vivoxcore\\definitions.vivoxcore.h",
+            "e:\\projects\\unrealprojects\\scp3008\\plugins\\vivoxcore\\source\\vivoxcore\\public\\presence.h",
+            "e:\\projects\\unrealprojects\\scp3008\\plugins\\vivoxcore\\source\\vivoxcore\\public\\vivoxcorecommon.h",
+            "e:\\projects\\unrealprojects\\scp3008\\plugins\\vivoxcore\\source\\vivoxcore\\public\\vivoxconfig.h",
+            "e:\\projects\\unrealprojects\\scp3008\\plugins\\vivoxcore\\source\\thirdparty\\vivoxcorelibrary\\windows\\include\\vxc.h",
+            "e:\\projects\\unrealprojects\\scp3008\\plugins\\vivoxcore\\source\\thirdparty\\vivoxcorelibrary\\windows\\include\\vxcexports.h",
+            "e:\\projects\\unrealprojects\\scp3008\\plugins\\vivoxcore\\source\\thirdparty\\vivoxcorelibrary\\windows\\include\\vxctypes.h",
+            "e:\\projects\\unrealprojects\\scp3008\\plugins\\vivoxcore\\source\\vivoxcore\\public\\accountid.h",
+            "e:\\projects\\unrealprojects\\scp3008\\plugins\\vivoxcore\\source\\vivoxcore\\public\\channelid.h",
+            "e:\\projects\\unrealprojects\\scp3008\\plugins\\vivoxcore\\source\\vivoxcore\\public\\channel3dproperties.h",
+            "e:\\projects\\unrealprojects\\scp3008\\plugins\\vivoxcore\\source\\vivoxcore\\public\\connectionstate.h"
+        ],
+        "ImportedModules": [],
+        "ImportedHeaderUnits": []
+    }
+}

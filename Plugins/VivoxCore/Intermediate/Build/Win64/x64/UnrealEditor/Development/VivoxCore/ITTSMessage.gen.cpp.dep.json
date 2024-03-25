@@ -1,0 +1,18 @@
+{
+    "Version": "1.2",
+    "Data": {
+        "Source": "e:\\projects\\unrealprojects\\scp3008\\plugins\\vivoxcore\\intermediate\\build\\win64\\unrealeditor\\inc\\vivoxcore\\uht\\ittsmessage.gen.cpp",
+        "ProvidedModule": "",
+        "PCH": "e:\\projects\\unrealprojects\\scp3008\\intermediate\\build\\win64\\x64\\scp3008editor\\development\\engine\\sharedpch.engine.cpp20.h.pch",
+        "Includes": [
+            "e:\\projects\\unrealprojects\\scp3008\\plugins\\vivoxcore\\intermediate\\build\\win64\\x64\\unrealeditor\\development\\vivoxcore\\definitions.vivoxcore.h",
+            "e:\\projects\\unrealprojects\\scp3008\\plugins\\vivoxcore\\source\\vivoxcore\\public\\ittsmessage.h",
+            "e:\\projects\\unrealprojects\\scp3008\\plugins\\vivoxcore\\source\\vivoxcore\\public\\ittsvoice.h",
+            "e:\\projects\\unrealprojects\\scp3008\\plugins\\vivoxcore\\source\\thirdparty\\vivoxcorelibrary\\windows\\include\\vxc.h",
+            "e:\\projects\\unrealprojects\\scp3008\\plugins\\vivoxcore\\source\\thirdparty\\vivoxcorelibrary\\windows\\include\\vxcexports.h",
+            "e:\\projects\\unrealprojects\\scp3008\\plugins\\vivoxcore\\source\\thirdparty\\vivoxcorelibrary\\windows\\include\\vxctypes.h"
+        ],
+        "ImportedModules": [],
+        "ImportedHeaderUnits": []
+    }
+}

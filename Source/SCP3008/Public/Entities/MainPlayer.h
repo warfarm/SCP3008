@@ -5,6 +5,7 @@
 #include <optional>
 
 #include "CoreMinimal.h"
+#include "EnhancedInputSubsystems.h"
 #include "InputActionValue.h"
 #include "Camera/CameraComponent.h"
 #include "Components/BuildableComponent.h"
@@ -50,30 +51,36 @@ protected:
 	UPROPERTY()
 	ABaseHUD* HUD;
 	
-	// Input stuff
+	/* ----- INPUT ACTIONS ----- */
 	UPROPERTY(EditAnywhere, Category="Player | EnhancedInput")
-	class UInputMappingContext* InputMapping;
+	class UInputMappingContext* MainInputMapping;
 	
 	UPROPERTY(EditAnywhere, Category="Player | EnhancedInput")
+	UInputMappingContext* BuildInputMapping;
+	
+	UPROPERTY(EditAnywhere, Category="Player | EnhancedInput | MainActions")
 	class UInputAction* MoveAction;
 	
-	UPROPERTY(EditAnywhere, Category="Player | EnhancedInput")
+	UPROPERTY(EditAnywhere, Category="Player | EnhancedInput | MainActions")
 	UInputAction* LookAction;
 	
-	UPROPERTY(EditAnywhere, Category="Player | EnhancedInput")
+	UPROPERTY(EditAnywhere, Category="Player | EnhancedInput | MainActions")
 	UInputAction* JumpAction;
 	
-	UPROPERTY(EditAnywhere, Category="Player | EnhancedInput")
+	UPROPERTY(EditAnywhere, Category="Player | EnhancedInput | MainActions")
 	UInputAction* SprintAction;
 
-	UPROPERTY(EditAnywhere, Category="Player | EnhancedInput")
+	UPROPERTY(EditAnywhere, Category="Player | EnhancedInput | MainActions")
 	UInputAction* ToggleAction;
 	
-	UPROPERTY(EditAnywhere, Category="Player | EnhancedInput")
+	UPROPERTY(EditAnywhere, Category="Player | EnhancedInput | MainActions")
 	UInputAction* InteractAction;
 	
-	UPROPERTY(EditAnywhere, Category="Player | EnhancedInput")
+	UPROPERTY(EditAnywhere, Category="Player | EnhancedInput | MainActions")
 	UInputAction* BuildAction;
+	
+	UPROPERTY(EditAnywhere, Category="Player | EnhancedInput | BuildActions")
+	UInputAction* BuildShiftOffsetAction;
 
 	// Camera
 	UPROPERTY(EditAnywhere, Category="Player | Camera")
@@ -153,6 +160,10 @@ protected:
 	void SprintStart();
 	void SprintEnd();
 	void Build();
+	void BuildShiftOffset(const FInputActionValue& InputValue);
+
+	// avoid a shit ton of if elses and casts
+	std::optional<UEnhancedInputLocalPlayerSubsystem*> GetInputSystem();
 
 	/* ----- INTERACTIONS ----- */
 	void ToggleMenu();

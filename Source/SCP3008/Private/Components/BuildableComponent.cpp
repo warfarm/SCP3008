@@ -50,9 +50,14 @@ void UBuildableComponent::PlaceDown()
 }
 
 // TODO! trigger w scrolling while in build mode
-void UBuildableComponent::ShiftOffset(float Distance)
+void UBuildableComponent::ShiftOffsetFlat(float Distance)
 {
-	OffsetFromPlayer = FMath::Clamp(OffsetFromPlayer + Distance, 100, 400);
+	OffsetFromPlayer = FMath::Clamp(OffsetFromPlayer + Distance, MinOffset, MaxOffset);
+}
+
+void UBuildableComponent::ShiftOffsetPercent(float PercentChange)
+{
+	OffsetFromPlayer = FMath::Clamp(OffsetFromPlayer * PercentChange, MinOffset, MaxOffset);
 }
 
 
@@ -63,6 +68,16 @@ void UBuildableComponent::BeginPlay()
 
 	StaticMesh = CastChecked<UStaticMeshComponent>(GetOwner()->GetComponentByClass(UStaticMeshComponent::StaticClass()));
 
+	SavedRotation = GetOwner()->GetActorRotation();
+}
+
+bool UBuildableComponent::CollidesWithValidComponent()
+{
+	TArray<FOverlapResult> OverlapResults;
+	// GetWorld()->ComponentOverlapMulti(OverlapResults, StaticMesh, );
+	// OverlapResults[1].GetActor();
+
+	return false;
 }
 
 
@@ -75,8 +90,8 @@ void UBuildableComponent::TickComponent(float DeltaTime, ELevelTick TickType, FA
 	{
 		AActor* Owner = GetOwner();
 
-		// TODO! 
 		Owner->SetActorLocation(HoldingPlayer->GetCameraPosition() + HoldingPlayer->GetLookVector() * OffsetFromPlayer);
+		Owner->SetActorRotation(SavedRotation);
 	}
 }
 

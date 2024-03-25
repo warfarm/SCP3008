@@ -16,7 +16,7 @@ PRAGMA_DISABLE_DEPRECATION_WARNINGS
 #define VIVOXCORE_ILoginSession_generated_h
 
 #undef CURRENT_FILE_ID
-#define CURRENT_FILE_ID FID_unrealprojects_SCP3008_Plugins_VivoxCore_Source_VivoxCore_Public_ILoginSession_h
+#define CURRENT_FILE_ID FID_Projects_UnrealProjects_SCP3008_Plugins_VivoxCore_Source_VivoxCore_Public_ILoginSession_h
 
 
 #define FOREACH_ENUM_LOGINSTATE(op) \
