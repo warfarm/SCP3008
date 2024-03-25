@@ -1,6 +1,7 @@
 {
     "Version": "1.2",
     "Data": {
+<<<<<<< HEAD
         "Source": "e:\\projects\\unrealprojects\\scp3008\\plugins\\vivoxcore\\intermediate\\build\\win64\\unrealeditor\\inc\\vivoxcore\\uht\\audiodeviceimpl.gen.cpp",
         "ProvidedModule": "",
         "PCH": "e:\\projects\\unrealprojects\\scp3008\\intermediate\\build\\win64\\x64\\scp3008editor\\development\\engine\\sharedpch.engine.cpp20.h.pch",
@@ -19,6 +20,26 @@
             "e:\\projects\\unrealprojects\\scp3008\\plugins\\vivoxcore\\source\\vivoxcore\\public\\channel3dproperties.h",
             "e:\\projects\\unrealprojects\\scp3008\\plugins\\vivoxcore\\source\\vivoxcore\\public\\presence.h",
             "e:\\projects\\unrealprojects\\scp3008\\plugins\\vivoxcore\\source\\vivoxcore\\public\\connectionstate.h"
+=======
+        "Source": "c:\\users\\kai_j\\onedrive\\documents\\github\\scp3008\\plugins\\vivoxcore\\intermediate\\build\\win64\\unrealeditor\\inc\\vivoxcore\\uht\\audiodeviceimpl.gen.cpp",
+        "ProvidedModule": "",
+        "PCH": "c:\\users\\kai_j\\onedrive\\documents\\github\\scp3008\\intermediate\\build\\win64\\x64\\scp3008editor\\development\\engine\\sharedpch.engine.cpp20.h.pch",
+        "Includes": [
+            "c:\\users\\kai_j\\onedrive\\documents\\github\\scp3008\\plugins\\vivoxcore\\intermediate\\build\\win64\\x64\\unrealeditor\\development\\vivoxcore\\definitions.vivoxcore.h",
+            "c:\\users\\kai_j\\onedrive\\documents\\github\\scp3008\\plugins\\vivoxcore\\source\\vivoxcore\\private\\audiodeviceimpl.h",
+            "c:\\users\\kai_j\\onedrive\\documents\\github\\scp3008\\plugins\\vivoxcore\\source\\vivoxcore\\public\\iaudiodevices.h",
+            "c:\\users\\kai_j\\onedrive\\documents\\github\\scp3008\\plugins\\vivoxcore\\source\\vivoxcore\\public\\iaudiodevice.h",
+            "c:\\users\\kai_j\\onedrive\\documents\\github\\scp3008\\plugins\\vivoxcore\\source\\vivoxcore\\public\\vivoxcorecommon.h",
+            "c:\\users\\kai_j\\onedrive\\documents\\github\\scp3008\\plugins\\vivoxcore\\source\\vivoxcore\\public\\vivoxconfig.h",
+            "c:\\users\\kai_j\\onedrive\\documents\\github\\scp3008\\plugins\\vivoxcore\\source\\thirdparty\\vivoxcorelibrary\\windows\\include\\vxc.h",
+            "c:\\users\\kai_j\\onedrive\\documents\\github\\scp3008\\plugins\\vivoxcore\\source\\thirdparty\\vivoxcorelibrary\\windows\\include\\vxcexports.h",
+            "c:\\users\\kai_j\\onedrive\\documents\\github\\scp3008\\plugins\\vivoxcore\\source\\thirdparty\\vivoxcorelibrary\\windows\\include\\vxctypes.h",
+            "c:\\users\\kai_j\\onedrive\\documents\\github\\scp3008\\plugins\\vivoxcore\\source\\vivoxcore\\public\\accountid.h",
+            "c:\\users\\kai_j\\onedrive\\documents\\github\\scp3008\\plugins\\vivoxcore\\source\\vivoxcore\\public\\channelid.h",
+            "c:\\users\\kai_j\\onedrive\\documents\\github\\scp3008\\plugins\\vivoxcore\\source\\vivoxcore\\public\\channel3dproperties.h",
+            "c:\\users\\kai_j\\onedrive\\documents\\github\\scp3008\\plugins\\vivoxcore\\source\\vivoxcore\\public\\presence.h",
+            "c:\\users\\kai_j\\onedrive\\documents\\github\\scp3008\\plugins\\vivoxcore\\source\\vivoxcore\\public\\connectionstate.h"
+>>>>>>> a35ab2aba050ffd346dbec9f284d0cf7a88c2bb6
         ],
         "ImportedModules": [],
         "ImportedHeaderUnits": []

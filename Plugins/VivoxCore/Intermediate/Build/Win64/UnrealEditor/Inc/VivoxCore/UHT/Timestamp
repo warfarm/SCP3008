@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 E:\Projects\UnrealProjects\SCP3008\Plugins\VivoxCore\Source\VivoxCore\Public\Channel3DProperties.h
 E:\Projects\UnrealProjects\SCP3008\Plugins\VivoxCore\Source\VivoxCore\Public\ConnectionState.h
 E:\Projects\UnrealProjects\SCP3008\Plugins\VivoxCore\Source\VivoxCore\Public\ChannelId.h
@@ -5,3 +6,12 @@ E:\Projects\UnrealProjects\SCP3008\Plugins\VivoxCore\Source\VivoxCore\Public\ILo
 E:\Projects\UnrealProjects\SCP3008\Plugins\VivoxCore\Source\VivoxCore\Public\ITTSMessage.h
 E:\Projects\UnrealProjects\SCP3008\Plugins\VivoxCore\Source\VivoxCore\Public\Presence.h
 E:\Projects\UnrealProjects\SCP3008\Plugins\VivoxCore\Source\VivoxCore\Private\AudioDeviceImpl.h
+=======
+F:\unrealprojects\SCP3008\Plugins\VivoxCore\Source\VivoxCore\Public\ConnectionState.h
+F:\unrealprojects\SCP3008\Plugins\VivoxCore\Source\VivoxCore\Public\Channel3DProperties.h
+F:\unrealprojects\SCP3008\Plugins\VivoxCore\Source\VivoxCore\Public\ChannelId.h
+F:\unrealprojects\SCP3008\Plugins\VivoxCore\Source\VivoxCore\Public\ILoginSession.h
+F:\unrealprojects\SCP3008\Plugins\VivoxCore\Source\VivoxCore\Public\ITTSMessage.h
+F:\unrealprojects\SCP3008\Plugins\VivoxCore\Source\VivoxCore\Public\Presence.h
+F:\unrealprojects\SCP3008\Plugins\VivoxCore\Source\VivoxCore\Private\AudioDeviceImpl.h
+>>>>>>> a35ab2aba050ffd346dbec9f284d0cf7a88c2bb6

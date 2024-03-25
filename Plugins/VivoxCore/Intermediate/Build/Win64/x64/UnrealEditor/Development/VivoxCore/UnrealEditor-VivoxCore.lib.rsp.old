@@ -6,7 +6,14 @@
 /NAME:"UnrealEditor-VivoxCore.dll"
 /IGNORE:4221
 /NODEFAULTLIB
+<<<<<<< HEAD
 "E:\Projects\UnrealProjects\SCP3008\Intermediate\Build\Win64\x64\SCP3008Editor\Development\Engine\SharedPCH.Engine.Cpp20.h.obj"
 "E:\Projects\UnrealProjects\SCP3008\Plugins\VivoxCore\Intermediate\Build\Win64\x64\UnrealEditor\Development\VivoxCore\Module.VivoxCore.cpp.obj"
 "E:\Projects\UnrealProjects\SCP3008\Plugins\VivoxCore\Intermediate\Build\Win64\x64\UnrealEditor\Development\VivoxCore\Default.rc2.res"
 /OUT:"E:\Projects\UnrealProjects\SCP3008\Plugins\VivoxCore\Intermediate\Build\Win64\x64\UnrealEditor\Development\VivoxCore\UnrealEditor-VivoxCore.lib"
+=======
+"C:\Users\kai_j\OneDrive\Documents\GitHub\SCP3008\Intermediate\Build\Win64\x64\SCP3008Editor\Development\Engine\SharedPCH.Engine.Cpp20.h.obj"
+"C:\Users\kai_j\OneDrive\Documents\GitHub\SCP3008\Plugins\VivoxCore\Intermediate\Build\Win64\x64\UnrealEditor\Development\VivoxCore\Module.VivoxCore.cpp.obj"
+"C:\Users\kai_j\OneDrive\Documents\GitHub\SCP3008\Plugins\VivoxCore\Intermediate\Build\Win64\x64\UnrealEditor\Development\VivoxCore\Default.rc2.res"
+/OUT:"C:\Users\kai_j\OneDrive\Documents\GitHub\SCP3008\Plugins\VivoxCore\Intermediate\Build\Win64\x64\UnrealEditor\Development\VivoxCore\UnrealEditor-VivoxCore.lib"
+>>>>>>> a35ab2aba050ffd346dbec9f284d0cf7a88c2bb6

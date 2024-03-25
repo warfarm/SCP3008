@@ -35,10 +35,16 @@
 /NODEFAULTLIB:"LIBCD"
 /NODEFAULTLIB:"LIBCPD"
 /FUNCTIONPADMIN:6
+<<<<<<< HEAD
 "E:\Projects\UnrealProjects\SCP3008\Intermediate\Build\Win64\x64\SCP3008Editor\Development\Engine\SharedPCH.Engine.Cpp20.h.obj"
 "E:\Projects\UnrealProjects\SCP3008\Plugins\VivoxCore\Intermediate\Build\Win64\x64\UnrealEditor\Development\VivoxCore\Module.VivoxCore.cpp.obj"
 "E:\Projects\UnrealProjects\SCP3008\Plugins\VivoxCore\Intermediate\Build\Win64\x64\UnrealEditor\Development\VivoxCore\Default.rc2.res"
 "E:\Projects\UnrealProjects\SCP3008\Plugins\VivoxCore\Source\ThirdParty\VivoxCoreLibrary\Windows\Release\x64\vivoxsdk.lib"
+=======
+"C:\Users\kai_j\OneDrive\Documents\GitHub\SCP3008\Intermediate\Build\Win64\x64\SCP3008Editor\Development\Engine\SharedPCH.Engine.Cpp20.h.obj"
+"C:\Users\kai_j\OneDrive\Documents\GitHub\SCP3008\Plugins\VivoxCore\Intermediate\Build\Win64\x64\UnrealEditor\Development\VivoxCore\Module.VivoxCore.cpp.obj"
+"C:\Users\kai_j\OneDrive\Documents\GitHub\SCP3008\Plugins\VivoxCore\Intermediate\Build\Win64\x64\UnrealEditor\Development\VivoxCore\Default.rc2.res"
+>>>>>>> a35ab2aba050ffd346dbec9f284d0cf7a88c2bb6
 "..\Intermediate\Build\Win64\x64\UnrealEditor\Development\Core\UnrealEditor-Core.lib"
 "..\Intermediate\Build\Win64\x64\UnrealEditor\Development\CoreUObject\UnrealEditor-CoreUObject.lib"
 "..\Intermediate\Build\Win64\x64\UnrealEditor\Development\Projects\UnrealEditor-Projects.lib"
@@ -68,7 +74,14 @@
 "synchronization.lib"
 "dwmapi.lib"
 "imm32.lib"
+<<<<<<< HEAD
 /OUT:"E:\Projects\UnrealProjects\SCP3008\Plugins\VivoxCore\Binaries\Win64\UnrealEditor-VivoxCore.dll"
 /IMPLIB:"E:\Projects\UnrealProjects\SCP3008\Plugins\VivoxCore\Intermediate\Build\Win64\x64\UnrealEditor\Development\VivoxCore\UnrealEditor-VivoxCore.sup.lib"
 /PDB:"E:\Projects\UnrealProjects\SCP3008\Plugins\VivoxCore\Binaries\Win64\UnrealEditor-VivoxCore.pdb"
+=======
+"C:\Users\kai_j\OneDrive\Documents\GitHub\SCP3008\Plugins\VivoxCore\Source\ThirdParty\VivoxCoreLibrary\Windows\Release\x64\vivoxsdk.lib"
+/OUT:"C:\Users\kai_j\OneDrive\Documents\GitHub\SCP3008\Plugins\VivoxCore\Binaries\Win64\UnrealEditor-VivoxCore.dll"
+/IMPLIB:"C:\Users\kai_j\OneDrive\Documents\GitHub\SCP3008\Plugins\VivoxCore\Intermediate\Build\Win64\x64\UnrealEditor\Development\VivoxCore\UnrealEditor-VivoxCore.sup.lib"
+/PDB:"C:\Users\kai_j\OneDrive\Documents\GitHub\SCP3008\Plugins\VivoxCore\Binaries\Win64\UnrealEditor-VivoxCore.pdb"
+>>>>>>> a35ab2aba050ffd346dbec9f284d0cf7a88c2bb6
 /ignore:4078
