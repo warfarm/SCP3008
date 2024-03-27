@@ -20,18 +20,26 @@ void UInventoryPanel::RefreshInventory()
 
 			InventoryPanel->AddChildToWrapBox(ItemSlot);
 		}
+		SetInfoText();
 	}
 }
 
 void UInventoryPanel::SetInfoText() const
 {
-	WeightInfo->SetText(FText::Format(FText::FromString("{0}/{1}"),
-		InventoryReference->GetInventoryTotalWeight(),
-		InventoryReference->GetWeightCapacity()));
+	const FString WeightInfoValue{
+		FString::SanitizeFloat(InventoryReference->GetInventoryTotalWeight())
+		+ "/"
+		+ FString::SanitizeFloat(InventoryReference->GetWeightCapacity())
+	};
+	
+	const FString CapacityInfoValue{
+		FString::SanitizeFloat(InventoryReference->GetInventoryContents().Num())
+		+ "/"
+		+ FString::SanitizeFloat(InventoryReference->GetSlotsCapacity())
+	};
 
-	CapacityInfo->SetText(FText::Format(FText::FromString("{0}/{1}"),
-		InventoryReference->GetInventoryContents().Num(),
-		InventoryReference->GetSlotsCapacity()));
+	WeightInfo->SetText(FText::FromString(WeightInfoValue));
+	CapacityInfo->SetText(FText::FromString(CapacityInfoValue));
 }
 
 void UInventoryPanel::NativeOnInitialized()
@@ -45,7 +53,7 @@ void UInventoryPanel::NativeOnInitialized()
 		if (InventoryReference)
 		{
 			InventoryReference->OnInventoryUpdate.AddUObject(this, &UInventoryPanel::RefreshInventory);
-			//SetInfoText();
+			SetInfoText();
 		}
 	}
 }

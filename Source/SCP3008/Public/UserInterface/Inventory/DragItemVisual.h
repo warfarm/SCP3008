@@ -6,6 +6,10 @@
 #include "Blueprint/UserWidget.h"
 #include "DragItemVisual.generated.h"
 
+class UBorder;
+class UImage;
+class UTextBlock;
+
 /**
  * 
  */
@@ -14,4 +18,10 @@ class SCP3008_API UDragItemVisual : public UUserWidget
 {
 	GENERATED_BODY()
 	
+protected:
+	UPROPERTY(EditDefaultsOnly,  Category = "DragItem Visual", meta = (BindWidget))
+	UBorder* ItemBorder{};
+
+	UPROPERTY(EditDefaultsOnly,  Category = "DragItem Visual", meta = (BindWidget))
+	UImage* ItemIcon{};
 };
