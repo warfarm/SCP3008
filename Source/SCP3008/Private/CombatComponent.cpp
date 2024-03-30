@@ -47,7 +47,16 @@ bool UCombatComponent::TakeDamage(float DamageAmount)
 	}
 	if (bIsBlocking)
 	{
-		// handle parry shing shing thing 
+		// TODO! change condition in regard to parry frames obviously
+		bool bIsParrying = true;
+		if (bIsParrying)
+		{
+			// handle parry shing shing thing
+		}
+		else
+		{
+			// handle block clunk ncluink 
+		}
 	}
 	return false;
 }
