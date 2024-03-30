@@ -9,6 +9,14 @@
 #include "Logging/LogMacros.h"
 #include "CombatComponent.generated.h"
 
+UENUM()
+enum BlockState
+{
+	Parrying,
+	Blocking,
+	None
+};
+
 UCLASS( ClassGroup=(Custom), meta=(BlueprintSpawnableComponent) )
 class SCP3008_API UCombatComponent : public UActorComponent
 {
