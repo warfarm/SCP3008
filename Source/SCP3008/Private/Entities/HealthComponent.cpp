@@ -34,11 +34,6 @@ void UHealthComponent::TickComponent(float DeltaTime, ELevelTick TickType, FActo
 
 bool UHealthComponent::TakeDamage(float DamageAmount)
 {
-	if (bCanTakeDamage)
-	{
-		Health -= DamageAmount;
-		return true;
-	}
 	return false;
 }
 

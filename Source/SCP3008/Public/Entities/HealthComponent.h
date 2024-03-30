@@ -22,11 +22,7 @@ protected:
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category="Health")
 	float Health{ MaxHealth };
 
-	/* ----- STATE ----- */
-	UPROPERTY(EditAnywhere, Category="Health")
-	bool bCanTakeDamage{ true };
-	std::map<std::string, FTimerHandle> TickDamageSources;
-	std::map<std::string, float> DamageMultiplierSources;
+	
 	
 public:	
 	// Sets default values for this component's properties

@@ -3,16 +3,10 @@
 
 #include "CombatComponent.h"
 
-// Sets default values for this component's properties
+
 UCombatComponent::UCombatComponent()
-{
-	// Set this component to be initialized when the game starts, and to be ticked every frame.  You can turn these features
-	// off to improve performance if you don't need them.
-	PrimaryComponentTick.bCanEverTick = true;
-
-	// ...
+{	
 }
-
 
 // Called when the game starts
 void UCombatComponent::BeginPlay()
@@ -23,7 +17,6 @@ void UCombatComponent::BeginPlay()
 	
 }
 
-
 // Called every frame
 void UCombatComponent::TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction)
 {
@@ -32,3 +25,46 @@ void UCombatComponent::TickComponent(float DeltaTime, ELevelTick TickType, FActo
 	// ...
 }
 
+// TODO!
+bool UCombatComponent::StartBlock()
+{
+	UE_LOG(LogTemp, Warning, TEXT("player blcoekd"));
+	return true;
+}
+
+bool UCombatComponent::EndBlock()
+{
+	UE_LOG(LogTemp, Warning, TEXT("BLCOK ENDED"));
+	return true;
+}
+
+bool UCombatComponent::TakeDamage(float DamageAmount)
+{
+	if (bCanTakeDamage)
+	{
+		Health -= DamageAmount;
+		return true;
+	}
+	if (bIsBlocking)
+	{
+		// handle parry shing shing thing 
+	}
+	return false;
+}
+
+void UCombatComponent::SetMaxHealth(const float Health_)
+{
+	MaxHealth = Health_;
+	
+}
+
+void UCombatComponent::SetCurrentAndMaxHealth(const float Health_)
+{
+	MaxHealth = Health_;
+	Health = Health_;
+}
+
+void UCombatComponent::RestoreHealth()
+{
+	Health = MaxHealth;
+}

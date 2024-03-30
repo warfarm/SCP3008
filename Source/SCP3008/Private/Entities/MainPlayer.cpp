@@ -29,6 +29,9 @@ AMainPlayer::AMainPlayer()
 	PlayerInventory = CreateDefaultSubobject<UInventoryComponent>(TEXT("PlayerInventory"));
 	PlayerInventory->SetSlotsCapacity(DefaultSlotCapacity);
 	PlayerInventory->SetWeightCapacity(DefaultWeightCapacity);
+
+	CombatComponent = CreateDefaultSubobject<UCombatComponent>("CombatComponent");
+	CombatComponent->SetCurrentAndMaxHealth(150.f);
 }
 
 void AMainPlayer::UpdateInteractionWidget() const
@@ -101,6 +104,7 @@ void AMainPlayer::SetupPlayerInputComponent(UInputComponent* PlayerInputComponen
 	if (InputSystem.has_value())
 	{
 		InputSystem.value()->AddMappingContext(MainInputMapping, 0);
+		InputSystem.value()->AddMappingContext(CombatInputMapping, 1);
 	}
 
 	// If PlayerInputComponent is an instance of EnhancedInputComponent
@@ -123,6 +127,10 @@ void AMainPlayer::SetupPlayerInputComponent(UInputComponent* PlayerInputComponen
 
 		// Build action bindings
 		Input->BindAction(BuildShiftOffsetAction, ETriggerEvent::Triggered, this, &AMainPlayer::BuildShiftOffset);
+
+		// Combat action bindings
+		Input->BindAction(BlockAction, ETriggerEvent::Started, this, &AMainPlayer::StartBlock);
+		Input->BindAction(BlockAction, ETriggerEvent::Completed, this, &AMainPlayer::EndBlock);
 	}
 }
 
@@ -148,7 +156,7 @@ void AMainPlayer::Move(const FInputActionValue& InputValue)
 			GetCharacterMovement()->MaxWalkSpeed = TrueSpeed * 600.f;
 		}
 
-		// UE_LOG(LogTemp, Warning, TEXT("TRUESPEED IS %f"), TrueSpeed);
+		// UE_LOG(LogTemp, Warning, TEXT("TRUESPEED IS"));
 
 		AddMovementInput(Forward, InputVector.Y * TrueSpeed);
 		AddMovementInput(Right, InputVector.X * TrueSpeed);
@@ -254,6 +262,16 @@ void AMainPlayer::BuildShiftOffset(const FInputActionValue& InputValue)
 	{
 		CurrentHeldBuildable->ShiftOffsetPercent(1.f + Input/7.f);
 	}
+}
+
+void AMainPlayer::StartBlock()
+{
+	CombatComponent->StartBlock();
+}
+
+void AMainPlayer::EndBlock()
+{
+	CombatComponent->EndBlock();
 }
 
 std::optional<UEnhancedInputLocalPlayerSubsystem*> AMainPlayer::GetInputSystem()

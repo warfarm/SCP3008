@@ -5,6 +5,7 @@
 #include <optional>
 
 #include "CoreMinimal.h"
+#include "CombatComponent.h"
 #include "EnhancedInputSubsystems.h"
 #include "InputActionValue.h"
 #include "Camera/CameraComponent.h"
@@ -58,6 +59,9 @@ protected:
 	UPROPERTY(EditAnywhere, Category="Player | EnhancedInput")
 	UInputMappingContext* BuildInputMapping;
 	
+	UPROPERTY(EditAnywhere, Category="Player | EnhancedInput")
+	UInputMappingContext* CombatInputMapping;
+	
 	UPROPERTY(EditAnywhere, Category="Player | EnhancedInput | MainActions")
 	class UInputAction* MoveAction;
 	
@@ -78,10 +82,30 @@ protected:
 	
 	UPROPERTY(EditAnywhere, Category="Player | EnhancedInput | MainActions")
 	UInputAction* BuildAction;
-	
+
+	// Will only be present in build mode
 	UPROPERTY(EditAnywhere, Category="Player | EnhancedInput | BuildActions")
 	UInputAction* BuildShiftOffsetAction;
 
+	// Will only be present while haing a weapon equipped.
+	UPROPERTY(EditAnywhere, Category="Player | EnhancedInput | CombatActions")
+	UInputAction* AttackAction;
+	
+	UPROPERTY(EditAnywhere, Category="Player | EnhancedInput | CombatActions")
+	UInputAction* BlockAction;
+
+	/* ----- INPUT RELATED ----- */
+	void Move(const FInputActionValue& InputValue);
+	void Look(const FInputActionValue& InputValue);
+	void Jump();
+	void SprintStart();
+	void SprintEnd();
+	void Build();
+	void BuildShiftOffset(const FInputActionValue& InputValue);
+	// Block is a parry until parry frames are finishied, then degrades into block.
+	void StartBlock();
+	void EndBlock();
+	
 	// Camera
 	UPROPERTY(EditAnywhere, Category="Player | Camera")
 	UCameraComponent* Camera;
@@ -89,9 +113,10 @@ protected:
 	// Gameplay
 	UPROPERTY(VisibleAnywhere, Category="Player | Interaction")
 	TScriptInterface<IInteractionInterface> TargetInteractable;
-	
-	// TODO! insert health component here
 
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Player | Combat")
+	UCombatComponent* CombatComponent{};
+	
 	/* ----- PROPERTIES ----- */
 	
 	// Hunger, Thirst, Stamina
@@ -152,15 +177,6 @@ protected:
 	virtual void Landed(const FHitResult& Hit) override;
 	virtual void Tick(float DeltaTime) override;
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
-
-	/* ----- INPUT RELATED ----- */
-	void Move(const FInputActionValue& InputValue);
-	void Look(const FInputActionValue& InputValue);
-	void Jump();
-	void SprintStart();
-	void SprintEnd();
-	void Build();
-	void BuildShiftOffset(const FInputActionValue& InputValue);
 
 	// avoid a shit ton of if elses and casts
 	std::optional<UEnhancedInputLocalPlayerSubsystem*> GetInputSystem();
