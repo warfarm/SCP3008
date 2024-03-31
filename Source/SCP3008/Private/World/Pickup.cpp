@@ -134,9 +134,9 @@ void APickup::PostEditChangeProperty(FPropertyChangedEvent& PropertyChangedEvent
 void APickup::InitializeDrop(UItemBase* ItemToDrop)
 {
 	ItemReference = ItemToDrop;
+	
 	ItemReference->NumericData.Weight = ItemToDrop->GetItemWeight();
+	ItemReference->OwnedInventory = nullptr;
 	PickupMesh->SetStaticMesh(ItemToDrop->AssetData.Mesh);
 	UpdateInteractableData();
 }
-
-
