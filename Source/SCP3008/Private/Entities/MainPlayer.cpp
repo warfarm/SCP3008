@@ -261,8 +261,13 @@ void AMainPlayer::Build()
 		}
 
 		AActor* HitActor = HitResultOption.value().GetActor();
-
-		if (UBuildableComponent* TargetedBuildable = CastChecked<UBuildableComponent>(HitActor->GetComponentByClass(UBuildableComponent::StaticClass())))
+		UActorComponent* RetrievedBuildableComponent =
+			HitActor->GetComponentByClass(UBuildableComponent::StaticClass());
+		if (!RetrievedBuildableComponent)
+		{
+			return;
+		}
+		if (UBuildableComponent* TargetedBuildable = CastChecked<UBuildableComponent>(RetrievedBuildableComponent))
 		{
 			// player has tried to interact w a buildable
 			
