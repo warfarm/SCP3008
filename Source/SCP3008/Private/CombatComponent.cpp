@@ -8,6 +8,13 @@ UCombatComponent::UCombatComponent()
 {	
 }
 
+void UCombatComponent::TransitionToBlockStateFromParry()
+{
+	BlockState = Blocking;
+	if(GEngine)
+		GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Red, FString::Printf(TEXT("PARRY -> BLOCK")));
+}
+
 // Called when the game starts
 void UCombatComponent::BeginPlay()
 {
@@ -28,34 +35,53 @@ void UCombatComponent::TickComponent(float DeltaTime, ELevelTick TickType, FActo
 // TODO!
 bool UCombatComponent::StartBlock()
 {
-	UE_LOG(LogTemp, Warning, TEXT("player blcoekd"));
+	if(GEngine)
+		GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Red, FString::Printf(TEXT("BLOCK START")));
+	BlockState = Parrying;
+	GetOwner()->GetWorldTimerManager().SetTimer(
+		TransitionToBlockHandle,
+		this,
+		&UCombatComponent::TransitionToBlockStateFromParry,
+		ParryFrames,
+		false
+	);
 	return true;
 }
 
 bool UCombatComponent::EndBlock()
 {
-	UE_LOG(LogTemp, Warning, TEXT("BLCOK ENDED"));
+	if(GEngine)
+		GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Red, FString::Printf(TEXT("BLOCK END")));
+	BlockState = None;
+	GetOwner()->GetWorldTimerManager().ClearTimer(TransitionToBlockHandle);
 	return true;
 }
 
-bool UCombatComponent::TakeDamage(float DamageAmount)
+bool UCombatComponent::TakeDamage(float DamageAmount, float PostureDamageAmount)
 {
-	if (bCanTakeDamage)
+	if (bCanTakeDamage || BlockState == None)
 	{
 		Health -= DamageAmount;
 		return true;
 	}
-	if (bIsBlocking)
+	switch (BlockState)
 	{
-		// TODO! change condition in regard to parry frames obviously
-		bool bIsParrying = true;
-		if (bIsParrying)
+	case Parrying:
 		{
 			// handle parry shing shing thing
+			Posture = Posture - PostureRestoreOnParry < 0.f ? 0.f : Posture - PostureRestoreOnParry; 
 		}
-		else
+	case Blocking:
 		{
-			// handle block clunk ncluink 
+			// handle block clunk ncluink
+			Posture = Posture + PostureRestoreOnParry > MaxPosture ? MaxPosture : Posture + PostureRestoreOnParry; 
+		}
+	default:
+		{
+			// wtf happened for you to get here?
+			// you deserve a segfault.
+			int x = *(int*)(0x0);
+			printf("%d", x);
 		}
 	}
 	return false;

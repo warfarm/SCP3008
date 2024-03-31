@@ -10,7 +10,7 @@
 #include "CombatComponent.generated.h"
 
 UENUM()
-enum BlockState
+enum EBlockState
 {
 	Parrying,
 	Blocking,
@@ -26,8 +26,15 @@ protected:
 	/* ----- ATTRIBUTES ----- */
 	UPROPERTY(EditAnywhere, Category="Combat | Stats")
 	float MaxHealth{ 100.f };
-	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category="Combat | Stats")
+	UPROPERTY(EditAnywhere, Category="Combat | Stats")
 	float Health{ MaxHealth };
+	UPROPERTY(EditAnywhere, Category="Combat | Stats")
+	float MaxPosture { 100.f };
+	// TODO! when posture gets too high "blockbreak" them
+	UPROPERTY(EditAnywhere, Category="Combat | Stats")
+	float Posture { 0.f };
+	UPROPERTY(EditAnywhere, Category="Combat | General")
+	float PostureRestoreOnParry { 10.f };
 	UPROPERTY(EditAnywhere, Category="Combat | General")
 	// not frames, measured in seconds
 	float ParryFrames{ 0.2f };
@@ -36,9 +43,12 @@ protected:
 
 	/* ----- STATE ----- */
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category="Combat | State")
-	bool bIsBlocking{ false };
+	TEnumAsByte<EBlockState> BlockState;
+	FTimerHandle TransitionToBlockHandle;
+	void TransitionToBlockStateFromParry();
 	UPROPERTY(EditAnywhere, Category="Combat | State")
 	bool bCanTakeDamage{ true };
+	// TODO!
 	std::map<std::string, FTimerHandle> TickDamageSources;
 	std::map<std::string, float> DamageMultiplierSources;
 	
@@ -53,7 +63,8 @@ public:
 	// This is a parry until parry frames are finished, then block..
 	bool StartBlock();
 	bool EndBlock();
-	bool TakeDamage(float DamageAmount);
+	// Prob change later to accept a weapon reference
+	bool TakeDamage(float DamageAmount, float PostureDamageAmount);
 	// Does not change current health.
 	FORCEINLINE void SetMaxHealth(float Health);
 	FORCEINLINE void SetCurrentAndMaxHealth(float Health);
