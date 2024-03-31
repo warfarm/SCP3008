@@ -7,6 +7,7 @@
 #include "Components/TextBlock.h"
 #include "Components/WrapBox.h"
 #include "Items/ItemBase.h"
+#include "UserInterface/Inventory/ItemDragDropOperation.h"
 
 void UInventoryPanel::RefreshInventory()
 {
@@ -61,5 +62,12 @@ void UInventoryPanel::NativeOnInitialized()
 bool UInventoryPanel::NativeOnDrop(const FGeometry& InGeometry, const FDragDropEvent& InDragDropEvent,
 	UDragDropOperation* InOperation)
 {
-	return Super::NativeOnDrop(InGeometry, InDragDropEvent, InOperation);
+	const UItemDragDropOperation* ItemDragDrop = Cast<UItemDragDropOperation>(InOperation);
+
+	if(ItemDragDrop->SourceItem && InventoryReference)
+	{
+		UE_LOG(LogTemp, Warning, TEXT("Detected Item Drop on Inventory Panel"));
+		return true;
+	}
+	return false;
 }
