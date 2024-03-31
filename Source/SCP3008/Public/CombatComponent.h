@@ -17,6 +17,17 @@ enum EBlockState
 	None
 };
 
+UENUM()
+enum EAttackResult
+{
+	Parried,
+	Blocked,
+	BlockBroken,
+	Immune,
+	Success,
+	Unknown
+};
+
 UCLASS( ClassGroup=(Custom), meta=(BlueprintSpawnableComponent) )
 class SCP3008_API UCombatComponent : public UActorComponent
 {
@@ -37,7 +48,7 @@ protected:
 	float PostureRestoreOnParry { 10.f };
 	UPROPERTY(EditAnywhere, Category="Combat | General")
 	// not frames, measured in seconds
-	float ParryFrames{ 0.2f };
+	float ParryFrames{ 0.4f };
 	// UPROPERTY(EditAnywhere, Category="Combat | General")
 	// float DodgeFrames{ 0.4f };
 
@@ -64,10 +75,13 @@ public:
 	bool StartBlock();
 	bool EndBlock();
 	// Prob change later to accept a weapon reference
-	bool TakeDamage(float DamageAmount, float PostureDamageAmount);
+	EAttackResult TakeDamage(float DamageAmount, float PostureDamageAmount);
 	// Does not change current health.
 	FORCEINLINE void SetMaxHealth(float Health);
 	FORCEINLINE void SetCurrentAndMaxHealth(float Health);
 	FORCEINLINE void RestoreHealth();
+
+	// should be handled with a raycast or linecast or some cast something somethign
+	EAttackResult Attack(UCombatComponent& Other);
 		
 };

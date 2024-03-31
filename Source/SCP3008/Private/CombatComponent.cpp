@@ -57,19 +57,24 @@ bool UCombatComponent::EndBlock()
 	return true;
 }
 
-bool UCombatComponent::TakeDamage(float DamageAmount, float PostureDamageAmount)
+EAttackResult UCombatComponent::TakeDamage(float DamageAmount, float PostureDamageAmount)
 {
 	if (bCanTakeDamage || BlockState == None)
 	{
 		Health -= DamageAmount;
-		return true;
+		return Success;
+	}
+	if (!bCanTakeDamage)
+	{
+		return Immune;
 	}
 	switch (BlockState)
 	{
 	case Parrying:
 		{
 			// handle parry shing shing thing
-			Posture = Posture - PostureRestoreOnParry < 0.f ? 0.f : Posture - PostureRestoreOnParry; 
+			Posture = Posture - PostureRestoreOnParry < 0.f ? 0.f : Posture - PostureRestoreOnParry;
+			return Parried;
 		}
 	case Blocking:
 		{
@@ -78,11 +83,10 @@ bool UCombatComponent::TakeDamage(float DamageAmount, float PostureDamageAmount)
 			{
 				// TODO! guardbreak
 				Posture = 0.f;
+				return BlockBroken;
 			}
-			else
-			{
-				Posture = Posture + PostureDamageAmount > MaxPosture ? MaxPosture : Posture + PostureDamageAmount; 
-			}
+			Posture = Posture + PostureDamageAmount > MaxPosture ? MaxPosture : Posture + PostureDamageAmount;
+			return Blocked;
 		}
 	default:
 		{
@@ -92,7 +96,8 @@ bool UCombatComponent::TakeDamage(float DamageAmount, float PostureDamageAmount)
 			printf("%d", x);
 		}
 	}
-	return false;
+	// how did we get here?
+	return Unknown;
 }
 
 void UCombatComponent::SetMaxHealth(const float Health_)
@@ -110,4 +115,10 @@ void UCombatComponent::SetCurrentAndMaxHealth(const float Health_)
 void UCombatComponent::RestoreHealth()
 {
 	Health = MaxHealth;
+}
+
+EAttackResult UCombatComponent::Attack(UCombatComponent& Other)
+{
+	// TODO! add equipped weapon fields etc use weapon stats blah blha
+	return Other.TakeDamage(10.f, 15.f);
 }
