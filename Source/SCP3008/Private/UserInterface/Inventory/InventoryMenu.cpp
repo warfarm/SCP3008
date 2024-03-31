@@ -2,6 +2,8 @@
 
 
 #include "UserInterface/Inventory/InventoryMenu.h"
+
+#include "UserInterface/Inventory/ItemDragDropOperation.h"
 #include "Entities/MainPlayer.h"
 
 void UInventoryMenu::NativeOnInitialized()
@@ -19,7 +21,12 @@ void UInventoryMenu::NativeConstruct()
 
 bool UInventoryMenu::NativeOnDrop(const FGeometry& InGeometry, const FDragDropEvent& InDragDropEvent, UDragDropOperation* InOperation)
 {
-    return Super::NativeOnDrop(InGeometry, InDragDropEvent, InOperation);
+    const UItemDragDropOperation* ItemDragDrop = Cast<UItemDragDropOperation>(InOperation);
 
-
+    if (Player && ItemDragDrop->SourceItem)
+    {
+        Player->DropItem(ItemDragDrop->SourceItem);
+        return true;
+    }
+    return false;
 }

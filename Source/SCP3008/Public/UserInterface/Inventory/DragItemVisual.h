@@ -18,7 +18,7 @@ class SCP3008_API UDragItemVisual : public UUserWidget
 {
 	GENERATED_BODY()
 	
-protected:
+public:
 	UPROPERTY(EditDefaultsOnly,  Category = "DragItem Visual", meta = (BindWidget))
 	UBorder* ItemBorder{};
 

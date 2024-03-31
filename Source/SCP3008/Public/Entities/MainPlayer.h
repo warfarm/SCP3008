@@ -15,6 +15,7 @@
 #include "Logging/LogMacros.h"
 #include "MainPlayer.generated.h"
 
+class UItemBase;
 class UInventoryComponent;
 class ABaseHUD;
 
@@ -211,6 +212,8 @@ public:
 
 	/* ----- FUNCTIONS ----- */
 	void UpdateInteractionWidget() const;
+
+	void DropItem(UItemBase* ItemToDrop);
 
 	/* ----- JUST nice stuff to have tbh ----- */
 	FORCEINLINE FVector GetCameraPosition();

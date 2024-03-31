@@ -11,6 +11,7 @@
 #include "EnhancedInputComponent.h"
 #include "Components/BuildableComponent.h"
 #include "GameFramework/CharacterMovementComponent.h"
+#include "World/Pickup.h"
 
 // Sets default values
 AMainPlayer::AMainPlayer()
@@ -39,6 +40,28 @@ void AMainPlayer::UpdateInteractionWidget() const
 	if(IsValid(TargetInteractable.GetObject()))
 	{
 		HUD->UpdateInteractionWidget(&TargetInteractable->InteractableData);
+	}
+}
+
+void AMainPlayer::DropItem(UItemBase* ItemToDrop)
+{
+	if(PlayerInventory->FindMatchingItem(ItemToDrop))
+	{
+		FActorSpawnParameters SpawnParams;
+		SpawnParams.Owner = this;
+		SpawnParams.bNoFail = true;
+		SpawnParams.SpawnCollisionHandlingOverride = ESpawnActorCollisionHandlingMethod::AdjustIfPossibleButAlwaysSpawn;
+
+		const FVector SpawnLocation{GetActorLocation() + (GetActorForwardVector() * 50.f)};
+		const FTransform SpawnTransform(GetActorRotation(), SpawnLocation);
+
+		APickup* PickUp = GetWorld()->SpawnActor<APickup>(APickup::StaticClass(), SpawnTransform, SpawnParams);
+
+		PickUp->InitializeDrop(ItemToDrop);
+	}
+	else
+	{
+		UE_LOG(LogTemp, Warning, TEXT("Item to drop was skibidi null"))
 	}
 }
 

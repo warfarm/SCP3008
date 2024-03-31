@@ -6,6 +6,8 @@
 #include "Blueprint/DragDropOperation.h"
 #include "ItemDragDropOperation.generated.h"
 
+class UItemBase;
+class UInventoryComponent;
 /**
  * 
  */
@@ -13,5 +15,11 @@ UCLASS()
 class SCP3008_API UItemDragDropOperation : public UDragDropOperation
 {
 	GENERATED_BODY()
-	
+
+public:
+	UPROPERTY()
+	UItemBase* SourceItem;
+
+	UPROPERTY()
+	UInventoryComponent* SourceInventory;
 };
