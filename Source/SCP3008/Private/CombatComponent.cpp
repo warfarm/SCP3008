@@ -74,7 +74,15 @@ bool UCombatComponent::TakeDamage(float DamageAmount, float PostureDamageAmount)
 	case Blocking:
 		{
 			// handle block clunk ncluink
-			Posture = Posture + PostureRestoreOnParry > MaxPosture ? MaxPosture : Posture + PostureRestoreOnParry; 
+			if (Posture == MaxPosture)
+			{
+				// TODO! guardbreak
+				Posture = 0.f;
+			}
+			else
+			{
+				Posture = Posture + PostureDamageAmount > MaxPosture ? MaxPosture : Posture + PostureDamageAmount; 
+			}
 		}
 	default:
 		{
