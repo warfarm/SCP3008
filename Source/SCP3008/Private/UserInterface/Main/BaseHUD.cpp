@@ -42,7 +42,7 @@ void ABaseHUD::HideMenu()
 {
 	if (InventoryMenuWidget)
 	{
-		bIsMenuVisible = true;
+		bIsMenuVisible = false;
 		InventoryMenuWidget->SetVisibility(ESlateVisibility::Collapsed);
 	}
 }
