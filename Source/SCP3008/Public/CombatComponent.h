@@ -25,6 +25,7 @@ enum EAttackResult
 	BlockBroken,
 	Immune,
 	Success,
+	CannotAttackNow,
 	Unknown
 };
 
@@ -54,7 +55,7 @@ protected:
 
 	/* ----- STATE ----- */
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category="Combat | State")
-	TEnumAsByte<EBlockState> BlockState;
+	TEnumAsByte<EBlockState> BlockState { None };
 	FTimerHandle TransitionToBlockHandle;
 	void TransitionToBlockStateFromParry();
 	UPROPERTY(EditAnywhere, Category="Combat | State")
@@ -82,6 +83,6 @@ public:
 	FORCEINLINE void RestoreHealth();
 
 	// should be handled with a raycast or linecast or some cast something somethign
-	EAttackResult Attack(UCombatComponent& Other);
+	EAttackResult DoAttackOn(UCombatComponent* Other);
 		
 };
