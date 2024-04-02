@@ -6,6 +6,7 @@
 #include "GameFramework/HUD.h"
 #include "BaseHUD.generated.h"
 
+class UHotBarPanel;
 struct FInteractableData;
 class UInventoryMenu;
 class UInteractionWidget;
@@ -21,14 +22,25 @@ public:
 	UPROPERTY(EditDefaultsOnly, Category = "Widgets")
 	TSubclassOf<UInteractionWidget> InteractionWidgetClass;
 
+	UPROPERTY(EditDefaultsOnly, Category = "Widgets")
+	TSubclassOf<UHotBarPanel> HotBarPanelClass;
+	
 	bool bIsMenuVisible;
+	bool bIsHotBarVisible;
 
 	ABaseHUD();
 
+	// Inventory Menu Toggles
 	void DisplayMenu();
 	void HideMenu();
 	void ToggleMenu();
 
+	// HotBar Menu Toggles
+	void DisplayHotBar();
+	void HideHotBar();
+	void ToggleHotBar();
+
+	// Interactions Toggles
 	void ShowInteractionWidget() const;
 	void HideInteractionWidget() const;
 	void UpdateInteractionWidget(const FInteractableData* InteractableData) const;
@@ -40,6 +52,9 @@ protected:
 	UPROPERTY()
 	UInteractionWidget* InteractionWidget;
 
+	UPROPERTY()
+	UHotBarPanel* HotBarPanelWidget;
+	
 	virtual void BeginPlay() override;
 
 };

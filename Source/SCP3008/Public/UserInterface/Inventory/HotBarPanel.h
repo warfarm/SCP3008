@@ -23,23 +23,19 @@ public:
 
 	UPROPERTY(meta=(BindWidget))
 	UWrapBox* HotBarPanel;
-
-	UPROPERTY(meta=(BindWidget))
-	UInventoryItemSlot* SlotOne;
-	
-	UPROPERTY(meta=(BindWidget))
-	UInventoryItemSlot* SlotTwo;
-	
-	UPROPERTY(meta=(BindWidget))
-	UInventoryItemSlot* SlotThree;
-	
-	UPROPERTY(meta=(BindWidget))
-	UInventoryItemSlot* SlotFour;
 	
 	UPROPERTY()
 	AMainPlayer* Player;
 
 	UPROPERTY()
 	UInventoryComponent* HotBarReference;
+
+	UPROPERTY(EditDefaultsOnly)
+	TSubclassOf<UInventoryItemSlot> HotBarSlotClass;
 	
+protected:
+
+	virtual void NativeOnInitialized() override;
+	virtual bool NativeOnDrop(const FGeometry& InGeometry, const FDragDropEvent& InDragDropEvent, UDragDropOperation* InOperation) override;
+
 };
