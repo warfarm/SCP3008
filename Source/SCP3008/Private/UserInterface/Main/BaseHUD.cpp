@@ -4,6 +4,7 @@
 #include "UserInterface/Main/BaseHUD.h"
 #include "UserInterface/Inventory/InventoryMenu.h"
 #include "UserInterface/Interaction/InteractionWidget.h"
+#include "UserInterface/Inventory/HotBarPanel.h"
 
 ABaseHUD::ABaseHUD()
 {
@@ -20,13 +21,20 @@ void ABaseHUD::BeginPlay()
 		InventoryMenuWidget->SetVisibility(ESlateVisibility::Collapsed);
 	}
 
-	if (InventoryMenuClass)
+	if (HotBarPanelWidget)
+	{
+		HotBarPanelWidget = CreateWidget<UHotBarPanel>(GetWorld(), HotBarPanelClass);
+		HotBarPanelWidget->AddToViewport(-1);
+		HotBarPanelWidget->SetVisibility(ESlateVisibility::Collapsed);
+	}
+	
+	if (InteractionWidget)
 	{
 		InteractionWidget = CreateWidget<UInteractionWidget>(GetWorld(), InteractionWidgetClass);
-		InteractionWidget->AddToViewport(-1);
+		InteractionWidget->AddToViewport(-2);
 		InteractionWidget->SetVisibility(ESlateVisibility::Collapsed);
 	}
-
+	
 }
 
 void ABaseHUD::DisplayMenu()
@@ -62,6 +70,36 @@ void ABaseHUD::ToggleMenu()
 		const FInputModeGameOnly InputMode;
 		GetOwningPlayerController()->SetInputMode(InputMode);
 		GetOwningPlayerController()->SetShowMouseCursor(true);
+	}
+}
+
+void ABaseHUD::DisplayHotBar()
+{
+	if(HotBarPanelWidget)
+	{
+		bIsMenuVisible = true;
+		HotBarPanelWidget->SetVisibility(ESlateVisibility::Visible);
+	}
+}
+
+void ABaseHUD::HideHotBar()
+{
+	if(HotBarPanelWidget)
+	{
+		bIsMenuVisible = false;
+		HotBarPanelWidget->SetVisibility(ESlateVisibility::Collapsed);
+	}
+}
+
+void ABaseHUD::ToggleHotBar()
+{
+	if (bIsHotBarVisible)
+	{
+		HideHotBar();
+	}
+	else
+	{
+		DisplayHotBar();
 	}
 }
 
