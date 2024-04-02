@@ -6,6 +6,7 @@
 AClientHeightFog::AClientHeightFog()
 {
     PrimaryActorTick.bCanEverTick = false;
+    
     PrimaryActorTick.bStartWithTickEnabled = false;
     
     // set is relevant only to owner to true
@@ -19,3 +20,4 @@ bool AClientHeightFog::IsNetRelevantFor(const AActor* RealViewer, const AActor* 
 {
     return RealViewer == GetOwner();
 }
+

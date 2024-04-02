@@ -15,6 +15,13 @@ class SCP3008_API AClientHeightFog : public ALocalHeightFog
 	GENERATED_BODY()
 	AClientHeightFog();
 
+	
+public:
+	//
+	virtual void Tick(float DeltaSeconds) override;
+	
+	
+
 	// override the net relevancy function ig
 	virtual bool IsNetRelevantFor(const AActor* RealViewer, const AActor* ViewTarget, const FVector& SrcLocation) const override;
 };
