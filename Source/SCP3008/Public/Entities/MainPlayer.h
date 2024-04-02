@@ -106,6 +106,7 @@ protected:
 	// Block is a parry until parry frames are finishied, then degrades into block.
 	void StartBlock();
 	void EndBlock();
+	void Attack();
 	
 	// Camera
 	UPROPERTY(EditAnywhere, Category="Player | Camera")
@@ -115,7 +116,7 @@ protected:
 	UPROPERTY(VisibleAnywhere, Category="Player | Interaction")
 	TScriptInterface<IInteractionInterface> TargetInteractable;
 
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Player | Combat")
+	UPROPERTY(Replicated, EditAnywhere, BlueprintReadWrite, Category="Player | Combat")
 	UCombatComponent* CombatComponent{};
 	
 	/* ----- PROPERTIES ----- */
@@ -192,6 +193,10 @@ protected:
 	void EndInteract();
 	void Interact();
 	FORCEINLINE bool IsInteracting() const { return GetWorldTimerManager().IsTimerActive(TimerHandle_Interaction); }
+
+	/* ----- NETWORKING ----- */
+	/** Property replication */
+	void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
 	
 public:
 	// Sets default values for this character's properties

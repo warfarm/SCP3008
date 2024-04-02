@@ -11,7 +11,16 @@
 #include "EnhancedInputComponent.h"
 #include "Components/BuildableComponent.h"
 #include "GameFramework/CharacterMovementComponent.h"
+#include "Net/UnrealNetwork.h"
 #include "World/Pickup.h"
+
+void AMainPlayer::GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const
+{
+	Super::GetLifetimeReplicatedProps(OutLifetimeProps);
+
+	//Replicate combat component
+	DOREPLIFETIME(AMainPlayer, CombatComponent);
+}
 
 // Sets default values
 AMainPlayer::AMainPlayer()
@@ -33,6 +42,8 @@ AMainPlayer::AMainPlayer()
 
 	CombatComponent = CreateDefaultSubobject<UCombatComponent>("CombatComponent");
 	CombatComponent->SetCurrentAndMaxHealth(150.f);
+	CombatComponent->SetNetAddressable();
+	CombatComponent->SetIsReplicated(true);
 }
 
 void AMainPlayer::UpdateInteractionWidget() const
@@ -127,6 +138,7 @@ void AMainPlayer::SetupPlayerInputComponent(UInputComponent* PlayerInputComponen
 	if (InputSystem.has_value())
 	{
 		InputSystem.value()->AddMappingContext(MainInputMapping, 0);
+		// TODO! ADD CONTEXT MAPPING every time weapon is pulled out ????
 		InputSystem.value()->AddMappingContext(CombatInputMapping, 1);
 	}
 
@@ -154,6 +166,7 @@ void AMainPlayer::SetupPlayerInputComponent(UInputComponent* PlayerInputComponen
 		// Combat action bindings
 		Input->BindAction(BlockAction, ETriggerEvent::Started, this, &AMainPlayer::StartBlock);
 		Input->BindAction(BlockAction, ETriggerEvent::Completed, this, &AMainPlayer::EndBlock);
+		Input->BindAction(AttackAction, ETriggerEvent::Started, this, &AMainPlayer::Attack);
 	}
 }
 
@@ -302,6 +315,74 @@ void AMainPlayer::EndBlock()
 	CombatComponent->EndBlock();
 }
 
+void AMainPlayer::Attack()
+{
+	// TODO! raycast shit
+	FCollisionQueryParams QueryParams{};
+	QueryParams.AddIgnoredActor(this);
+	// I DONT PLAY DEEPWOKEN
+	std::optional HitResultOption = BlockingLookDirRaycast(QueryParams, 1000);
+	if (!HitResultOption.has_value())
+	{
+		if(GEngine)
+			GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Silver, FString::Printf(TEXT("u didnt hit anything dipshit")));
+		return;
+	}
+	AActor* HitActor = HitResultOption.value().GetActor();
+	UActorComponent* RetrievedCombatComponent =
+		HitActor->GetComponentByClass(UCombatComponent::StaticClass());
+	if (!RetrievedCombatComponent)
+	{
+		return;
+	}
+	if (UCombatComponent* TargetedEnemy = CastChecked<UCombatComponent>(RetrievedCombatComponent))
+	{
+		EAttackResult AttackResult = CombatComponent->DoAttackOn(TargetedEnemy);
+
+		switch (AttackResult)
+		{
+		case Parried:
+			{
+				break;
+			}
+		case Blocked:
+			{
+				break;
+			}
+		case BlockBroken:
+			{
+				break;
+			}
+		case Immune:
+			{
+				break;
+			}
+		case Success:
+			{
+				if(GEngine)
+					GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Yellow, FString::Printf(TEXT("shing shing shing")));
+				break;
+			}
+		case CannotAttackNow:
+			{
+				break;
+			}
+		case Unknown:
+			{
+				if(GEngine)
+					GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Green, FString::Printf(TEXT("UNKNONW?? FIX YO CODE")));
+				break;
+			}
+		default:
+			{
+				if(GEngine)
+					GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Cyan, FString::Printf(TEXT("idk what happeend here ur cooked")));
+				break;
+			}
+		}
+	}
+}
+
 std::optional<UEnhancedInputLocalPlayerSubsystem*> AMainPlayer::GetInputSystem()
 {
 	// Setup enhanced input
@@ -445,5 +526,3 @@ void AMainPlayer::Interact()
 		TargetInteractable->Interact(this);
 	}
 }
-
-
