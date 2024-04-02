@@ -24,7 +24,7 @@ void ABaseHUD::BeginPlay()
 	if (HotBarPanelClass)
 	{
 		HotBarPanelWidget = CreateWidget<UHotBarPanel>(GetWorld(), HotBarPanelClass);
-		HotBarPanelWidget->AddToViewport(-1);
+		HotBarPanelWidget->AddToViewport(4);
 		HotBarPanelWidget->SetVisibility(ESlateVisibility::Collapsed);
 	}
 	

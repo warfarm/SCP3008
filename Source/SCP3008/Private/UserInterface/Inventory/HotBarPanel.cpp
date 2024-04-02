@@ -32,7 +32,7 @@ void UHotBarPanel::NativeOnInitialized()
 	Player = Cast<AMainPlayer>(GetOwningPlayerPawn());
 	if(Player)
 	{
-		HotBarReference = Player->GetInventory();
+		HotBarReference = Player->GetHotBar();
 		if (HotBarReference)
 		{
 			HotBarReference->OnInventoryUpdate.AddUObject(this, &UHotBarPanel::RefreshHotBar);

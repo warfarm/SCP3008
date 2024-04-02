@@ -66,6 +66,24 @@ void AMainPlayer::DropItem(UItemBase* ItemToDrop)
 		const FVector SpawnLocation{GetActorLocation() + (GetActorForwardVector() * 50.f)};
 		const FTransform SpawnTransform(GetActorRotation(), SpawnLocation);
 
+		PlayerInventory->RemoveSingleInstance(ItemToDrop);
+		
+		APickup* PickUp = GetWorld()->SpawnActor<APickup>(APickup::StaticClass(), SpawnTransform, SpawnParams);
+
+		PickUp->InitializeDrop(ItemToDrop);
+	}
+	else if(PlayerHotBar->FindMatchingItem(ItemToDrop))
+	{
+		FActorSpawnParameters SpawnParams;
+		SpawnParams.Owner = this;
+		SpawnParams.bNoFail = true;
+		SpawnParams.SpawnCollisionHandlingOverride = ESpawnActorCollisionHandlingMethod::AdjustIfPossibleButAlwaysSpawn;
+
+		const FVector SpawnLocation{GetActorLocation() + (GetActorForwardVector() * 50.f)};
+		const FTransform SpawnTransform(GetActorRotation(), SpawnLocation);
+
+		PlayerHotBar->RemoveSingleInstance(ItemToDrop);
+		
 		APickup* PickUp = GetWorld()->SpawnActor<APickup>(APickup::StaticClass(), SpawnTransform, SpawnParams);
 
 		PickUp->InitializeDrop(ItemToDrop);

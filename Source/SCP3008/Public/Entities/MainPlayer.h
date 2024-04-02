@@ -49,6 +49,9 @@ protected:
 
 	UPROPERTY(VisibleAnywhere, Category="Character | Inventory")
 	UInventoryComponent* PlayerInventory;
+
+	UPROPERTY(VisibleAnywhere, Category="Character | HotBar")
+	UInventoryComponent* PlayerHotBar;
 	
 	UPROPERTY()
 	ABaseHUD* HUD;
@@ -218,6 +221,7 @@ public:
 	FORCEINLINE float GetStamina() const { return Stamina; }
 
 	FORCEINLINE UInventoryComponent* GetInventory() const {return PlayerInventory;}
+	FORCEINLINE UInventoryComponent* GetHotBar() const {return PlayerHotBar;}
 
 	/* ----- FUNCTIONS ----- */
 	void UpdateInteractionWidget() const;
