@@ -117,8 +117,14 @@ void UCombatComponent::RestoreHealth()
 	Health = MaxHealth;
 }
 
-EAttackResult UCombatComponent::Attack(UCombatComponent& Other)
+EAttackResult UCombatComponent::DoAttackOn(UCombatComponent* Other)
 {
 	// TODO! add equipped weapon fields etc use weapon stats blah blha
-	return Other.TakeDamage(10.f, 15.f);
+
+	if (BlockState != None)
+	{
+		return CannotAttackNow;
+	}
+	
+	return Other->TakeDamage(10.f, 15.f);
 }
