@@ -17,8 +17,7 @@ class SCP3008_API AClientHeightFog : public ALocalHeightFog
 
 	
 public:
-	//
-	virtual void Tick(float DeltaSeconds) override;
+
 	
 	
 
