@@ -28,7 +28,6 @@ void UInteractionWidget::UpdateWidget(const FInteractableData* InteractableData)
 	case EInteractableType::Pickup:
 		KeyPressText->SetText(FText::FromString("Press"));
 		InteractionProgressBar->SetVisibility(ESlateVisibility::Collapsed);
-
 		
 		break;
 		

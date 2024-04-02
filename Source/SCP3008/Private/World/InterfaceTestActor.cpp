@@ -34,7 +34,8 @@ void AInterfaceTestActor::BeginFocus()
 {
 	if (Mesh)
 	{
-		Mesh->SetRenderCustomDepth(true);
+		//Mesh->SetRenderCustomDepth(true);
+		UE_LOG(LogTemp, Warning, TEXT("Calling BeginFocus"))
 	}
 }
 
@@ -42,7 +43,8 @@ void AInterfaceTestActor::EndFocus()
 {
 	if (Mesh)
 	{
-		Mesh->SetRenderCustomDepth(false);
+		//Mesh->SetRenderCustomDepth(false);
+		UE_LOG(LogTemp, Warning, TEXT("Calling EndFocus"))
 	}
 }
 

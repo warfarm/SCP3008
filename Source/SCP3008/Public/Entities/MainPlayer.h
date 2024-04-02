@@ -77,6 +77,9 @@ protected:
 
 	UPROPERTY(EditAnywhere, Category="Player | EnhancedInput | MainActions")
 	UInputAction* ToggleAction;
+
+	UPROPERTY(EditAnywhere, Category="Player | EnhancedInput | MainActions")
+	UInputAction* HotBarToggleAction;
 	
 	UPROPERTY(EditAnywhere, Category="Player | EnhancedInput | MainActions")
 	UInputAction* InteractAction;
@@ -185,6 +188,7 @@ protected:
 
 	/* ----- INTERACTIONS ----- */
 	void ToggleMenu();
+	void ToggleHotBar();
 	
 	void PerformInteractionCheck();
 	void FoundInteractable(AActor* NewInteractable);
