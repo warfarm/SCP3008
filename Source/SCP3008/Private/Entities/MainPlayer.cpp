@@ -40,6 +40,10 @@ AMainPlayer::AMainPlayer()
 	PlayerInventory->SetSlotsCapacity(DefaultSlotCapacity);
 	PlayerInventory->SetWeightCapacity(DefaultWeightCapacity);
 
+	PlayerHotBar = CreateDefaultSubobject<UInventoryComponent>(TEXT("PlayerHotBar"));
+	PlayerHotBar->SetSlotsCapacity(DefaultHotBarCapacity);
+	PlayerHotBar->SetWeightCapacity(DefaultHotBarWeightCapacity);
+
 	CombatComponent = CreateDefaultSubobject<UCombatComponent>("CombatComponent");
 	CombatComponent->SetCurrentAndMaxHealth(150.f);
 	CombatComponent->SetNetAddressable();

@@ -93,6 +93,12 @@ FItemAddResult UInventoryComponent::HandleAddItem(UItemBase* InputItem)
 void UInventoryComponent::RemoveSingleInstance(UItemBase* ItemToRemove)
 {
 	InventoryContents.RemoveSingle(ItemToRemove);
+	int32 WeightToSet = FMath::FloorToInt32((this->GetInventoryTotalWeight()) - (ItemToRemove->NumericData.Weight));
+	if(WeightToSet <= 0)
+	{
+		WeightToSet = 0;
+	}
+	this->SetTotalWeight(WeightToSet);
 	OnInventoryUpdate.Broadcast();
 }
 
@@ -105,6 +111,16 @@ int32 UInventoryComponent::CalculateWeightAddAmount(UItemBase* ItemIn, int32 Req
 	}
 	return WeightMaxAddAmount;
 }
+
+void UInventoryComponent::TransferItemInventory(UItemBase* ItemIn, UInventoryComponent* InventoryFrom, UInventoryComponent* InventoryTo)
+{
+	if(InventoryFrom && InventoryTo)
+	{
+		//Remove Item from InventoryFrom
+		//AddNewItem in InventoryTo
+	}
+}
+
 
 void UInventoryComponent::AddNewItem(UItemBase* Item)
 {

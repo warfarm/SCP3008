@@ -47,10 +47,10 @@ class SCP3008_API AMainPlayer : public ACharacter
 protected:
 	/* ----- COMPONENTS ----- */
 
-	UPROPERTY(VisibleAnywhere, Category="Character | Inventory")
+	UPROPERTY(BlueprintReadWrite,VisibleAnywhere, Category="Character | Inventory")
 	UInventoryComponent* PlayerInventory;
 
-	UPROPERTY(VisibleAnywhere, Category="Character | HotBar")
+	UPROPERTY(BlueprintReadWrite, VisibleAnywhere, Category="Character | HotBar")
 	UInventoryComponent* PlayerHotBar;
 	
 	UPROPERTY()
@@ -171,7 +171,10 @@ protected:
 	// Default Inventory Statistics
 	int32 DefaultSlotCapacity{ 20 };
 	float DefaultWeightCapacity{ 50 };
-	
+
+	// Default HotBar Statistics
+	int32 DefaultHotBarCapacity{ 5 };
+	float DefaultHotBarWeightCapacity{ 15 };
 	/* ----- STATE ----- */
 	
 	bool bIsJumping{ false };

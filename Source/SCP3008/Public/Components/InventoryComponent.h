@@ -80,18 +80,20 @@ public:
 	void RemoveSingleInstance(UItemBase* ItemToRemove);
 
 	UFUNCTION(Category = "Inventory")
-	FORCEINLINE float GetInventoryTotalWeight() const {return InventoryTotalWeight;};
+	FORCEINLINE float GetInventoryTotalWeight() const {return InventoryTotalWeight;}
 	UFUNCTION(Category = "Inventory")
-	FORCEINLINE float GetWeightCapacity() const {return InventoryWeightCapacity;};
+	FORCEINLINE float GetWeightCapacity() const {return InventoryWeightCapacity;}
 	UFUNCTION(Category = "Inventory")
-	FORCEINLINE int32 GetSlotsCapacity() const {return InventorySlotsCapacity;};
+	FORCEINLINE int32 GetSlotsCapacity() const {return InventorySlotsCapacity;}
 	UFUNCTION(Category = "Inventory")
-	FORCEINLINE TArray<UItemBase*> GetInventoryContents() const { return InventoryContents;};
+	FORCEINLINE TArray<UItemBase*> GetInventoryContents() const { return InventoryContents;}
 
 	UFUNCTION(Category = "Inventory")
-	FORCEINLINE void SetSlotsCapacity(const int32 NewSlotsCapacity) {InventorySlotsCapacity = NewSlotsCapacity;};
+	FORCEINLINE void SetTotalWeight(const int32 WeightToSet) {InventoryTotalWeight = WeightToSet;}
 	UFUNCTION(Category = "Inventory")
-	FORCEINLINE void SetWeightCapacity(const float NewWeightCapacity) {InventoryWeightCapacity = NewWeightCapacity;};
+	FORCEINLINE void SetSlotsCapacity(const int32 NewSlotsCapacity) {InventorySlotsCapacity = NewSlotsCapacity;}
+	UFUNCTION(Category = "Inventory")
+	FORCEINLINE void SetWeightCapacity(const float NewWeightCapacity) {InventoryWeightCapacity = NewWeightCapacity;}
 	
 protected:
 
@@ -109,6 +111,8 @@ protected:
 	virtual void BeginPlay() override;
 
 	int32 CalculateWeightAddAmount(UItemBase* ItemIn, int32 RequestedAddAmount);
+
+	void TransferItemInventory(UItemBase* ItemIn, UInventoryComponent* InventoryFrom, UInventoryComponent* InventoryTo);
 
 	void AddNewItem(UItemBase* Item);
 	

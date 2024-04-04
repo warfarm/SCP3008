@@ -20,13 +20,6 @@ void ABaseHUD::BeginPlay()
 		InventoryMenuWidget->AddToViewport(5);
 		InventoryMenuWidget->SetVisibility(ESlateVisibility::Collapsed);
 	}
-
-	if (HotBarPanelClass)
-	{
-		HotBarPanelWidget = CreateWidget<UHotBarPanel>(GetWorld(), HotBarPanelClass);
-		HotBarPanelWidget->AddToViewport(4);
-		HotBarPanelWidget->SetVisibility(ESlateVisibility::Collapsed);
-	}
 	
 	if (InteractionWidgetClass)
 	{
@@ -42,6 +35,7 @@ void ABaseHUD::DisplayMenu()
 	if (InventoryMenuWidget)
 	{
 		bIsMenuVisible = true;
+		bIsHotBarVisible = true;
 		InventoryMenuWidget->SetVisibility(ESlateVisibility::Visible);
 	}
 }
@@ -51,6 +45,7 @@ void ABaseHUD::HideMenu()
 	if (InventoryMenuWidget)
 	{
 		bIsMenuVisible = false;
+		bIsHotBarVisible = false;
 		InventoryMenuWidget->SetVisibility(ESlateVisibility::Collapsed);
 	}
 }
@@ -77,8 +72,10 @@ void ABaseHUD::DisplayHotBar()
 {
 	if(HotBarPanelWidget)
 	{
+		bIsMenuVisible = true;
 		bIsHotBarVisible = true;
 		HotBarPanelWidget->SetVisibility(ESlateVisibility::Visible);
+		InventoryMenuWidget->SetVisibility(ESlateVisibility::Collapsed);
 	}
 }
 
@@ -87,7 +84,9 @@ void ABaseHUD::HideHotBar()
 	if(HotBarPanelWidget)
 	{
 		bIsHotBarVisible = false;
+		bIsMenuVisible = false;
 		HotBarPanelWidget->SetVisibility(ESlateVisibility::Collapsed);
+		InventoryMenuWidget->SetVisibility(ESlateVisibility::Collapsed);
 	}
 }
 

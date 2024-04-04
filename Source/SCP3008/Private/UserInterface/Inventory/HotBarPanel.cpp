@@ -40,6 +40,8 @@ void UHotBarPanel::NativeOnInitialized()
 	}
 }
 
+void UHotBarPanel::
+
 bool UHotBarPanel::NativeOnDrop(const FGeometry& InGeometry, const FDragDropEvent& InDragDropEvent,
 	UDragDropOperation* InOperation)
 {
@@ -48,6 +50,9 @@ bool UHotBarPanel::NativeOnDrop(const FGeometry& InGeometry, const FDragDropEven
 	if(ItemDragDrop->SourceItem && HotBarReference)
 	{
 		UE_LOG(LogTemp, Warning, TEXT("Detected Item Drop on HotBar"));
+
+		
+		
 		return true;
 	}
 	return false;
