@@ -54,6 +54,11 @@ struct FItemAddResult
 		AddedAllResult.ResultMessage = Message;
 		return AddedAllResult;
 	};
+
+	bool operator == (const FItemAddResult& OtherAddResult) const
+	{
+		return this->OperationResult == OtherAddResult.OperationResult;
+	}
 	
 };
 
@@ -79,6 +84,9 @@ public:
 	UFUNCTION(Category = "Inventory")
 	void RemoveSingleInstance(UItemBase* ItemToRemove);
 
+	UFUNCTION(Category = "Inventory")
+	void TransferItemInventory(UItemBase* ItemIn, UInventoryComponent* InventoryFrom, UInventoryComponent* InventoryTo);
+	
 	UFUNCTION(Category = "Inventory")
 	FORCEINLINE float GetInventoryTotalWeight() const {return InventoryTotalWeight;}
 	UFUNCTION(Category = "Inventory")
@@ -111,8 +119,6 @@ protected:
 	virtual void BeginPlay() override;
 
 	int32 CalculateWeightAddAmount(UItemBase* ItemIn, int32 RequestedAddAmount);
-
-	void TransferItemInventory(UItemBase* ItemIn, UInventoryComponent* InventoryFrom, UInventoryComponent* InventoryTo);
 
 	void AddNewItem(UItemBase* Item);
 	

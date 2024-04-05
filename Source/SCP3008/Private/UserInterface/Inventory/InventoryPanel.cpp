@@ -68,11 +68,9 @@ bool UInventoryPanel::NativeOnDrop(const FGeometry& InGeometry, const FDragDropE
 	if(ItemDragDrop->SourceItem && InventoryReference)
 	{
 		UE_LOG(LogTemp, Warning, TEXT("Detected Item Drop on Inventory Panel"));
-		return true;
-	}
-	if(ItemDragDrop->SourceItem && Player->GetHotBar())
-	{
-		UE_LOG(LogTemp, Warning, TEXT("Detected Item Drop on HotBar Panel"));
+
+		InventoryReference->TransferItemInventory(ItemDragDrop->SourceItem, ItemDragDrop->SourceInventory, InventoryReference);
+		
 		return true;
 	}
 	return false;

@@ -6,6 +6,7 @@
 #include "Blueprint/UserWidget.h"
 #include "HotBarPanel.generated.h"
 
+class UTextBlock;
 class UInventoryItemSlot;
 class UInventoryComponent;
 class AMainPlayer;
@@ -23,6 +24,9 @@ public:
 
 	UPROPERTY(meta=(BindWidget))
 	UWrapBox* HotBarPanel;
+
+	UPROPERTY(meta=(BindWidget))
+	UTextBlock* HotBarWeightInfo;
 	
 	UPROPERTY()
 	AMainPlayer* Player;
@@ -34,6 +38,7 @@ public:
 	TSubclassOf<UInventoryItemSlot> HotBarSlotClass;
 	
 protected:
+	void SetInfoText() const;
 	
 	virtual void NativeOnInitialized() override;
 	virtual bool NativeOnDrop(const FGeometry& InGeometry, const FDragDropEvent& InDragDropEvent, UDragDropOperation* InOperation) override;

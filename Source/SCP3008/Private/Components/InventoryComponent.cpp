@@ -53,7 +53,7 @@ FItemAddResult UInventoryComponent::HandleAddItem(UItemBase* InputItem)
 	if (GetOwner())
 	{
 		
-		//Check Weight Overflow
+		//Check Weight Underflow
 		if (FMath::IsNearlyZero(InputItem->GetItemWeight()) || InputItem->GetItemWeight() < 0)
 		{
 			return FItemAddResult::AddedNone(FText::Format(
@@ -114,10 +114,14 @@ int32 UInventoryComponent::CalculateWeightAddAmount(UItemBase* ItemIn, int32 Req
 
 void UInventoryComponent::TransferItemInventory(UItemBase* ItemIn, UInventoryComponent* InventoryFrom, UInventoryComponent* InventoryTo)
 {
-	if(InventoryFrom && InventoryTo)
+	if(InventoryFrom && InventoryTo && InventoryFrom->FindMatchingItem(ItemIn))
 	{
-		//Remove Item from InventoryFrom
-		//AddNewItem in InventoryTo
+		if (InventoryTo->HandleAddItem(ItemIn) == FItemAddResult::AddedAll(FText::Format(
+				FText::FromString("Successfully added {0} to Inventory."),
+				ItemIn->TextData.Name)))
+		{
+			InventoryFrom->RemoveSingleInstance(ItemIn);
+		}
 	}
 }
 

@@ -23,8 +23,21 @@ void UHotBarPanel::RefreshHotBar()
 
 			HotBarPanel->AddChildToWrapBox(ItemSlot);
 		}
+		SetInfoText();
 	}
 }
+
+void UHotBarPanel::SetInfoText() const
+{
+	const FString WeightInfoValue{
+		FString::SanitizeFloat(HotBarReference->GetInventoryTotalWeight())
+		+ "/"
+		+ FString::SanitizeFloat(HotBarReference->GetWeightCapacity())
+	};
+
+	HotBarWeightInfo->SetText(FText::FromString(WeightInfoValue));
+}
+
 void UHotBarPanel::NativeOnInitialized()
 {
 	Super::NativeOnInitialized();
@@ -36,11 +49,10 @@ void UHotBarPanel::NativeOnInitialized()
 		if (HotBarReference)
 		{
 			HotBarReference->OnInventoryUpdate.AddUObject(this, &UHotBarPanel::RefreshHotBar);
+			SetInfoText();
 		}
 	}
 }
-
-void UHotBarPanel::
 
 bool UHotBarPanel::NativeOnDrop(const FGeometry& InGeometry, const FDragDropEvent& InDragDropEvent,
 	UDragDropOperation* InOperation)
@@ -51,7 +63,7 @@ bool UHotBarPanel::NativeOnDrop(const FGeometry& InGeometry, const FDragDropEven
 	{
 		UE_LOG(LogTemp, Warning, TEXT("Detected Item Drop on HotBar"));
 
-		
+		HotBarReference->TransferItemInventory(ItemDragDrop->SourceItem, ItemDragDrop->SourceInventory, HotBarReference);
 		
 		return true;
 	}

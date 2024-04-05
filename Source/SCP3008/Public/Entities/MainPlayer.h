@@ -94,7 +94,7 @@ protected:
 	UPROPERTY(EditAnywhere, Category="Player | EnhancedInput | BuildActions")
 	UInputAction* BuildShiftOffsetAction;
 
-	// Will only be present while haing a weapon equipped.
+	// Will only be present while having a weapon equipped.
 	UPROPERTY(EditAnywhere, Category="Player | EnhancedInput | CombatActions")
 	UInputAction* AttackAction;
 	
