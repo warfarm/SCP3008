@@ -85,7 +85,7 @@ public:
 	void RemoveSingleInstance(UItemBase* ItemToRemove);
 
 	UFUNCTION(Category = "Inventory")
-	void TransferItemInventory(UItemBase* ItemIn, UInventoryComponent* InventoryFrom, UInventoryComponent* InventoryTo);
+	static void TransferItemInventory(UItemBase* ItemIn, UInventoryComponent* InventoryFrom, UInventoryComponent* InventoryTo);
 	
 	UFUNCTION(Category = "Inventory")
 	FORCEINLINE float GetInventoryTotalWeight() const {return InventoryTotalWeight;}

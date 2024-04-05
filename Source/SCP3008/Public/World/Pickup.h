@@ -54,6 +54,11 @@ protected:
 	void UpdateInteractableData();
 	void TakePickup(const AMainPlayer* Taker);
 
+	UFUNCTION(NetMulticast, Reliable)
+	void ServerDestroy();
+
+	void ServerDestroy_Implementation();
+
 #if WITH_EDITOR
 	virtual void PostEditChangeProperty(FPropertyChangedEvent& PropertyChangedEvent) override;
 #endif

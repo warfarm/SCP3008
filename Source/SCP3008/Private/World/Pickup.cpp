@@ -29,7 +29,7 @@ APickup::APickup()
 
 void APickup::InitializePickup(const TSubclassOf<UItemBase> BaseClass)
 {
-	if (ItemDataTable && !DesiredItemID.IsNone())
+	if (ItemDataTable && !(DesiredItemID.IsNone()))
 	{
 		const FItemData* ItemData = ItemDataTable->FindRow<FItemData>(DesiredItemID, DesiredItemID.ToString());
 
@@ -43,6 +43,7 @@ void APickup::InitializePickup(const TSubclassOf<UItemBase> BaseClass)
 		ItemReference->AssetData = ItemData->AssetData;
 
 		PickupMesh->SetStaticMesh(ItemData->AssetData.Mesh);
+		UpdateInteractableData();
 	}
 }
 
@@ -95,7 +96,7 @@ void APickup::TakePickup(const AMainPlayer* Taker)
 					case EItemAddResult::IAR_NoItemAdded:
 						break;
 					case EItemAddResult::IAR_ItemAdded:
-						Destroy();
+						ServerDestroy();
 						break;
 				}
 
@@ -139,4 +140,9 @@ void APickup::InitializeDrop(UItemBase* ItemToDrop)
 	ItemReference->OwnedInventory = nullptr;
 	PickupMesh->SetStaticMesh(ItemToDrop->AssetData.Mesh);
 	UpdateInteractableData();
+}
+
+void APickup::ServerDestroy_Implementation()
+{
+	Destroy();
 }
