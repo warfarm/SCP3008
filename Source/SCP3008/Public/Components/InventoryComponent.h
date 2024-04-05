@@ -54,6 +54,11 @@ struct FItemAddResult
 		AddedAllResult.ResultMessage = Message;
 		return AddedAllResult;
 	};
+
+	bool operator == (const FItemAddResult& OtherAddResult) const
+	{
+		return this->OperationResult == OtherAddResult.OperationResult;
+	}
 	
 };
 
@@ -80,18 +85,23 @@ public:
 	void RemoveSingleInstance(UItemBase* ItemToRemove);
 
 	UFUNCTION(Category = "Inventory")
-	FORCEINLINE float GetInventoryTotalWeight() const {return InventoryTotalWeight;};
+	void TransferItemInventory(UItemBase* ItemIn, UInventoryComponent* InventoryFrom, UInventoryComponent* InventoryTo);
+	
 	UFUNCTION(Category = "Inventory")
-	FORCEINLINE float GetWeightCapacity() const {return InventoryWeightCapacity;};
+	FORCEINLINE float GetInventoryTotalWeight() const {return InventoryTotalWeight;}
 	UFUNCTION(Category = "Inventory")
-	FORCEINLINE int32 GetSlotsCapacity() const {return InventorySlotsCapacity;};
+	FORCEINLINE float GetWeightCapacity() const {return InventoryWeightCapacity;}
 	UFUNCTION(Category = "Inventory")
-	FORCEINLINE TArray<UItemBase*> GetInventoryContents() const { return InventoryContents;};
+	FORCEINLINE int32 GetSlotsCapacity() const {return InventorySlotsCapacity;}
+	UFUNCTION(Category = "Inventory")
+	FORCEINLINE TArray<UItemBase*> GetInventoryContents() const { return InventoryContents;}
 
 	UFUNCTION(Category = "Inventory")
-	FORCEINLINE void SetSlotsCapacity(const int32 NewSlotsCapacity) {InventorySlotsCapacity = NewSlotsCapacity;};
+	FORCEINLINE void SetTotalWeight(const int32 WeightToSet) {InventoryTotalWeight = WeightToSet;}
 	UFUNCTION(Category = "Inventory")
-	FORCEINLINE void SetWeightCapacity(const float NewWeightCapacity) {InventoryWeightCapacity = NewWeightCapacity;};
+	FORCEINLINE void SetSlotsCapacity(const int32 NewSlotsCapacity) {InventorySlotsCapacity = NewSlotsCapacity;}
+	UFUNCTION(Category = "Inventory")
+	FORCEINLINE void SetWeightCapacity(const float NewWeightCapacity) {InventoryWeightCapacity = NewWeightCapacity;}
 	
 protected:
 

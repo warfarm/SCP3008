@@ -47,8 +47,11 @@ class SCP3008_API AMainPlayer : public ACharacter
 protected:
 	/* ----- COMPONENTS ----- */
 
-	UPROPERTY(VisibleAnywhere, Category="Character | Inventory")
+	UPROPERTY(BlueprintReadWrite,VisibleAnywhere, Category="Character | Inventory")
 	UInventoryComponent* PlayerInventory;
+
+	UPROPERTY(BlueprintReadWrite, VisibleAnywhere, Category="Character | HotBar")
+	UInventoryComponent* PlayerHotBar;
 	
 	UPROPERTY()
 	ABaseHUD* HUD;
@@ -77,6 +80,9 @@ protected:
 
 	UPROPERTY(EditAnywhere, Category="Player | EnhancedInput | MainActions")
 	UInputAction* ToggleAction;
+
+	UPROPERTY(EditAnywhere, Category="Player | EnhancedInput | MainActions")
+	UInputAction* HotBarToggleAction;
 	
 	UPROPERTY(EditAnywhere, Category="Player | EnhancedInput | MainActions")
 	UInputAction* InteractAction;
@@ -88,7 +94,7 @@ protected:
 	UPROPERTY(EditAnywhere, Category="Player | EnhancedInput | BuildActions")
 	UInputAction* BuildShiftOffsetAction;
 
-	// Will only be present while haing a weapon equipped.
+	// Will only be present while having a weapon equipped.
 	UPROPERTY(EditAnywhere, Category="Player | EnhancedInput | CombatActions")
 	UInputAction* AttackAction;
 	
@@ -165,7 +171,10 @@ protected:
 	// Default Inventory Statistics
 	int32 DefaultSlotCapacity{ 20 };
 	float DefaultWeightCapacity{ 50 };
-	
+
+	// Default HotBar Statistics
+	int32 DefaultHotBarCapacity{ 5 };
+	float DefaultHotBarWeightCapacity{ 15 };
 	/* ----- STATE ----- */
 	
 	bool bIsJumping{ false };
@@ -185,6 +194,7 @@ protected:
 
 	/* ----- INTERACTIONS ----- */
 	void ToggleMenu();
+	void ToggleHotBar();
 	
 	void PerformInteractionCheck();
 	void FoundInteractable(AActor* NewInteractable);
@@ -214,6 +224,7 @@ public:
 	FORCEINLINE float GetStamina() const { return Stamina; }
 
 	FORCEINLINE UInventoryComponent* GetInventory() const {return PlayerInventory;}
+	FORCEINLINE UInventoryComponent* GetHotBar() const {return PlayerHotBar;}
 
 	/* ----- FUNCTIONS ----- */
 	void UpdateInteractionWidget() const;

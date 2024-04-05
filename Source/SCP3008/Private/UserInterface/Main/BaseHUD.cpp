@@ -20,15 +20,8 @@ void ABaseHUD::BeginPlay()
 		InventoryMenuWidget->AddToViewport(5);
 		InventoryMenuWidget->SetVisibility(ESlateVisibility::Collapsed);
 	}
-
-	if (HotBarPanelWidget)
-	{
-		HotBarPanelWidget = CreateWidget<UHotBarPanel>(GetWorld(), HotBarPanelClass);
-		HotBarPanelWidget->AddToViewport(-1);
-		HotBarPanelWidget->SetVisibility(ESlateVisibility::Collapsed);
-	}
 	
-	if (InteractionWidget)
+	if (InteractionWidgetClass)
 	{
 		InteractionWidget = CreateWidget<UInteractionWidget>(GetWorld(), InteractionWidgetClass);
 		InteractionWidget->AddToViewport(-2);
@@ -42,6 +35,7 @@ void ABaseHUD::DisplayMenu()
 	if (InventoryMenuWidget)
 	{
 		bIsMenuVisible = true;
+		bIsHotBarVisible = true;
 		InventoryMenuWidget->SetVisibility(ESlateVisibility::Visible);
 	}
 }
@@ -51,6 +45,7 @@ void ABaseHUD::HideMenu()
 	if (InventoryMenuWidget)
 	{
 		bIsMenuVisible = false;
+		bIsHotBarVisible = false;
 		InventoryMenuWidget->SetVisibility(ESlateVisibility::Collapsed);
 	}
 }
@@ -78,7 +73,9 @@ void ABaseHUD::DisplayHotBar()
 	if(HotBarPanelWidget)
 	{
 		bIsMenuVisible = true;
+		bIsHotBarVisible = true;
 		HotBarPanelWidget->SetVisibility(ESlateVisibility::Visible);
+		InventoryMenuWidget->SetVisibility(ESlateVisibility::Collapsed);
 	}
 }
 
@@ -86,20 +83,26 @@ void ABaseHUD::HideHotBar()
 {
 	if(HotBarPanelWidget)
 	{
+		bIsHotBarVisible = false;
 		bIsMenuVisible = false;
 		HotBarPanelWidget->SetVisibility(ESlateVisibility::Collapsed);
+		InventoryMenuWidget->SetVisibility(ESlateVisibility::Collapsed);
 	}
 }
 
 void ABaseHUD::ToggleHotBar()
 {
+
+	UE_LOG(LogTemp, Warning, TEXT("ATTEMPTING TO TOGGLE HOTBAR"))
 	if (bIsHotBarVisible)
 	{
 		HideHotBar();
+		UE_LOG(LogTemp, Warning, TEXT("ATTEMPTING TO TOGGLE2 HOTBAR"))
 	}
 	else
 	{
 		DisplayHotBar();
+		UE_LOG(LogTemp, Warning, TEXT("ATTEMPTING TO UNTOGGLE HOTBAR"))
 	}
 }
 
@@ -107,7 +110,7 @@ void ABaseHUD::ShowInteractionWidget() const
 {
 	if (InteractionWidget)
 	{
-		InventoryMenuWidget->SetVisibility(ESlateVisibility::Visible);
+		InteractionWidget->SetVisibility(ESlateVisibility::Visible);
 	}
 }
 
@@ -115,7 +118,7 @@ void ABaseHUD::HideInteractionWidget() const
 {
 	if (InteractionWidget)
 	{
-		InventoryMenuWidget->SetVisibility(ESlateVisibility::Collapsed);
+		InteractionWidget->SetVisibility(ESlateVisibility::Collapsed);
 	}
 }
 
@@ -127,6 +130,7 @@ void ABaseHUD::UpdateInteractionWidget(const FInteractableData* InteractableData
 		{
 			InteractionWidget->SetVisibility(ESlateVisibility::Visible);
 		}
+		
 
 		InteractionWidget->UpdateWidget(InteractableData);
 		

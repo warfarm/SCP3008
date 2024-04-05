@@ -40,6 +40,10 @@ AMainPlayer::AMainPlayer()
 	PlayerInventory->SetSlotsCapacity(DefaultSlotCapacity);
 	PlayerInventory->SetWeightCapacity(DefaultWeightCapacity);
 
+	PlayerHotBar = CreateDefaultSubobject<UInventoryComponent>(TEXT("PlayerHotBar"));
+	PlayerHotBar->SetSlotsCapacity(DefaultHotBarCapacity);
+	PlayerHotBar->SetWeightCapacity(DefaultHotBarWeightCapacity);
+
 	CombatComponent = CreateDefaultSubobject<UCombatComponent>("CombatComponent");
 	CombatComponent->SetCurrentAndMaxHealth(150.f);
 	CombatComponent->SetNetAddressable();
@@ -66,6 +70,24 @@ void AMainPlayer::DropItem(UItemBase* ItemToDrop)
 		const FVector SpawnLocation{GetActorLocation() + (GetActorForwardVector() * 50.f)};
 		const FTransform SpawnTransform(GetActorRotation(), SpawnLocation);
 
+		PlayerInventory->RemoveSingleInstance(ItemToDrop);
+		
+		APickup* PickUp = GetWorld()->SpawnActor<APickup>(APickup::StaticClass(), SpawnTransform, SpawnParams);
+
+		PickUp->InitializeDrop(ItemToDrop);
+	}
+	else if(PlayerHotBar->FindMatchingItem(ItemToDrop))
+	{
+		FActorSpawnParameters SpawnParams;
+		SpawnParams.Owner = this;
+		SpawnParams.bNoFail = true;
+		SpawnParams.SpawnCollisionHandlingOverride = ESpawnActorCollisionHandlingMethod::AdjustIfPossibleButAlwaysSpawn;
+
+		const FVector SpawnLocation{GetActorLocation() + (GetActorForwardVector() * 50.f)};
+		const FTransform SpawnTransform(GetActorRotation(), SpawnLocation);
+
+		PlayerHotBar->RemoveSingleInstance(ItemToDrop);
+		
 		APickup* PickUp = GetWorld()->SpawnActor<APickup>(APickup::StaticClass(), SpawnTransform, SpawnParams);
 
 		PickUp->InitializeDrop(ItemToDrop);
@@ -154,6 +176,7 @@ void AMainPlayer::SetupPlayerInputComponent(UInputComponent* PlayerInputComponen
 		Input->BindAction(SprintAction, ETriggerEvent::Completed, this, &AMainPlayer::SprintEnd);
 
 		Input->BindAction(ToggleAction, ETriggerEvent::Triggered, this, &AMainPlayer::ToggleMenu);
+		Input->BindAction(HotBarToggleAction, ETriggerEvent::Triggered, this, &AMainPlayer::ToggleHotBar);
 		
 		Input->BindAction(InteractAction, ETriggerEvent::Started, this, &AMainPlayer::BeginInteract);
 		Input->BindAction(InteractAction, ETriggerEvent::Completed, this, &AMainPlayer::EndInteract);
@@ -401,35 +424,45 @@ void AMainPlayer::ToggleMenu()
 	HUD->ToggleMenu();
 }
 
+void AMainPlayer::ToggleHotBar()
+{
+	HUD->ToggleHotBar();
+}
+
 void AMainPlayer::PerformInteractionCheck()
 {
 	InteractionData.LastInteractionCheckTime = GetWorld()->GetTimeSeconds();
 	if (USceneComponent* CameraComponent = CastChecked<USceneComponent>(Camera))
 	{
-	// 	FVector TraceStart{GetCameraPosition()};
-	// 	FVector TraceEnd{TraceStart +  GetLookVector() * InteractionCheckDistance};
+	 	FVector TraceStart{GetCameraPosition()};
+	 	FVector TraceEnd{TraceStart +  GetLookVector() * InteractionCheckDistance};
 	//
 	// 	// TODO! remove later
-	// 	DrawDebugLine(GetWorld(), TraceStart, TraceEnd, FColor::Red, false, 1.f, 0.f, 2.f);
+	 	DrawDebugLine(GetWorld(), TraceStart, TraceEnd, FColor::Red, false, 1.f, 0.f, 2.f);
 	
 		FCollisionQueryParams QueryParams;
 		QueryParams.AddIgnoredActor(this);
 		std::optional<FHitResult> HitResultOption{BlockingLookDirRaycast(QueryParams, InteractionCheckDistance)};
 
 		if (HitResultOption.has_value())
-		{
+		{ //UE_LOG(LogTemp, Warning, TEXT("Result Valid"))
 			FHitResult const& HitResult = HitResultOption.value();
 			AActor* HitActor = HitResult.GetActor();
-
+			//UE_LOG(LogTemp, Warning, TEXT("Reparsed Found AActor"))
 			// Checks to see if the actor class itself implements UInteractionIterface
 			if (HitActor->GetClass()->ImplementsInterface(UInteractionInterface::StaticClass()))
-			{
+			{//UE_LOG(LogTemp, Warning, TEXT("Found Implementation"))
 				// If we are looking at the same interactable for some reason
-				if (HitActor == InteractionData.CurrentInteractable)
-				{
+				if (HitActor != InteractionData.CurrentInteractable)
+				{//UE_LOG(LogTemp, Warning, TEXT("Found Interactable"))
+					FoundInteractable(HitActor);
 					return;
 				}
-				FoundInteractable(HitActor);
+				if (HitActor == InteractionData.CurrentInteractable)
+				{//UE_LOG(LogTemp, Warning, TEXT("Found Interactable"))
+					return;
+				}
+				
 			}
 		}
 	}
@@ -439,28 +472,30 @@ void AMainPlayer::PerformInteractionCheck()
 
 void AMainPlayer::FoundInteractable(AActor* NewInteractable)
 {
+	//UE_LOG(LogTemp, Warning, TEXT("1Found Interactable"))
 	if (IsInteracting())
 	{
 		EndInteract();
 	}
-
+	//UE_LOG(LogTemp, Warning, TEXT("2Attempting to Get New Interactable"))
 	if (InteractionData.CurrentInteractable)
 	{
 		TargetInteractable = InteractionData.CurrentInteractable;
 		TargetInteractable->EndFocus();
 	}
-
+	
 	InteractionData.CurrentInteractable = NewInteractable;
 	TargetInteractable = NewInteractable;
 
 	//Update Interaction Widget
+	//UE_LOG(LogTemp, Warning, TEXT("3ATTEMPTING TO SHOW HUD"))
 	HUD->UpdateInteractionWidget(&TargetInteractable->InteractableData);
 	
 	TargetInteractable->BeginFocus();
 }
 
 void AMainPlayer::NoInteractableFound()
-{
+{//UE_LOG(LogTemp, Warning, TEXT("Found No Interactable"))
 	if (IsInteracting())
 	{
 		GetWorldTimerManager().ClearTimer(TimerHandle_Interaction);
@@ -485,11 +520,11 @@ void AMainPlayer::BeginInteract()
 {
 	// verify nothing has changed with the interactable state since beginning interaction
 	PerformInteractionCheck();
-
+	//UE_LOG(LogTemp, Warning, TEXT("Interaction Check Performed"))
 	if (InteractionData.CurrentInteractable)
-	{
+	{ //UE_LOG(LogTemp, Warning, TEXT("Found Interactable in Begin Interact"))
 		if (IsValid(TargetInteractable.GetObject()))
-		{
+		{ //UE_LOG(LogTemp, Warning, TEXT("Valid Object Found"))
 			TargetInteractable->BeginInteract();
 
 			if (FMath::IsNearlyZero(TargetInteractable->InteractableData.InteractionDuration, 0.1f))

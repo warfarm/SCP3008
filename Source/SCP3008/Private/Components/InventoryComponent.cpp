@@ -53,7 +53,7 @@ FItemAddResult UInventoryComponent::HandleAddItem(UItemBase* InputItem)
 	if (GetOwner())
 	{
 		
-		//Check Weight Overflow
+		//Check Weight Underflow
 		if (FMath::IsNearlyZero(InputItem->GetItemWeight()) || InputItem->GetItemWeight() < 0)
 		{
 			return FItemAddResult::AddedNone(FText::Format(
@@ -93,6 +93,12 @@ FItemAddResult UInventoryComponent::HandleAddItem(UItemBase* InputItem)
 void UInventoryComponent::RemoveSingleInstance(UItemBase* ItemToRemove)
 {
 	InventoryContents.RemoveSingle(ItemToRemove);
+	int32 WeightToSet = FMath::FloorToInt32((this->GetInventoryTotalWeight()) - (ItemToRemove->NumericData.Weight));
+	if(WeightToSet <= 0)
+	{
+		WeightToSet = 0;
+	}
+	this->SetTotalWeight(WeightToSet);
 	OnInventoryUpdate.Broadcast();
 }
 
@@ -105,6 +111,20 @@ int32 UInventoryComponent::CalculateWeightAddAmount(UItemBase* ItemIn, int32 Req
 	}
 	return WeightMaxAddAmount;
 }
+
+void UInventoryComponent::TransferItemInventory(UItemBase* ItemIn, UInventoryComponent* InventoryFrom, UInventoryComponent* InventoryTo)
+{
+	if(InventoryFrom && InventoryTo && InventoryFrom->FindMatchingItem(ItemIn))
+	{
+		if (InventoryTo->HandleAddItem(ItemIn) == FItemAddResult::AddedAll(FText::Format(
+				FText::FromString("Successfully added {0} to Inventory."),
+				ItemIn->TextData.Name)))
+		{
+			InventoryFrom->RemoveSingleInstance(ItemIn);
+		}
+	}
+}
+
 
 void UInventoryComponent::AddNewItem(UItemBase* Item)
 {

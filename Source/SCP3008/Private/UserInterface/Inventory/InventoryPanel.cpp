@@ -1,6 +1,7 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 #include "UserInterface/Inventory/InventoryPanel.h"
 #include "UserInterface/Inventory/InventoryItemSlot.h"
+#include "UserInterface/Inventory/HotBarPanel.h"
 #include "Components/InventoryComponent.h"
 #include "Entities/MainPlayer.h"
 
@@ -67,6 +68,9 @@ bool UInventoryPanel::NativeOnDrop(const FGeometry& InGeometry, const FDragDropE
 	if(ItemDragDrop->SourceItem && InventoryReference)
 	{
 		UE_LOG(LogTemp, Warning, TEXT("Detected Item Drop on Inventory Panel"));
+
+		InventoryReference->TransferItemInventory(ItemDragDrop->SourceItem, ItemDragDrop->SourceInventory, InventoryReference);
+		
 		return true;
 	}
 	return false;
