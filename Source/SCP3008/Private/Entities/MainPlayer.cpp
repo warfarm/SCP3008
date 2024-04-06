@@ -181,6 +181,13 @@ void AMainPlayer::SetupPlayerInputComponent(UInputComponent* PlayerInputComponen
 		Input->BindAction(InteractAction, ETriggerEvent::Started, this, &AMainPlayer::BeginInteract);
 		Input->BindAction(InteractAction, ETriggerEvent::Completed, this, &AMainPlayer::EndInteract);
 
+		// HotBar BindActions | ReturnHotBarSlot([SLOT INDEX NUMBER])
+		Input->BindAction(HotBarSlot1, ETriggerEvent::Triggered, this, &AMainPlayer::ReturnHotBarSlot, 1);
+		Input->BindAction(HotBarSlot2, ETriggerEvent::Triggered, this, &AMainPlayer::ReturnHotBarSlot, 2);
+		Input->BindAction(HotBarSlot3, ETriggerEvent::Triggered, this, &AMainPlayer::ReturnHotBarSlot, 3);
+		Input->BindAction(HotBarSlot4, ETriggerEvent::Triggered, this, &AMainPlayer::ReturnHotBarSlot, 4);
+		Input->BindAction(HotBarSlot5, ETriggerEvent::Triggered, this, &AMainPlayer::ReturnHotBarSlot, 5);
+		
 		Input->BindAction(BuildAction, ETriggerEvent::Started, this, &AMainPlayer::Build);
 
 		// Build action bindings
@@ -428,6 +435,17 @@ void AMainPlayer::ToggleHotBar()
 {
 	HUD->ToggleHotBar();
 }
+
+void AMainPlayer::ReturnHotBarSlot(int SlotNumber)
+{
+	if (PlayerHotBar && PlayerHotBar->GetInventoryContents()[SlotNumber])
+	{
+		SetCurrentItem(PlayerHotBar->GetInventoryContents()[SlotNumber]);
+		// Rebind Keybinds to be able to use items
+		// 
+	}
+}
+
 
 void AMainPlayer::PerformInteractionCheck()
 {

@@ -101,6 +101,26 @@ protected:
 	UPROPERTY(EditAnywhere, Category="Player | EnhancedInput | CombatActions")
 	UInputAction* BlockAction;
 
+	// HotBar Slot
+	UPROPERTY(EditAnywhere, Category="Player | EnhancedInput | HotbarSlot")
+	UInputAction* HotBarSlot1;
+
+	UPROPERTY(EditAnywhere, Category="Player | EnhancedInput | HotbarSlot")
+	UInputAction* HotBarSlot2;
+	
+	UPROPERTY(EditAnywhere, Category="Player | EnhancedInput | HotbarSlot")
+	UInputAction* HotBarSlot3;
+	
+	UPROPERTY(EditAnywhere, Category="Player | EnhancedInput | HotbarSlot")
+	UInputAction* HotBarSlot4;
+	
+	UPROPERTY(EditAnywhere, Category="Player | EnhancedInput | HotbarSlot")
+	UInputAction* HotBarSlot5;
+
+	// HOTBAR FUNCTIONALITY
+	UPROPERTY(VisibleAnywhere, Category = "Player | HotBar")
+	UItemBase* CurrentItem;
+	
 	/* ----- INPUT RELATED ----- */
 	void Move(const FInputActionValue& InputValue);
 	void Look(const FInputActionValue& InputValue);
@@ -109,7 +129,7 @@ protected:
 	void SprintEnd();
 	void Build();
 	void BuildShiftOffset(const FInputActionValue& InputValue);
-	// Block is a parry until parry frames are finishied, then degrades into block.
+	// Block is a parry until parry frames are finished, then degrades into block.
 	void StartBlock();
 	void EndBlock();
 	void Attack();
@@ -204,6 +224,9 @@ protected:
 	void Interact();
 	FORCEINLINE bool IsInteracting() const { return GetWorldTimerManager().IsTimerActive(TimerHandle_Interaction); }
 
+	// HotBar Item Functionality
+	void ReturnHotBarSlot(int SlotNumber);
+	
 	/* ----- NETWORKING ----- */
 	/** Property replication */
 	void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
@@ -226,6 +249,10 @@ public:
 	FORCEINLINE UInventoryComponent* GetInventory() const {return PlayerInventory;}
 	FORCEINLINE UInventoryComponent* GetHotBar() const {return PlayerHotBar;}
 
+	// CurrentHeldItem
+	FORCEINLINE UItemBase* GetCurrentItem() const {return CurrentItem;}
+	FORCEINLINE void SetCurrentItem(UItemBase* ItemToSet) {CurrentItem = ItemToSet;}
+	
 	/* ----- FUNCTIONS ----- */
 	void UpdateInteractionWidget() const;
 
