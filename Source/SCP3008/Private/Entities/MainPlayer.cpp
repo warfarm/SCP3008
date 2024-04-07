@@ -167,6 +167,8 @@ void AMainPlayer::SetupPlayerInputComponent(UInputComponent* PlayerInputComponen
 	// If PlayerInputComponent is an instance of EnhancedInputComponent
 	if (UEnhancedInputComponent* Input = CastChecked<UEnhancedInputComponent>(PlayerInputComponent))
 	{
+		//MoveAction = FInputActionBinding("MoveAction",)
+		
 		// Main action bindings
 		Input->BindAction(MoveAction, ETriggerEvent::Triggered, this, &AMainPlayer::Move);
 		Input->BindAction(LookAction, ETriggerEvent::Triggered, this, &AMainPlayer::Look);
@@ -181,7 +183,7 @@ void AMainPlayer::SetupPlayerInputComponent(UInputComponent* PlayerInputComponen
 		Input->BindAction(InteractAction, ETriggerEvent::Started, this, &AMainPlayer::BeginInteract);
 		Input->BindAction(InteractAction, ETriggerEvent::Completed, this, &AMainPlayer::EndInteract);
 
-		// HotBar BindActions | ReturnHotBarSlot([SLOT INDEX NUMBER])
+		// HotBar BindActions | (HotBarSlot[SLOT INDEX NUMBER], ETriggerEvent::Triggered, this, ReturnHotBarSlot, Parameter[SLOT INDEX NUMBER]);
 		Input->BindAction(HotBarSlot1, ETriggerEvent::Triggered, this, &AMainPlayer::ReturnHotBarSlot, 1);
 		Input->BindAction(HotBarSlot2, ETriggerEvent::Triggered, this, &AMainPlayer::ReturnHotBarSlot, 2);
 		Input->BindAction(HotBarSlot3, ETriggerEvent::Triggered, this, &AMainPlayer::ReturnHotBarSlot, 3);

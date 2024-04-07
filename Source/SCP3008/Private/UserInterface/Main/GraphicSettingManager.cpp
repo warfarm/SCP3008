@@ -1,10 +1,10 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
+#include "UserInterface/Main/GraphicSettingManager.h"
 #include "Components/CheckBox.h"
 #include "Components/ComboBoxString.h"
 #include "GameFramework/GameUserSettings.h"
 #include "Kismet/KismetSystemLibrary.h"
-#include "UserInterface/Main/GraphicSettingManager.h"
 
 void UGraphicSettingManager::NativeConstruct() {
 	GameUserSettings = UGameUserSettings::GetGameUserSettings();
@@ -47,9 +47,9 @@ void UGraphicSettingManager::InitializeGraphicQuality() {
 		GraphicSettingComboBox->SetSelectedIndex(SelectedIndex);
 
 	//when there's changes
-	GraphicSettingComboBox->OnSelectionChanged.Clear();
 	GraphicSettingComboBox->OnSelectionChanged.AddDynamic(this, &UGraphicSettingManager::OnGraphicSettingChanged);
-
+	GraphicSettingComboBox->OnSelectionChanged.Clear();
+	
 }
 
 void UGraphicSettingManager::InitializeResolutionComboBox() {
@@ -90,7 +90,7 @@ void UGraphicSettingManager::OnVSyncChanged(bool InIsChecked) {
 	GameUserSettings->ApplySettings(false);
 }
 
-void UGraphicSettingManager::OnGraphicSettingChanged(int InSelectedItem, ESelectInfo::Type InSelectionType) {
+void UGraphicSettingManager::OnGraphicSettingChanged(FString InSelectedItem, ESelectInfo::Type InSelectionType) {
 	const auto SelectedGraphicSetting = GraphicSettings[GraphicSettingComboBox->GetSelectedIndex()];
 	GameUserSettings->SetOverallScalabilityLevel(SelectedGraphicSetting);
 	GameUserSettings->ApplySettings(false);

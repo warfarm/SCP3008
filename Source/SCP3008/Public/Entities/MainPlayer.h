@@ -122,6 +122,7 @@ protected:
 	UItemBase* CurrentItem;
 	
 	/* ----- INPUT RELATED ----- */
+	FInputActionBinding PlayerActionBinding;
 	void Move(const FInputActionValue& InputValue);
 	void Look(const FInputActionValue& InputValue);
 	void Jump();

@@ -4,6 +4,7 @@
 
 #include "CoreMinimal.h"
 #include "CommonActivatableWidget.h"
+#include "SNodePanel.h"
 #include "GraphicSettingManager.generated.h"
 
 
@@ -33,8 +34,8 @@ protected:
 	void OnVSyncChanged(bool InIsChecked);
 
 	UFUNCTION()
-	void OnGraphicSettingChanged(int InSelectedItem, ESelectInfo::Type InSelectionType);
-
+	void OnGraphicSettingChanged(FString InSelectedItem, ESelectInfo::Type InSelectionType);
+	
 	UPROPERTY()
 	TObjectPtr<UGameUserSettings> GameUserSettings;
 
