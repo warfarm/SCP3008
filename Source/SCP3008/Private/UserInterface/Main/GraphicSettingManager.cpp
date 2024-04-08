@@ -3,6 +3,7 @@
 #include "UserInterface/Main/GraphicSettingManager.h"
 #include "Components/CheckBox.h"
 #include "Components/ComboBoxString.h"
+#include "Components/Button.h"
 #include "GameFramework/GameUserSettings.h"
 #include "Kismet/KismetSystemLibrary.h"
 
@@ -12,6 +13,7 @@ void UGraphicSettingManager::NativeConstruct() {
 	InitializeResolutionComboBox();
 	InitializeVSync();
 	InitializeGraphicQuality();
+	ResetButton->OnClicked.AddDynamic(this, &UGraphicSettingManager::ResetSettings);
 }
 
 UWidget* UGraphicSettingManager::NativeGetDesiredFocusTarget() const {
@@ -94,4 +96,11 @@ void UGraphicSettingManager::OnGraphicSettingChanged(FString InSelectedItem, ESe
 	const auto SelectedGraphicSetting = GraphicSettings[GraphicSettingComboBox->GetSelectedIndex()];
 	GameUserSettings->SetOverallScalabilityLevel(SelectedGraphicSetting);
 	GameUserSettings->ApplySettings(false);
+}
+
+void UGraphicSettingManager::ResetSettings()
+{
+	GameUserSettings->ResetToCurrentSettings();
+	GameUserSettings->ApplySettings(false);
+	
 }

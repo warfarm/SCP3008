@@ -10,6 +10,7 @@
 
 class UComboBoxString;
 class UCheckBox;
+class UButton;
 /**
  * 
  */
@@ -35,6 +36,9 @@ protected:
 
 	UFUNCTION()
 	void OnGraphicSettingChanged(FString InSelectedItem, ESelectInfo::Type InSelectionType);
+
+	UFUNCTION()
+	void ResetSettings();
 	
 	UPROPERTY()
 	TObjectPtr<UGameUserSettings> GameUserSettings;
@@ -48,11 +52,16 @@ protected:
 	UPROPERTY(BlueprintReadOnly, meta = (BindWidget))
 	TObjectPtr<UComboBoxString> GraphicSettingComboBox;
 
+	UPROPERTY(BlueprintReadOnly, meta = (BindWidget))
+	TObjectPtr<UButton> ResetButton;
+
 	UPROPERTY()
 	TArray<FIntPoint> Resolutions;
 
 	UPROPERTY()
 	TArray<int> GraphicSettings;
+
+	
 
 
 };
