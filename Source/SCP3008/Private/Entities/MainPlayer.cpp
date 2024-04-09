@@ -156,18 +156,18 @@ void AMainPlayer::SetupPlayerInputComponent(UInputComponent* PlayerInputComponen
 	Super::SetupPlayerInputComponent(PlayerInputComponent);
 
 	// Setup enhanced input
-	auto InputSystem = GetInputSystem();
+	std::optional<UEnhancedInputLocalPlayerSubsystem*> InputSystem = GetInputSystem();
 	if (InputSystem.has_value())
 	{
 		InputSystem.value()->AddMappingContext(MainInputMapping, 0);
+		InputSystem.value()->AddMappingContext(InventoryInputMapping, 1);
 		// TODO! ADD CONTEXT MAPPING every time weapon is pulled out ????
-		InputSystem.value()->AddMappingContext(CombatInputMapping, 1);
+		InputSystem.value()->AddMappingContext(CombatInputMapping, 5);
 	}
 
 	// If PlayerInputComponent is an instance of EnhancedInputComponent
 	if (UEnhancedInputComponent* Input = CastChecked<UEnhancedInputComponent>(PlayerInputComponent))
 	{
-		//MoveAction = FInputActionBinding("MoveAction",)
 		
 		// Main action bindings
 		Input->BindAction(MoveAction, ETriggerEvent::Triggered, this, &AMainPlayer::Move);
@@ -318,7 +318,7 @@ void AMainPlayer::Build()
 			
 			TargetedBuildable->PickUp(this);
 			CurrentHeldBuildable = TargetedBuildable;
-			InputSystem.value()->AddMappingContext(BuildInputMapping, 1);
+			InputSystem.value()->AddMappingContext(BuildInputMapping, 5);
 			UE_LOG(LogTemp, Warning, TEXT("PICKED UP"));
 		}
 		// if not we dont need to do anything

@@ -65,6 +65,9 @@ protected:
 	
 	UPROPERTY(EditAnywhere, Category="Player | EnhancedInput")
 	UInputMappingContext* CombatInputMapping;
+
+	UPROPERTY(EditAnywhere, Category = "Player | EnhancedInput")
+	UInputMappingContext* InventoryInputMapping;
 	
 	UPROPERTY(EditAnywhere, Category="Player | EnhancedInput | MainActions")
 	class UInputAction* MoveAction;
@@ -122,7 +125,6 @@ protected:
 	UItemBase* CurrentItem;
 	
 	/* ----- INPUT RELATED ----- */
-	FInputActionBinding PlayerActionBinding;
 	void Move(const FInputActionValue& InputValue);
 	void Look(const FInputActionValue& InputValue);
 	void Jump();
