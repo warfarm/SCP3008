@@ -22,7 +22,8 @@ protected:
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category="Health")
 	float Health{ MaxHealth };
 
-	
+	UPROPERTY(EditAnywhere,BlueprintReadWrite, Category="Audio")
+	USoundBase* DamagedSound;
 	
 public:	
 	// Sets default values for this component's properties

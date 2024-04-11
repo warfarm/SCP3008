@@ -1,6 +1,6 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
-
+#include "Kismet/GameplayStatics.h"
 #include "Entities/HealthComponent.h"
 
 // Sets default values for this component's properties
@@ -34,6 +34,7 @@ void UHealthComponent::TickComponent(float DeltaTime, ELevelTick TickType, FActo
 
 bool UHealthComponent::TakeDamage(float DamageAmount)
 {
+	UGameplayStatics::PlaySoundAtLocation(this, DamagedSound, GetOwner()->GetActorLocation());
 	return false;
 }
 

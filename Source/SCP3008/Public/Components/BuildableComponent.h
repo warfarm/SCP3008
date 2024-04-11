@@ -24,7 +24,9 @@ protected:
 	
 	AMainPlayer* HoldingPlayer;
 	UStaticMeshComponent* StaticMesh;
-	
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Audio")
+	USoundBase* SoundToPlay;
 	/* ----- ENGINE OVERRIDES ----- */
 	// Called when the game starts
 	virtual void BeginPlay() override;

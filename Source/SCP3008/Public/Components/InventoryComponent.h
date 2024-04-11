@@ -114,6 +114,9 @@ protected:
 
 	UPROPERTY(VisibleAnywhere, Category = "Inventory")
 	TArray<TObjectPtr<UItemBase>> InventoryContents;
+
+	UPROPERTY(EditAnywhere,BlueprintReadWrite,Category="Audio")
+	USoundBase* PickUpSound;
 	
 	// Called when the game starts
 	virtual void BeginPlay() override;

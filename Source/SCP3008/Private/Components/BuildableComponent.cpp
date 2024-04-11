@@ -2,7 +2,7 @@
 
 
 #include "Components/BuildableComponent.h"
-
+#include "Kismet/GameplayStatics.h"
 #include "Entities/MainPlayer.h"
 
 // Sets default values for this component's properties
@@ -32,6 +32,7 @@ void UBuildableComponent::PickUp(AMainPlayer* TargetPlayer)
 
 	StaticMesh->SetSimulatePhysics(false);
 	GetOwner()->SetActorEnableCollision(false);
+	UGameplayStatics::PlaySoundAtLocation(this, SoundToPlay, GetOwner()->GetActorLocation());
 }
 
 void UBuildableComponent::PlaceDown()
@@ -47,6 +48,7 @@ void UBuildableComponent::PlaceDown()
 	// TODO! do more checks if in wall etc etc
 	StaticMesh->SetSimulatePhysics(true);
 	GetOwner()->SetActorEnableCollision(true);
+	UGameplayStatics::PlaySoundAtLocation(this, SoundToPlay, GetOwner()->GetActorLocation());
 }
 
 // TODO! trigger w scrolling while in build mode

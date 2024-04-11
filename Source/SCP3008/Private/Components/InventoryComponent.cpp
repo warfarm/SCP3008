@@ -2,7 +2,7 @@
 
 
 #include "Components/InventoryComponent.h"
-
+#include "Kismet/GameplayStatics.h"
 #include "Items/ItemBase.h"
 
 // Sets default values for this component's properties
@@ -147,4 +147,5 @@ void UInventoryComponent::AddNewItem(UItemBase* Item)
 	InventoryContents.Add(NewItem);
 	InventoryTotalWeight += NewItem->GetItemWeight();
 	OnInventoryUpdate.Broadcast();
+	UGameplayStatics::PlaySoundAtLocation(this, PickUpSound,GetOwner()->GetActorLocation());
 }
