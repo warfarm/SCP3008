@@ -6,11 +6,11 @@
 #include "Blueprint/UserWidget.h"
 #include "HotBarPanel.generated.h"
 
+class UGridPanel;
 class UTextBlock;
 class UInventoryItemSlot;
 class UInventoryComponent;
 class AMainPlayer;
-class UWrapBox;
 /**
  * 
  */
@@ -23,7 +23,7 @@ public:
 	void RefreshHotBar();
 
 	UPROPERTY(meta=(BindWidget))
-	UWrapBox* HotBarPanel;
+	UGridPanel* HotBarPanel;
 
 	UPROPERTY(meta=(BindWidget))
 	UTextBlock* HotBarWeightInfo;

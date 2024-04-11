@@ -7,7 +7,7 @@
 #include "Entities/MainPlayer.h"
 
 #include "Components/TextBlock.h"
-#include "Components/WrapBox.h"
+#include "Components/GridPanel.h"
 #include "Items/ItemBase.h"
 #include "UserInterface/Inventory/ItemDragDropOperation.h"
 
@@ -21,7 +21,7 @@ void UHotBarPanel::RefreshHotBar()
 			UInventoryItemSlot* ItemSlot = CreateWidget<UInventoryItemSlot>(this, HotBarSlotClass);
 			ItemSlot->SetItemReference(InventoryItem);
 
-			HotBarPanel->AddChildToWrapBox(ItemSlot);
+			//HotBarPanel->AddChildToWrapBox(ItemSlot);
 		}
 		SetInfoText();
 	}

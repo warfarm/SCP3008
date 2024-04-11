@@ -41,6 +41,7 @@ AMainPlayer::AMainPlayer()
 	PlayerInventory->SetWeightCapacity(DefaultWeightCapacity);
 
 	PlayerHotBar = CreateDefaultSubobject<UInventoryComponent>(TEXT("PlayerHotBar"));
+	PlayerHotBar->ReserveArraySlots(5);
 	PlayerHotBar->SetSlotsCapacity(DefaultHotBarCapacity);
 	PlayerHotBar->SetWeightCapacity(DefaultHotBarWeightCapacity);
 
@@ -184,11 +185,11 @@ void AMainPlayer::SetupPlayerInputComponent(UInputComponent* PlayerInputComponen
 		Input->BindAction(InteractAction, ETriggerEvent::Completed, this, &AMainPlayer::EndInteract);
 
 		// HotBar BindActions | (HotBarSlot[SLOT INDEX NUMBER], ETriggerEvent::Triggered, this, ReturnHotBarSlot, Parameter[SLOT INDEX NUMBER]);
-		Input->BindAction(HotBarSlot1, ETriggerEvent::Triggered, this, &AMainPlayer::ReturnHotBarSlot, 1);
-		Input->BindAction(HotBarSlot2, ETriggerEvent::Triggered, this, &AMainPlayer::ReturnHotBarSlot, 2);
-		Input->BindAction(HotBarSlot3, ETriggerEvent::Triggered, this, &AMainPlayer::ReturnHotBarSlot, 3);
-		Input->BindAction(HotBarSlot4, ETriggerEvent::Triggered, this, &AMainPlayer::ReturnHotBarSlot, 4);
-		Input->BindAction(HotBarSlot5, ETriggerEvent::Triggered, this, &AMainPlayer::ReturnHotBarSlot, 5);
+		Input->BindAction(HotBarSlot1Select, ETriggerEvent::Triggered, this, &AMainPlayer::ReturnHotBarSlot, 1);
+		Input->BindAction(HotBarSlot2Select, ETriggerEvent::Triggered, this, &AMainPlayer::ReturnHotBarSlot, 2);
+		Input->BindAction(HotBarSlot3Select, ETriggerEvent::Triggered, this, &AMainPlayer::ReturnHotBarSlot, 3);
+		Input->BindAction(HotBarSlot4Select, ETriggerEvent::Triggered, this, &AMainPlayer::ReturnHotBarSlot, 4);
+		Input->BindAction(HotBarSlot5Select, ETriggerEvent::Triggered, this, &AMainPlayer::ReturnHotBarSlot, 5);
 		
 		Input->BindAction(BuildAction, ETriggerEvent::Started, this, &AMainPlayer::Build);
 

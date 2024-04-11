@@ -149,3 +149,27 @@ void UInventoryComponent::AddNewItem(UItemBase* Item)
 	OnInventoryUpdate.Broadcast();
 	UGameplayStatics::PlaySoundAtLocation(this, PickUpSound,GetOwner()->GetActorLocation());
 }
+
+void UInventoryComponent::InsertNewItem(UItemBase* Item, int32 Index)
+{
+	UItemBase* NewItem{};
+
+	//Pointer!!!
+	if(Item->bIsCopy || Item->bIsPickUp)
+	{
+		//Check If Item is already Copy or Pickup Actor
+		NewItem = Item;
+		NewItem->ResetItemFlags();
+	}
+	else
+	{
+		NewItem = Item->CreateItemCopy();
+	}
+
+	NewItem->OwnedInventory = this;
+
+	InventoryContents.Insert(NewItem, Index);
+	InventoryTotalWeight += NewItem->GetItemWeight();
+	OnInventoryUpdate.Broadcast();
+	UGameplayStatics::PlaySoundAtLocation(this, PickUpSound,GetOwner()->GetActorLocation());
+}

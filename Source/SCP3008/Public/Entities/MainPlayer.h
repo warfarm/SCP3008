@@ -106,19 +106,19 @@ protected:
 
 	// HotBar Slot
 	UPROPERTY(EditAnywhere, Category="Player | EnhancedInput | HotbarSlot")
-	UInputAction* HotBarSlot1;
+	UInputAction* HotBarSlot1Select;
 
 	UPROPERTY(EditAnywhere, Category="Player | EnhancedInput | HotbarSlot")
-	UInputAction* HotBarSlot2;
+	UInputAction* HotBarSlot2Select;
 	
 	UPROPERTY(EditAnywhere, Category="Player | EnhancedInput | HotbarSlot")
-	UInputAction* HotBarSlot3;
+	UInputAction* HotBarSlot3Select;
 	
 	UPROPERTY(EditAnywhere, Category="Player | EnhancedInput | HotbarSlot")
-	UInputAction* HotBarSlot4;
+	UInputAction* HotBarSlot4Select;
 	
 	UPROPERTY(EditAnywhere, Category="Player | EnhancedInput | HotbarSlot")
-	UInputAction* HotBarSlot5;
+	UInputAction* HotBarSlot5Select;
 
 	// HOTBAR FUNCTIONALITY
 	UPROPERTY(VisibleAnywhere, Category = "Player | HotBar")

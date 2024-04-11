@@ -102,6 +102,8 @@ public:
 	FORCEINLINE void SetSlotsCapacity(const int32 NewSlotsCapacity) {InventorySlotsCapacity = NewSlotsCapacity;}
 	UFUNCTION(Category = "Inventory")
 	FORCEINLINE void SetWeightCapacity(const float NewWeightCapacity) {InventoryWeightCapacity = NewWeightCapacity;}
+
+	FORCEINLINE void ReserveArraySlots(const int32 SlotsToReserve){InventoryContents.Reserve(SlotsToReserve);}
 	
 protected:
 
@@ -124,5 +126,6 @@ protected:
 	int32 CalculateWeightAddAmount(UItemBase* ItemIn, int32 RequestedAddAmount);
 
 	void AddNewItem(UItemBase* Item);
+	void InsertNewItem(UItemBase* Item, int32 Index);
 	
 };
