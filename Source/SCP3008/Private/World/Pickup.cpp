@@ -144,5 +144,6 @@ void APickup::InitializeDrop(UItemBase* ItemToDrop)
 
 void APickup::ServerDestroy_Implementation()
 {
+	
 	Destroy();
 }
