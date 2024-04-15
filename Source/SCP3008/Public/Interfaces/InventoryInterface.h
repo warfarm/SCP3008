@@ -14,11 +14,10 @@ struct FInventoryData
 {
 	GENERATED_BODY()
 	
-	FInventoryData(int32 SlotCapacity, int WeightCapacity, std::optional<int32> SlotsToReserve) :
+	FInventoryData(int32 SlotCapacity, int WeightCapacity, const std::optional<int32> SlotsToReserve) :
 		InventoryTotalWeight(0),
 		InventorySlotsCapacity(SlotCapacity),
 		InventoryWeightCapacity(WeightCapacity)
-	
 	{
 		InventoryContents.Reserve(SlotsToReserve.value_or(0));
 	};
@@ -93,11 +92,7 @@ public:
 	
 protected:
 	FInventoryData InventoryData;
-	void AddNewItem(UItemBase* Item);
+	virtual void AddNewItem(UItemBase* Item);
 	
-
-
-
-
 	int32 CalculateWeightAddAmount(UItemBase* ItemIn, int32 RequestedAddAmount);
 };
