@@ -13,15 +13,20 @@ USTRUCT(Blueprintable)
 struct FInventoryData
 {
 	GENERATED_BODY()
+
+	FInventoryData() :
+		InventoryTotalWeight(0),
+		InventorySlotsCapacity(0),
+		InventoryWeightCapacity(0){
+	};
 	
-	FInventoryData(int32 SlotCapacity, int WeightCapacity, const std::optional<int32> SlotsToReserve) :
+	FInventoryData(const int32 SlotCapacity, const int WeightCapacity, const std::optional<int32> SlotsToReserve) :
 		InventoryTotalWeight(0),
 		InventorySlotsCapacity(SlotCapacity),
 		InventoryWeightCapacity(WeightCapacity)
 	{
 		InventoryContents.Reserve(SlotsToReserve.value_or(0));
 	};
-	
 	
 	UPROPERTY(VisibleAnywhere, Category = "Inventory")
 	float InventoryTotalWeight;
@@ -34,7 +39,7 @@ struct FInventoryData
 	TArray<TObjectPtr<UItemBase>> InventoryContents;
 
 	UPROPERTY(EditAnywhere,BlueprintReadWrite,Category="Audio")
-	USoundBase* PickUpSound;
+	USoundBase* PickUpSound = nullptr;
 	
 };
 class UInventoryComponent;
@@ -43,10 +48,9 @@ UINTERFACE(MinimalAPI)
 class UInventoryInterface : public UInterface
 {
 	
-	GENERATED_BODY()	
+	GENERATED_BODY()
 	// very important! (delete this)
 	void VeryImportantFunction();
-
 	
 };
 
