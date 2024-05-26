@@ -1,0 +1,14 @@
+{
+	"Targets": [
+		{
+			"Name": "SCP3008",
+			"Path": "..\\Source\\SCP3008.Target.cs",
+			"Type": "Game"
+		},
+		{
+			"Name": "SCP3008Editor",
+			"Path": "..\\Source\\SCP3008Editor.Target.cs",
+			"Type": "Editor"
+		}
+	]
+}
