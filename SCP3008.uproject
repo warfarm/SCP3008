@@ -1,18 +1,13 @@
 {
 	"FileVersion": 3,
-	"EngineAssociation": "5.3",
+	"EngineAssociation": "5.4",
 	"Category": "",
 	"Description": "",
 	"Modules": [
 		{
 			"Name": "SCP3008",
 			"Type": "Runtime",
-			"LoadingPhase": "Default",
-			"AdditionalDependencies": [
-				"Engine",
-				"UMG",
-				"CommonUI"
-			]
+			"LoadingPhase": "Default"
 		}
 	],
 	"Plugins": [
@@ -22,26 +17,6 @@
 			"TargetAllowList": [
 				"Editor"
 			]
-		},
-		{
-			"Name": "MultiUserClient",
-			"Enabled": true
-		},
-		{
-			"Name": "Water",
-			"Enabled": true
-		},
-		{
-			"Name": "Iris",
-			"Enabled": true
-		},
-		{
-			"Name": "VivoxCore",
-			"Enabled": true
-		},
-		{
-			"Name": "CommonUI",
-			"Enabled": true
 		}
 	]
 }
