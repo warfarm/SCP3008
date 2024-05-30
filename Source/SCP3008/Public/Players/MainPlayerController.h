@@ -18,6 +18,9 @@ UCLASS(Abstract)
 class SCP3008_API AMainPlayerController : public APlayerController
 {
 protected:
+	//Multipliers
+	float SprintMultiplier = 2.0f;
+	
 	//Native On Pawn posses and unPosses functions
 	virtual void OnPossess(APawn* APawn) override;
 	virtual void OnUnPossess() override;
@@ -26,6 +29,8 @@ protected:
 	void HandleLook(const FInputActionValue& InputActionValue);
 	void HandleMove(const FInputActionValue& InputActionValue);
 	void HandleJump();
+	void HandleCrouch();
+	void HandleSprint();
 
 public:
 	//Declare InputActions to be set later in Blueprint
@@ -38,6 +43,12 @@ public:
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category="Player Input|Character Movement")
 	UInputAction* ActionJump = nullptr;
 
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category="Player Input|Character Movement")
+	UInputAction* ActionCrouch = nullptr;
+
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category="Player Input|Character Movement")
+	UInputAction* ActionSprint = nullptr;
+	
 	//Reference for InputMappingContexts
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category="Player Input|Character Movement")
 	TObjectPtr<UInputMappingContext> InputMappingContent = nullptr;

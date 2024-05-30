@@ -42,6 +42,14 @@ void AMainPlayerController::OnPossess(APawn* APawn)
 	{
 		EnhancedInputComponent->BindAction(ActionJump, ETriggerEvent::Triggered, this, &AMainPlayerController::HandleJump);
 	}
+	if(ActionCrouch)
+	{
+		EnhancedInputComponent->BindAction(ActionCrouch, ETriggerEvent::Triggered, this, &AMainPlayerController::HandleCrouch);
+	}
+	if(ActionSprint)
+	{
+		EnhancedInputComponent->BindAction(ActionSprint, ETriggerEvent::Triggered, this, &AMainPlayerController::HandleSprint);
+	}
 }
 
 void AMainPlayerController::OnUnPossess()
@@ -64,19 +72,30 @@ void AMainPlayerController::HandleLook(const FInputActionValue& InputActionValue
 void AMainPlayerController::HandleMove(const FInputActionValue& InputActionValue)
 {
 	const FVector2D MovementVector = InputActionValue.Get<FVector2D>();
-
-	if(PlayerCharacter)
-	{
-		PlayerCharacter->AddMovementInput(PlayerCharacter->GetActorForwardVector(), MovementVector.Y);
-		PlayerCharacter->AddMovementInput(PlayerCharacter->GetActorRightVector(), MovementVector.X);
-	}
+	
+	PlayerCharacter->AddMovementInput(PlayerCharacter->GetActorForwardVector(), MovementVector.Y);
+	PlayerCharacter->AddMovementInput(PlayerCharacter->GetActorRightVector(), MovementVector.X);
 }
 
 void AMainPlayerController::HandleJump()
 {
-	if(PlayerCharacter)
+	PlayerCharacter->UnCrouch();
+	PlayerCharacter->Jump();
+}
+
+void AMainPlayerController::HandleCrouch()
+{
+	if(PlayerCharacter->bIsCrouched)
 	{
 		PlayerCharacter->UnCrouch();
-		PlayerCharacter->Jump();
 	}
+	else
+	{
+		PlayerCharacter->Crouch();
+	}
+}
+
+void AMainPlayerController::HandleSprint()
+{
+	PlayerCharacter->ToggleRunning();
 }
