@@ -30,9 +30,10 @@ AMainCharacter::AMainCharacter()
 void AMainCharacter::BeginPlay()
 {
 	Super::BeginPlay();
-	if(ACharacter::GetMovementComponent())
+	if(GetMovementComponent())
 	{
-		ACharacter::GetMovementComponent()->GetNavAgentPropertiesRef().bCanCrouch = true;
+		GetCharacterMovement()->MaxWalkSpeed = bIsRunning ? RunningMaxSpeed : NormalWalkSpeed;
+		GetMovementComponent()->GetNavAgentPropertiesRef().bCanCrouch = true;
 	}
 }
 
