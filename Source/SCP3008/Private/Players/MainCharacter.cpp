@@ -32,11 +32,14 @@ void AMainCharacter::BeginPlay()
 	Super::BeginPlay();
 	if(GetMovementComponent())
 	{
+		//Check if Player is Running or Walking and sets Speed
 		GetCharacterMovement()->MaxWalkSpeed = bIsRunning ? RunningMaxSpeed : NormalWalkSpeed;
+		//Enables Crouching
 		GetMovementComponent()->GetNavAgentPropertiesRef().bCanCrouch = true;
 	}
 }
 
+//Overriding native basic movement
 void AMainCharacter::AddMovementInput(FVector WorldDirection, float ScaleValue, bool bForce)
 {
 
@@ -53,6 +56,7 @@ void AMainCharacter::AddMovementInput(FVector WorldDirection, float ScaleValue, 
 	}
 }
 
+//Overriding native basic jumping
 void AMainCharacter::Jump()
 {
 	UnCrouch();
@@ -60,12 +64,14 @@ void AMainCharacter::Jump()
 	bHasJumped = true;
 }
 
+//Overriding native basic crouching
 void AMainCharacter::Crouch(bool bClientSimulation)
 {
 	SetRunning(false);
 	Super::Crouch(bClientSimulation);
 }
 
+//Setting Run Speed (Helper Function)
 void AMainCharacter::SetRunning(bool IsRunning)
 {
 	bIsRunning = IsRunning;
@@ -73,31 +79,37 @@ void AMainCharacter::SetRunning(bool IsRunning)
 	GetCharacterMovement()->MaxWalkSpeed = bIsRunning ? RunningMaxSpeed : NormalWalkSpeed;
 }
 
+//Toggling Running
 void AMainCharacter::ToggleRunning()
 {
 	SetRunning(!bIsRunning);
 }
 
+//Setting if Player has just Jumped
 void AMainCharacter::SetHasJumped(bool HasJumped)
 {
 	bHasJumped = HasJumped;
 }
 
+//Setting if Player has just Ran
 void AMainCharacter::SetHasRan(bool HasRan)
 {
 	bHasRan = HasRan;
 }
 
+//Health Getter Function
 int AMainCharacter::GetHealth()
 {
 	return CurrentHealth;
 }
 
+//Max Health Getter Function
 int AMainCharacter::GetMaxHealth()
 {
 	return MaxHealth;
 }
 
+//Update Health Delegate Function
 void AMainCharacter::UpdateHealth(int DeltaHealth)
 {
 	//Check if player is alive
@@ -125,6 +137,7 @@ void AMainCharacter::UpdateHealth(int DeltaHealth)
 	}
 }
 
+//Setter Function for Max Health, as well as updating health appropriately
 void AMainCharacter::SetMaxHealth(int NewMaxHealth)
 {
 	int OldValue = MaxHealth;
@@ -144,16 +157,19 @@ void AMainCharacter::SetMaxHealth(int NewMaxHealth)
 	}
 }
 
+//Getter Function for Stamina
 float AMainCharacter::GetStamina()
 {
 	return CurrentStamina;
 }
 
+//Getter Function for Stamina Regeneration Factor
 float AMainCharacter::GetStaminaRegenerationFactor()
 {
 	return StaminaRegenFactor;
 }
 
+//Setter Function for new Stamina Regeneration Factor
 void AMainCharacter::SetStaminaRegenerationFactor(float NewRegenerationFactor)
 {
 	StaminaRegenFactor = NewRegenerationFactor;
@@ -171,6 +187,10 @@ void AMainCharacter::Tick(float DeltaTime)
 	if (bIsCrouched)
 	{
 		RealStaminaRegenerationFactor=RestStaminaFactor;
+	}
+	else if(bIsRunning && GetVelocity().Size() > 0)
+	{
+		RealStaminaRegenerationFactor = -RunStaminaCost;
 	}
 
 	const float PreviousStamina = CurrentStamina;

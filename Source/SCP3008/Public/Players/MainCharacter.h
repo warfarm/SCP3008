@@ -120,7 +120,7 @@ private:
 	//Stamina
 	static constexpr float MaxStamina = 100.0f;
 	static constexpr float RunStaminaCost = 4.0f;
-	static constexpr float RestStaminaFactor = 5.0f;
+	static constexpr float RestStaminaFactor = 3.0f;
+	float StaminaRegenFactor = 2.0f;
 	float CurrentStamina = MaxStamina;
-	float StaminaRegenFactor = 1.0f;
 };
