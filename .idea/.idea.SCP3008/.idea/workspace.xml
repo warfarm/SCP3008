@@ -12,7 +12,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="f1187944-df0f-470c-9802-a18cb423a966" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.SCP3008/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.SCP3008/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Inputs/DefaultMap.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Inputs/DefaultMap.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SCP3008.uproject" beforeDir="false" afterPath="$PROJECT_DIR$/SCP3008.uproject" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Source/SCP3008/Private/UserInterface/PlayerHUD.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/SCP3008/Private/UserInterface/PlayerHUD.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Source/SCP3008/Public/UserInterface/PlayerHUD.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/SCP3008/Public/UserInterface/PlayerHUD.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Source/SCP3008/SCP3008.Build.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Source/SCP3008/SCP3008.Build.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -38,30 +43,30 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "C++ Project.SCP3008.executor": "Run",
-    "C++ Project.UE5.executor": "Run",
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "git-widget-placeholder": "main",
-    "ignore.virus.scanning.warn.message": "true",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "settings.editor.selected.configurable": "project.propVCSSupport.DirectoryMappings",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;C++ Project.SCP3008.executor&quot;: &quot;Run&quot;,
+    &quot;C++ Project.UE5.executor&quot;: &quot;Run&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;project.propVCSSupport.DirectoryMappings&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   },
-  "keyToStringList": {
-    "rider.external.source.directories": [
-      "C:\\Users\\warfarm\\AppData\\Roaming\\JetBrains\\Rider2023.3\\resharper-host\\DecompilerCache",
-      "C:\\Users\\warfarm\\AppData\\Roaming\\JetBrains\\Rider2023.3\\resharper-host\\SourcesCache",
-      "C:\\Users\\warfarm\\AppData\\Local\\Symbols\\src"
+  &quot;keyToStringList&quot;: {
+    &quot;rider.external.source.directories&quot;: [
+      &quot;C:\\Users\\warfarm\\AppData\\Roaming\\JetBrains\\Rider2023.3\\resharper-host\\DecompilerCache&quot;,
+      &quot;C:\\Users\\warfarm\\AppData\\Roaming\\JetBrains\\Rider2023.3\\resharper-host\\SourcesCache&quot;,
+      &quot;C:\\Users\\warfarm\\AppData\\Local\\Symbols\\src&quot;
     ]
   }
-}]]></component>
+}</component>
   <component name="RunManager" selected="C++ Project.SCP3008">
     <configuration name="SCP3008" type="CppProject" factoryName="C++ Project">
       <configuration_1>
@@ -473,7 +478,11 @@
       <workItem from="1717029357868" duration="2732000" />
       <workItem from="1717079591823" duration="2064000" />
       <workItem from="1717090966975" duration="3720000" />
-      <workItem from="1717108361609" duration="3297000" />
+      <workItem from="1717108361609" duration="4508000" />
+      <workItem from="1717194187358" duration="605000" />
+      <workItem from="1717242966850" duration="601000" />
+      <workItem from="1717264102714" duration="5074000" />
+      <workItem from="1717277009206" duration="5448000" />
     </task>
     <servers />
   </component>
