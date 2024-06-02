@@ -12,9 +12,14 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="f1187944-df0f-470c-9802-a18cb423a966" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/Content/Blueprints/BP_PlayerHUD.uasset" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Content/Blueprints/UI/BP_BasicLayoutBase.uasset" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Content/Blueprints/UI/BP_MaximumLayoutBase.uasset" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Content/Blueprints/UI/BP_MinimalLayoutBase.uasset" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.SCP3008/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.SCP3008/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/SCP3008/Private/Players/MainCharacter.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/SCP3008/Private/Players/MainCharacter.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/SCP3008/Public/Players/MainCharacter.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/SCP3008/Public/Players/MainCharacter.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Blueprints/PlayerMode.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Blueprints/PlayerMode.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Blueprints/UI/BP_StatusBarBase.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Blueprints/UI/BP_StatusBarBase.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Blueprints/UI/BP_StatusHUDBase.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Blueprints/UI/BP_StatusHUDBase.uasset" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -479,7 +484,7 @@
       <workItem from="1717194187358" duration="605000" />
       <workItem from="1717242966850" duration="601000" />
       <workItem from="1717264102714" duration="5074000" />
-      <workItem from="1717277009206" duration="14403000" />
+      <workItem from="1717277009206" duration="16391000" />
     </task>
     <servers />
   </component>
