@@ -30,6 +30,7 @@ AMainCharacter::AMainCharacter()
 void AMainCharacter::BeginPlay()
 {
 	Super::BeginPlay();
+	GetWorldTimerManager().SetTimer(ResourceTimerHandle, this, &AMainCharacter::ResourceManagement,ResourceTickInterval, true, ResourceTickInterval);
 	if(GetMovementComponent())
 	{
 		//Check if Player is Running or Walking and sets Speed
@@ -95,6 +96,14 @@ void AMainCharacter::SetHasJumped(bool HasJumped)
 void AMainCharacter::SetHasRan(bool HasRan)
 {
 	bHasRan = HasRan;
+}
+
+void AMainCharacter::BroadcastCurrentStats()
+{
+	OnHealthChanged.Broadcast(CurrentHealth, CurrentHealth, MaxHealth);
+	OnStaminaChanged.Broadcast(CurrentStamina, CurrentStamina, MaxStamina);
+	OnHungerChanged.Broadcast(CurrentHunger, CurrentHunger, MaxStamina);
+	OnThirstChanged.Broadcast(CurrentThirst, CurrentThirst, MaxThirst);
 }
 
 //Health Getter Function
@@ -174,7 +183,109 @@ void AMainCharacter::SetStaminaRegenerationFactor(float NewRegenerationFactor)
 {
 	StaminaRegenFactor = NewRegenerationFactor;
 }
+#pragma region Resource
 
+	int AMainCharacter::GetHunger()
+	{
+		return CurrentHunger;
+	}
+
+	int AMainCharacter::GetMaxHunger()
+	{
+		return MaxHunger;
+	}
+
+	int AMainCharacter::GetThirst()
+	{
+		return CurrentThirst;
+	}
+
+	int AMainCharacter::GetMaxThirst()
+	{
+		return MaxThirst;
+	}
+
+	void AMainCharacter::SetMaxHunger(int NewMaxHunger)
+	{
+		int OldHunger = MaxHunger;
+
+		MaxHunger = NewMaxHunger;
+
+		if(MaxHunger != OldHunger)
+		{
+			if(MaxHunger<OldHunger)
+			{
+				if (CurrentHunger > MaxHunger)
+				{
+				CurrentHunger = MaxHunger;
+				}
+			}
+			OnHungerChanged.Broadcast(OldHunger, CurrentHunger, MaxHunger);
+		}
+	}
+
+	void AMainCharacter::SetMaxThirst(int NewMaxThirst)
+	{
+		int OldThirst = MaxThirst;
+
+		MaxThirst = NewMaxThirst;
+
+		if(MaxThirst != OldThirst)
+		{
+			if(MaxThirst<OldThirst)
+			{
+				if(CurrentThirst>MaxThirst)
+				{
+					CurrentThirst = MaxThirst;
+				}
+			}
+			OnThirstChanged.Broadcast(OldThirst, CurrentThirst, MaxThirst);
+		}
+	}
+
+	void AMainCharacter::UpdateHunger(int DeltaHunger)
+	{
+		int OldHunger = CurrentHunger;
+
+		CurrentHunger += DeltaHunger;
+		FMath::Clamp(CurrentHunger, -1.0f, MaxHunger);
+
+		if(CurrentHunger != OldHunger)
+		{
+			OnHungerChanged.Broadcast(OldHunger, CurrentHunger, MaxHunger);
+		}
+	}
+
+	void AMainCharacter::UpdateThirst(int DeltaThirst)
+	{
+		int OldThirst = CurrentThirst;
+
+		CurrentThirst += DeltaThirst;
+		FMath::Clamp(CurrentThirst, -1.0f, MaxThirst);
+
+		if(CurrentThirst != OldThirst)
+		{
+			OnThirstChanged.Broadcast(OldThirst, CurrentThirst, MaxThirst);
+		}
+	}
+
+	void AMainCharacter::ResourceManagement()
+	{
+		const int OldHunger = CurrentHunger;
+		const int OldThirst = CurrentThirst;
+		CurrentHunger = FMath::Clamp(CurrentHunger - HungerCost, 0, MaxHunger);
+		CurrentThirst = FMath::Clamp(CurrentThirst - ThirstCost, 0, MaxThirst);
+
+		if(CurrentHunger != OldHunger)
+		{
+			OnHungerChanged.Broadcast(OldHunger, CurrentHunger, MaxHunger);
+		}
+		if(CurrentThirst != OldThirst)
+		{
+			OnThirstChanged.Broadcast(OldThirst, CurrentThirst, MaxThirst);
+		}
+	}
+#pragma endregion
 // Called every frame
 void AMainCharacter::Tick(float DeltaTime)
 {
@@ -215,6 +326,10 @@ void AMainCharacter::Tick(float DeltaTime)
 		*(FString::Printf(TEXT("Health: CurrentHealth[%d] | MaxHealth[%d]"), GetHealth(), GetMaxHealth())));
 	GEngine->AddOnScreenDebugMessage(-1, 0.49f, FColor::Green,
 		*(FString::Printf(TEXT("Stamina: CurrentStam[%f] | MaxStam[%f]"), GetStamina(), MaxStamina)));
+	GEngine->AddOnScreenDebugMessage(-1, 0.49f, FColor::Orange,
+		*(FString::Printf(TEXT("Hunger: CurrentHunger[%d] | MaxHunger[%d]"), GetHunger(), MaxHunger)));
+	GEngine->AddOnScreenDebugMessage(-1, 0.49f, FColor::Magenta,
+		*(FString::Printf(TEXT("Thirst: CurrentThirst[%d] | MaxThirst[%d]"), CurrentThirst, MaxThirst)));
 	
 #endif
 }

@@ -13,11 +13,15 @@
   <component name="ChangeListManager">
     <list default="true" id="f1187944-df0f-470c-9802-a18cb423a966" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.SCP3008/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.SCP3008/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Inputs/DefaultMap.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Inputs/DefaultMap.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SCP3008.uproject" beforeDir="false" afterPath="$PROJECT_DIR$/SCP3008.uproject" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Source/SCP3008/Private/Players/MainCharacter.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/SCP3008/Private/Players/MainCharacter.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Source/SCP3008/Private/UserInterface/PlayerHUD.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/SCP3008/Private/UserInterface/PlayerHUD.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Source/SCP3008/Public/Players/MainCharacter.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/SCP3008/Public/Players/MainCharacter.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Source/SCP3008/Public/UserInterface/BasicLayoutBase.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/SCP3008/Public/UserInterface/BasicLayoutBase.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Source/SCP3008/Public/UserInterface/MaximumLayoutBase.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/SCP3008/Public/UserInterface/MaximumLayoutBase.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Source/SCP3008/Public/UserInterface/MinimalLayoutBase.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/SCP3008/Public/UserInterface/MinimalLayoutBase.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Source/SCP3008/Public/UserInterface/PlayerHUD.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/SCP3008/Public/UserInterface/PlayerHUD.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/SCP3008/SCP3008.Build.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Source/SCP3008/SCP3008.Build.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Source/SCP3008/Public/UserInterface/StatusBarBase.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/SCP3008/Public/UserInterface/StatusBarBase.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Source/SCP3008/Public/UserInterface/StatusHUDBase.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/SCP3008/Public/UserInterface/StatusHUDBase.h" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -482,7 +486,7 @@
       <workItem from="1717194187358" duration="605000" />
       <workItem from="1717242966850" duration="601000" />
       <workItem from="1717264102714" duration="5074000" />
-      <workItem from="1717277009206" duration="5448000" />
+      <workItem from="1717277009206" duration="13724000" />
     </task>
     <servers />
   </component>

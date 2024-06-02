@@ -58,6 +58,9 @@ public:
 
 	UFUNCTION(BlueprintCallable, Category="Player|Movement")
 	void SetHasRan(bool HasRan);
+
+	UFUNCTION(BlueprintCallable, Category="Player|Stats")
+	void BroadcastCurrentStats();
 	
 #pragma region Health
 
@@ -96,11 +99,52 @@ public:
 	FFloatStatUpdated OnStaminaChanged;
 	
 #pragma endregion
+
+#pragma region Resource
+
+	UFUNCTION(BlueprintPure, Category="Player|Resource")
+	int GetHunger();
+
+	UFUNCTION(BlueprintPure, Category="Player|Resource")
+	int GetMaxHunger();
+	
+	UFUNCTION(BlueprintPure, Category="Player|Resource")
+	int GetThirst();
+
+	UFUNCTION(BlueprintPure, Category="Player|Resource")
+	int GetMaxThirst();
+
+	UFUNCTION(BlueprintCallable, Category="Player|Resource")
+	void SetMaxHunger(int NewMaxHunger);
+
+	UFUNCTION(BlueprintCallable, Category="Player|Resource")
+	void SetMaxThirst(int NewMaxThirst);
+	
+	UFUNCTION(BlueprintCallable, Category="Player|Resource")
+	void UpdateHunger(int DeltaHunger);
+
+	UFUNCTION(BlueprintCallable, Category="Player|Resource")
+	void UpdateThirst(int DeltaThirst);
+
+	UFUNCTION(BlueprintCallable, Category="Player|Resource")
+	void ResourceManagement();
+	
+	UPROPERTY(BlueprintAssignable, Category="Player|Resource")
+	FIntStatUpdated OnHungerChanged;
+
+	UPROPERTY(BlueprintAssignable, Category="Player|Resource")
+	FIntStatUpdated OnThirstChanged;
+	
+#pragma endregion
 	
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
 
 	virtual void SetupPlayerInputComponent(UInputComponent* PlayerInputComponent) override;
+
+	int ResourceTickInterval = 5;
+	
+	FTimerHandle ResourceTimerHandle;
 	
 private:
 	//Is Player Running?
@@ -123,4 +167,17 @@ private:
 	static constexpr float RestStaminaFactor = 3.0f;
 	float StaminaRegenFactor = 2.0f;
 	float CurrentStamina = MaxStamina;
+	
+	//Hunger
+	static constexpr int BaseHungerValue = 100;
+	static constexpr int HungerCost = 1;
+	int MaxHunger = BaseHungerValue;
+	int CurrentHunger = BaseHungerValue;
+
+	//Thirst
+	static constexpr int BaseThirstValue = 100;
+	static constexpr int ThirstCost = 2;
+	int MaxThirst = BaseThirstValue;
+	int CurrentThirst = BaseThirstValue;
+	
 };

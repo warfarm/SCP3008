@@ -16,7 +16,7 @@ class UBorder;
 class UImage;
 class UTextBlock;
 
-UCLASS()
+UCLASS(Abstract)
 class SCP3008_API UStatusBarBase : public UPlayerUserWidgetBase
 {
 

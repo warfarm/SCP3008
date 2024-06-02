@@ -23,19 +23,47 @@ enum class EHUDViewMode: uint8
 	Maximum UMETA(Tooltip="Extravagance Galore!") 
 };
 
+FORCEINLINE EHUDViewMode& operator++(EHUDViewMode& ViewMode)
+{
+	if (ViewMode == EHUDViewMode::Maximum)
+	{
+		ViewMode = EHUDViewMode::Clean;
+	}
+	else
+	{
+		ViewMode = static_cast<EHUDViewMode>(static_cast<int>(ViewMode)+1);
+	}
+
+	return ViewMode;
+}
+
+FORCEINLINE EHUDViewMode& operator--(EHUDViewMode& ViewMode)
+{
+	if (ViewMode == EHUDViewMode::Clean)
+	{
+		ViewMode = EHUDViewMode::Maximum;
+	}
+	else
+	{
+		ViewMode = static_cast<EHUDViewMode>(static_cast<int>(ViewMode)-1);
+	}
+
+	return ViewMode;
+}
+
 UCLASS(Abstract)
 class SCP3008_API APlayerHUD : public AHUD
 {
 
 public:
-	//UPROPERTY(EditAnywhere)
-	//TSubclassOf<UMinimalLayoutBase> MinimalLayoutClass = nullptr;
+	UPROPERTY(EditAnywhere)
+	TSubclassOf<UMinimalLayoutBase> MinimalLayoutClass = nullptr;
 
-	//UPROPERTY(EditAnywhere)
-	//TSubclassOf<UBasicLayoutBase> BasicLayoutClass = nullptr;
+	UPROPERTY(EditAnywhere)
+	TSubclassOf<UBasicLayoutBase> BasicLayoutClass = nullptr;
 
-	//UPROPERTY(EditAnywhere)
-	//TSubclassOf<UMaximumLayoutBase> MaximumLayoutClass = nullptr;
+	UPROPERTY(EditAnywhere)
+	TSubclassOf<UMaximumLayoutBase> MaximumLayoutClass = nullptr;
 
 	UFUNCTION(BlueprintCallable)
 	void SetCurrentViewMode(EHUDViewMode NewViewMode);
@@ -53,23 +81,23 @@ private:
 	//Update Widgets
 	void UpdateWidgets();
 
-	//Clear binded Delegates
+	//Clear bound delegates
 	void ClearAllHandlers();
 
 	UPROPERTY()
 	TObjectPtr<UWorld> World = nullptr;
 
-	//UPROPERTY()
-	//TObjectPtr<UMinimalLayoutBase> MinimalLayoutWidget = nullptr;
+	UPROPERTY()
+	TObjectPtr<UMinimalLayoutBase> MinimalLayoutWidget = nullptr;
 
-	//UPROPERTY()
-	//TObjectPtr<UBasicLayoutBase> BasicLayoutWidget = nullptr;
+	UPROPERTY()
+	TObjectPtr<UBasicLayoutBase> BasicLayoutWidget = nullptr;
 
-	//UPROPERTY()
-	//TObjectPtr<UMaximumLayoutBase> MaximumLayoutWidget = nullptr;
+	UPROPERTY()
+	TObjectPtr<UMaximumLayoutBase> MaximumLayoutWidget = nullptr;
 
-	//UPROPERTY()
-	//TObjectPtr<AMainCharacter> PlayerCharacter = nullptr;
+	UPROPERTY()
+	TObjectPtr<AMainCharacter> PlayerCharacter = nullptr;
 
 	GENERATED_BODY()
 };
