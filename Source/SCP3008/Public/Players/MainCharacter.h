@@ -171,12 +171,14 @@ private:
 	//Hunger
 	static constexpr int BaseHungerValue = 100;
 	static constexpr int HungerCost = 1;
+	static constexpr int HungerHealthCost = 3;
 	int MaxHunger = BaseHungerValue;
 	int CurrentHunger = BaseHungerValue;
 
 	//Thirst
 	static constexpr int BaseThirstValue = 100;
 	static constexpr int ThirstCost = 2;
+	static constexpr int ThirstHealthCost = 2;
 	int MaxThirst = BaseThirstValue;
 	int CurrentThirst = BaseThirstValue;
 	

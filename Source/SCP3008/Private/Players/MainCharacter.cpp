@@ -30,6 +30,8 @@ AMainCharacter::AMainCharacter()
 void AMainCharacter::BeginPlay()
 {
 	Super::BeginPlay();
+	//Create Timer to Act as another "Tick" function on a different time interval
+	//This auxiliary Tick function manages Hunger and Thirst depletion over time
 	GetWorldTimerManager().SetTimer(ResourceTimerHandle, this, &AMainCharacter::ResourceManagement,ResourceTickInterval, true, ResourceTickInterval);
 	if(GetMovementComponent())
 	{
@@ -44,6 +46,7 @@ void AMainCharacter::BeginPlay()
 void AMainCharacter::AddMovementInput(FVector WorldDirection, float ScaleValue, bool bForce)
 {
 
+	//Check if has Stamina to Run
 	if(bIsRunning && CurrentStamina <= 0)
 	{
 		SetRunning(false);
@@ -51,6 +54,7 @@ void AMainCharacter::AddMovementInput(FVector WorldDirection, float ScaleValue, 
 	
 	Super::AddMovementInput(WorldDirection, ScaleValue, bForce);
 
+	//Check if Currently Running
 	if(bIsRunning)
 	{
 		bHasRan = true;
@@ -185,32 +189,39 @@ void AMainCharacter::SetStaminaRegenerationFactor(float NewRegenerationFactor)
 }
 #pragma region Resource
 
+	//Getter function for Hunger
 	int AMainCharacter::GetHunger()
 	{
 		return CurrentHunger;
 	}
 
+	//Getter function for MaxHunger
 	int AMainCharacter::GetMaxHunger()
 	{
 		return MaxHunger;
 	}
 
+	//Getter function for Thirst
 	int AMainCharacter::GetThirst()
 	{
 		return CurrentThirst;
 	}
 
+	//Getter function for MaxThirst
 	int AMainCharacter::GetMaxThirst()
 	{
 		return MaxThirst;
 	}
 
+	//Setter Function for MaxHunger
 	void AMainCharacter::SetMaxHunger(int NewMaxHunger)
 	{
 		int OldHunger = MaxHunger;
 
 		MaxHunger = NewMaxHunger;
 
+		//Check if there is a change
+		//Then check if CurrentHunger > Max Hunger, if so, clamp to Max Hunger
 		if(MaxHunger != OldHunger)
 		{
 			if(MaxHunger<OldHunger)
@@ -224,12 +235,15 @@ void AMainCharacter::SetStaminaRegenerationFactor(float NewRegenerationFactor)
 		}
 	}
 
+	//Setter Function for MaxThirst
 	void AMainCharacter::SetMaxThirst(int NewMaxThirst)
 	{
 		int OldThirst = MaxThirst;
 
 		MaxThirst = NewMaxThirst;
 
+		//Check if there is a change
+		//Then check if CurrentThirst > Max Thirst, if so, clamp to Max Thirst
 		if(MaxThirst != OldThirst)
 		{
 			if(MaxThirst<OldThirst)
@@ -243,6 +257,7 @@ void AMainCharacter::SetStaminaRegenerationFactor(float NewRegenerationFactor)
 		}
 	}
 
+	//Update Hunger
 	void AMainCharacter::UpdateHunger(int DeltaHunger)
 	{
 		int OldHunger = CurrentHunger;
@@ -256,6 +271,7 @@ void AMainCharacter::SetStaminaRegenerationFactor(float NewRegenerationFactor)
 		}
 	}
 
+	//Update Thirst
 	void AMainCharacter::UpdateThirst(int DeltaThirst)
 	{
 		int OldThirst = CurrentThirst;
@@ -269,6 +285,7 @@ void AMainCharacter::SetStaminaRegenerationFactor(float NewRegenerationFactor)
 		}
 	}
 
+	//Manages Timer Resource Depletion
 	void AMainCharacter::ResourceManagement()
 	{
 		const int OldHunger = CurrentHunger;
@@ -276,6 +293,16 @@ void AMainCharacter::SetStaminaRegenerationFactor(float NewRegenerationFactor)
 		CurrentHunger = FMath::Clamp(CurrentHunger - HungerCost, 0, MaxHunger);
 		CurrentThirst = FMath::Clamp(CurrentThirst - ThirstCost, 0, MaxThirst);
 
+		//Reduce Health if Hunger or Thirst fall to 0 or below
+		if(CurrentHunger <= 0)
+		{
+			UpdateHealth(-HungerHealthCost);
+		}
+		if(CurrentThirst <= 0)
+		{
+			UpdateHealth(-ThirstHealthCost);
+		}
+	
 		if(CurrentHunger != OldHunger)
 		{
 			OnHungerChanged.Broadcast(OldHunger, CurrentHunger, MaxHunger);
