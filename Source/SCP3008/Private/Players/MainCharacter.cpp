@@ -348,7 +348,7 @@ void AMainCharacter::Tick(float DeltaTime)
 #ifdef ENABLE_DEBUG_MODE
 
 	GEngine->AddOnScreenDebugMessage(-1, 0.49f, FColor::Silver,
-		*(FString::Printf(TEXT("Movement: IsCrouched[%d] | IsRunning[%d]"), bIsCrouched, bIsRunning)));
+		*(FString::Printf(TEXT("Movement: IsCrouched[%d] | IsRunning[%d] HEWITT WANG WAS HERE"), bIsCrouched, bIsRunning)));
 	GEngine->AddOnScreenDebugMessage(-1, 0.49f, FColor::Red,
 		*(FString::Printf(TEXT("Health: CurrentHealth[%d] | MaxHealth[%d]"), GetHealth(), GetMaxHealth())));
 	GEngine->AddOnScreenDebugMessage(-1, 0.49f, FColor::Green,

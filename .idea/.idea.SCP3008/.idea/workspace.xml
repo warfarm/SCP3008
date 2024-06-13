@@ -13,7 +13,16 @@
   <component name="ChangeListManager">
     <list default="true" id="f1187944-df0f-470c-9802-a18cb423a966" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.SCP3008/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.SCP3008/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Blueprints/ProceduralDungeon/RoomEnd.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Blueprints/ProceduralDungeon/RoomEnd.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Blueprints/ProceduralDungeon/WalledRoom1.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Blueprints/ProceduralDungeon/WalledRoom1.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Blueprints/ProceduralDungeon/WalledRoom2.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Blueprints/ProceduralDungeon/WalledRoom2.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Blueprints/ProceduralDungeon/WalledRoom3.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Blueprints/ProceduralDungeon/WalledRoom3.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Blueprints/ProceduralDungeon/WalledRoom4.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Blueprints/ProceduralDungeon/WalledRoom4.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Blueprints/ProceduralDungeon/WalledRoom5.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Blueprints/ProceduralDungeon/WalledRoom5.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Blueprints/ProceduralDungeon/WalledRoom6.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Blueprints/ProceduralDungeon/WalledRoom6.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Blueprints/ProceduralDungeon/WalledRoom7.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Blueprints/ProceduralDungeon/WalledRoom7.uasset" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Content/Maps/BaseTestMap.umap" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Maps/BaseTestMap.umap" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Source/SCP3008/Private/Players/MainCharacter.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/SCP3008/Private/Players/MainCharacter.cpp" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -55,9 +64,9 @@
   },
   "keyToStringList": {
     "rider.external.source.directories": [
-      "C:\\Users\\warfarm\\AppData\\Roaming\\JetBrains\\Rider2023.3\\resharper-host\\DecompilerCache",
-      "C:\\Users\\warfarm\\AppData\\Roaming\\JetBrains\\Rider2023.3\\resharper-host\\SourcesCache",
-      "C:\\Users\\warfarm\\AppData\\Local\\Symbols\\src"
+      "C:\\Users\\danz3\\AppData\\Roaming\\JetBrains\\Rider2023.3\\resharper-host\\DecompilerCache",
+      "C:\\Users\\danz3\\AppData\\Roaming\\JetBrains\\Rider2023.3\\resharper-host\\SourcesCache",
+      "C:\\Users\\danz3\\AppData\\Local\\Symbols\\src"
     ]
   }
 }]]></component>
